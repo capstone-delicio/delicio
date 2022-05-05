@@ -1,110 +1,111 @@
 const cuisine = [
   {
-    restaurant_id: 1,
+    restaurantId: 1,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 2,
+    restaurantId: 2,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 3,
+    restaurantId: 3,
     cuisine_type: 'Mediterranean',
   },
   {
-    restaurant_id: 4,
+    restaurantId: 4,
     cuisine_type: 'Korean',
   },
   {
-    restaurant_id: 5,
+    restaurantId: 5,
     cuisine_type: 'Japanese',
   },
   {
-    restaurant_id: 6,
-    cuisine_type: ' Italian',
-  },
-  {
-    restaurant_id: 7,
-    cuisine_type: 'French',
-  },
-  {
-    restaurant_id: 8,
+    restaurantId: 6,
     cuisine_type: 'Italian',
   },
   {
-    restaurant_id: 9,
+    restaurantId: 7,
     cuisine_type: 'French',
   },
   {
-    restaurant_id: 9,
+    restaurantId: 8,
+    cuisine_type: 'Italian',
+  },
+  {
+    restaurantId: 9,
+    cuisine_type: 'French',
+  },
+  {
+    restaurantId: 9,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 10,
+    restaurantId: 10,
     cuisine_type: 'Chinese',
   },
   {
-    restaurant_id: 11,
+    restaurantId: 11,
     cuisine_type: 'French',
   },
   {
-    restaurant_id: 11,
+    restaurantId: 11,
     cuisine_type: 'Mediterranean',
   },
   {
-    restaurant_id: 12,
+    restaurantId: 12,
     cuisine_type: 'Korean',
   },
   {
-    restaurant_id: 13,
+    restaurantId: 13,
+    cuisine_type: 'Korean',
+  },
+  {
+    restaurantId: 14,
     cuisine_type: '',
   },
   {
-    restaurant_id: 14,
+    restaurantId: 15,
     cuisine_type: '',
   },
+
   {
-    restaurant_id: 15,
-    cuisine_type: '',
-  },
-  {
-    restaurant_id: 20,
+    restaurantId: 20,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 21,
+    restaurantId: 21,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 22,
+    restaurantId: 22,
     cuisine_type: 'Middle Eastern',
   },
   {
-    restaurant_id: 23,
+    restaurantId: 23,
     cuisine_type: 'Mediterranean',
   },
   {
-    restaurant_id: 24,
+    restaurantId: 24,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 25,
+    restaurantId: 25,
     cuisine_type: 'Italian',
   },
   {
-    restaurant_id: 26,
+    restaurantId: 26,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 27,
+    restaurantId: 27,
     cuisine_type: 'Japanese',
   },
   {
-    restaurant_id: 28,
+    restaurantId: 28,
     cuisine_type: 'American',
   },
   {
-    restaurant_id: 29,
+    restaurantId: 29,
     cuisine_type: 'Italian',
   },
 ]
