@@ -7,13 +7,56 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
-  username: {
+  first_name: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false,
+  },
+  last_name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  prof_picUrl: {
+    type: Sequelize.STRING,
+    defaultValue:
+      "https://e6.pngbyte.com/pngpicture/76945/png-default-image-png-Default-Profile_thumbnail.png",
+    validate: {
+      isUrl: true,
+    },
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  password_confirm: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    // check to see if this matches with password
+    // custom validator
+    validate: {
+      isPasswordMatch(value) {
+        if (!value) throw new Error("Please confirm your password");
+        if (value !== this.password) throw new Error("Passwords do not match");
+      },
+    },
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true,
+    },
+  },
+  preferred_city: {
+    type: Sequelize.ENUM("Chicago", "New York", "Miami", "Los Angeles"),
+    defaultValue: "Chicago",
+  },
+  phone_number: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
 });
 
@@ -69,6 +112,19 @@ const hashPassword = async (user) => {
   }
 };
 
+User.beforeCreate(async (user) => {
+  user.password_confirm = undefined;
+  await hashPassword(user);
+});
+
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
-User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+
+User.beforeBulkCreate((users) =>
+  Promise.all(
+    users.map((user) => {
+      user.password_confirm = undefined;
+      hashPassword(user);
+    })
+  )
+);
