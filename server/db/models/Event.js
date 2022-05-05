@@ -4,7 +4,7 @@ const User = require("./User");
 const Restaurant = require("./Restaurant");
 
 const Event = db.define("event", {
-  organizer_id: {
+  organizerId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {

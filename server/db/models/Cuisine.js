@@ -3,7 +3,7 @@ const db = require("../db");
 const Restaurant = require("./Restaurant");
 
 const Cuisine = db.define("cuisine", {
-  restaurant_id: {
+  restaurantId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     // references: {

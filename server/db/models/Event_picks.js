@@ -13,14 +13,14 @@ const Event_picks = db.define("event_picks", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  event_id: {
+  eventId: {
     type: Sequelize.INTEGER,
     references: {
       model: Event,
       key: "id",
     },
   },
-  user_id: {
+  userId: {
     type: Sequelize.INTEGER,
 
     references: {
@@ -28,7 +28,7 @@ const Event_picks = db.define("event_picks", {
       key: "id",
     },
   },
-  restaurant_pics_id: {
+  restaurant_picsId: {
     type: Sequelize.INTEGER,
     references: {
       model: Restaurant_pics,
