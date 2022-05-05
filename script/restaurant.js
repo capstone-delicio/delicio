@@ -255,7 +255,7 @@ const restaurant = [
     profile_picUrl:"https://resizer.otstatic.com/v2/photos/xlarge/1/25197462.jpg"
   },
 ]
-module.export = restaurant
+module.exports = restaurant
 
 // {
 //   userId: 1,

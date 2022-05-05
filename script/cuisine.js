@@ -10,7 +10,7 @@ const cuisine = [
   },
   {
     restaurant_id: 18,
-    cuisine_type: "Amrican",
+    cuisine_type: "American",
   },
   {
     restaurant_id: 19,
@@ -61,4 +61,4 @@ const cuisine = [
     cuisine_type: "",
   },
 ]
-module.export = cuisine
+module.exports = cuisine
