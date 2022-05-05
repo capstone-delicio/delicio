@@ -589,7 +589,7 @@ const restaurant = [
     open_time: '11am',
     close_time: '12am',
     description:
-      "For those who want to escape life’s daily woes and return to a place where rolling waves meet crystal clear skies, there is Lolo's Surf Cantina.",
+      "For those who want to escape life's daily woes and return to a place where rolling waves meet crystal clear skies, there is Lolo's Surf Cantina.",
     price_range: '$$$',
     website_Url: 'https://loloscantina.com/',
     opentableUrl:
@@ -598,4 +598,4 @@ const restaurant = [
       'https://resizer.otstatic.com/v2/photos/xlarge/1/25197462.jpg',
   },
 ]
-module.export = restaurant
+module.exports = restaurant
