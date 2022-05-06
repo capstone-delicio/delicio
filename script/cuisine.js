@@ -127,5 +127,75 @@ const cuisine = [
     restaurantId: 30,
     cuisine_type: 'Mexican',
   },
+
+  {
+    restaurantId: 46,
+    cuisine_type: 'Italian',
+  },
+  {
+    restaurantId: 47,
+    cuisine_type: 'American',
+  },
+  {
+    restaurantId: 48,
+    cuisine_type: 'Italian',
+  },
+  {
+    restaurantId: 49,
+    cuisine_type: 'Japanese',
+  },
+  {
+    restaurantId: 49,
+    cuisine_type: 'Korean',
+  },
+  {
+    restaurantId: 49,
+    cuisine_type: 'Chinese',
+  },
+  {
+    restaurantId: 50,
+    cuisine_type: 'Mexican',
+  },
+  {
+    restaurantId: 51,
+    cuisine_type: 'American',
+  },
+  {
+    restaurantId: 52,
+    cuisine_type: 'American',
+  },
+  {
+    restaurantId: 53,
+    cuisine_type: 'American',
+  },
+  {
+    restaurantId: 54,
+    cuisine_type: 'Mediterranean',
+  },
+  {
+    restaurantId: 55,
+    cuisine_type: 'Mexican',
+  },
+  {
+    restaurantId: 56,
+    cuisine_type: 'American',
+  },
+  {
+    restaurantId: 57,
+    cuisine_type: 'Italian',
+  },
+  {
+    restaurantId: 58,
+    cuisine_type: 'Mexican',
+  },
+
+  {
+    restaurantId: 59,
+    cuisine_type: 'Indian',
+  },
+  {
+    restaurantId: 60,
+    cuisine_type: 'Japanese',
+  },
 ]
 module.exports = cuisine

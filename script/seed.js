@@ -38,6 +38,7 @@ async function seed() {
       return Restaurant_pics.create(restaurant_pics)
     })
   )
+
   // Creating Users
   // const users = await Promise.all([
   //   User.create({ username: 'cody', password: '123' }),
