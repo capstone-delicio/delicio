@@ -29,4 +29,4 @@ const attendees = [
   },
 ];
 
-module.exports = friends;
+module.exports = attendees;
