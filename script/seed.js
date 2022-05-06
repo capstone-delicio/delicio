@@ -2,17 +2,29 @@
 
 const {
   db,
-  models: { User, Restaurant, Event, Cuisine, Restaurant_pics, Event_picks },
+  models: {
+    User,
+    Restaurant,
+    Event,
+    Cuisine,
+    Restaurant_pics,
+    Event_picks,
+    Friend,
+  },
 } = require("../server/db");
 
 const users = require("./users");
 const restaurant = require("./restaurant");
 const cuisine = require("./cuisine");
 const restaurant_pics = require("./restaurant_pics");
+// const { friends, person } = require("./friends");
 const friends = require("./friends");
 const attendees = require("./attendees");
 const eventPicks = require("./eventPicks");
+const bookmarked_restaurants = require("./bookmarked_restaurants");
+const events = require("./events");
 
+// console.log(friends);
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -42,17 +54,38 @@ async function seed() {
     })
   );
 
-  // Creating Users
-  // const users = await Promise.all([
-  //   User.create({ username: 'cody', password: '123' }),
-  //   User.create({ username: 'murphy', password: '123' }),
-  // ])
+  await Promise.all(
+    friends.map((friend) => {
+      return Friend.create(friend);
+    })
+  );
 
   // await Promise.all(
-  //   friends.map((friend) => {
-  //     return friends.create(friend);
+  //   restaurant_pics.map((Event_picks) => {
+  //     return Event_picks.create(event_picks);
   //   })
   // );
+
+  // console.log("proto", User.__proto__);
+  console.log(Object.keys(User.prototype));
+
+  const userA = await User.findByPk(1);
+  const userB = await User.findByPk(5);
+  await userA.addPerson(userB);
+  // await userA.removePerson(userB);
+
+  // await Promise.all(
+  //   person.map((el, idx) => {
+  //     const thisPerson = await User.findByPk(el);
+  //     const thisFriend = await User.findByPk(friends[idx]);
+  //     console.log("inside promise", thisPerson);
+  //     return thisPerson.setFriend(thisFriend);
+  //     // await userList[el[idx]].addFriend(userList[friends[idx]]);
+  //   })
+  // );
+
+  // TO ADD FRIENDS LATER TO NOT DELETE!
+  // await userList[0].addFriend(userList[1]);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${restaurant.length} restaurant`);
