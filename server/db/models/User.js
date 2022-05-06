@@ -27,18 +27,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  // password_confirm: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  //   // check to see if this matches with password
-  //   // custom validator
-  //   validate: {
-  //     isPasswordMatch(value) {
-  //       if (!value) throw new Error('Please confirm your password')
-  //       if (value !== this.password) throw new Error('Passwords do not match')
-  //     },
-  //   },
-  // },
+
   email: {
     type: Sequelize.STRING,
     allowNull: false,

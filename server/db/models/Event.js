@@ -38,6 +38,10 @@ const Event = db.define('event', {
     type: Sequelize.BOOLEAN,
     allowNull: true,
   },
+  vote_deadline: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
 })
 
 module.exports = Event
