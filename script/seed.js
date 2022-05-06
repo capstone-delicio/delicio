@@ -1,4 +1,4 @@
-"use strict";
+'use strict'
 
 const {
   db,
@@ -11,18 +11,18 @@ const {
     Event_picks,
     Friend,
   },
-} = require("../server/db");
+} = require('../server/db')
 
-const users = require("./users");
-const restaurant = require("./restaurant");
-const cuisine = require("./cuisine");
-const restaurant_pics = require("./restaurant_pics");
+const users = require('./users')
+const restaurant = require('./restaurant')
+const cuisine = require('./cuisine')
+const restaurant_pics = require('./restaurant_pics')
 // const { friends, person } = require("./friends");
-const friends = require("./friends");
-const attendees = require("./attendees");
-const eventPicks = require("./eventPicks");
-const bookmarked_restaurants = require("./bookmarked_restaurants");
-const events = require("./events");
+const friends = require('./friends')
+const attendees = require('./attendees')
+const eventPicks = require('./eventPicks')
+const bookmarked_restaurants = require('./bookmarked_restaurants')
+const events = require('./events')
 
 // console.log(friends);
 /**
@@ -30,35 +30,35 @@ const events = require("./events");
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
 
   await Promise.all(
     users.map((users) => {
-      return User.create(users);
+      return User.create(users)
     })
-  );
+  )
   await Promise.all(
     restaurant.map((restaurant) => {
-      return Restaurant.create(restaurant);
+      return Restaurant.create(restaurant)
     })
-  );
+  )
   await Promise.all(
     cuisine.map((cuisine) => {
-      return Cuisine.create(cuisine);
+      return Cuisine.create(cuisine)
     })
-  );
+  )
   await Promise.all(
     restaurant_pics.map((restaurant_pics) => {
-      return Restaurant_pics.create(restaurant_pics);
+      return Restaurant_pics.create(restaurant_pics)
     })
-  );
+  )
 
   await Promise.all(
     friends.map((friend) => {
-      return Friend.create(friend);
+      return Friend.create(friend)
     })
-  );
+  )
 
   // await Promise.all(
   //   restaurant_pics.map((Event_picks) => {
@@ -67,11 +67,11 @@ async function seed() {
   // );
 
   // console.log("proto", User.__proto__);
-  console.log(Object.keys(User.prototype));
+  console.log(Object.keys(User.prototype))
 
-  const userA = await User.findByPk(1);
-  const userB = await User.findByPk(5);
-  await userA.addPerson(userB);
+  const userA = await User.findByPk(1)
+  const userB = await User.findByPk(5)
+  await userA.addPerson(userB)
   // await userA.removePerson(userB);
 
   // await Promise.all(
@@ -87,12 +87,12 @@ async function seed() {
   // TO ADD FRIENDS LATER TO NOT DELETE!
   // await userList[0].addFriend(userList[1]);
 
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded ${restaurant.length} restaurant`);
-  console.log(`seeded ${cuisine.length} cuisine`);
-  console.log(`seeded ${restaurant_pics.length} restaurant_pics`);
-  console.log(`seeded ${friends.length} friends`);
-  console.log(`seeded successfully`);
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${restaurant.length} restaurant`)
+  console.log(`seeded ${cuisine.length} cuisine`)
+  console.log(`seeded ${restaurant_pics.length} restaurant_pics`)
+  console.log(`seeded ${friends.length} friends`)
+  console.log(`seeded successfully`)
   // return {
   // users: {
   //   cody: users[0],
@@ -107,16 +107,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
+  console.log('seeding...')
   try {
-    await seed();
+    await seed()
   } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
+    console.error(err)
+    process.exitCode = 1
   } finally {
-    console.log("closing db connection");
-    await db.close();
-    console.log("db connection closed");
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
   }
 }
 
@@ -126,8 +126,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed();
+  runSeed()
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed;
+module.exports = seed
