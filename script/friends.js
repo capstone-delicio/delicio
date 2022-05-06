@@ -1,3 +1,8 @@
+// const person = [1, 1, 1, 1, 1, 6, 6, 6, 6];
+// const friends = [2, 3, 4, 5, 6, 1, 5, 7, 8];
+
+// module.exports = { person, friends };
+
 const friends = [
   { userId: 1, friendId: 2 },
   { userId: 2, friendId: 1 },
