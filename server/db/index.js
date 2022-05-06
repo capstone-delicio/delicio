@@ -13,19 +13,19 @@ const Friend = require("./models/Friend");
 //associations could go here!
 // friends is the through table
 
-User.belongsToMany(User, { as: "personA", through: Friend });
-User.belongsToMany(User, { as: "personB", through: Friend });
+// User.belongsToMany(User, { as: "personA", through: Friend });
+// User.belongsToMany(User, { through: Friend });
 
-// User.belongsToMany(User, {
-//   as: "friend",
-//   foreignKey: "userId",
-//   through: "friends",
-// });
-// User.belongsToMany(User, {
-//   as: "userFriends",
-//   foreignKey: "friendId",
-//   through: "friends",
-// });
+User.belongsToMany(User, {
+  as: "person",
+  foreignKey: "userId",
+  through: Friend,
+});
+User.belongsToMany(User, {
+  as: "usersFriend",
+  foreignKey: "friendId",
+  through: Friend,
+});
 
 // Cuisine.hasMany(Restaurant, {
 //   foreignKey: 'id',

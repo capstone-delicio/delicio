@@ -11,7 +11,6 @@ const friends = [
   { userId: 1, friendId: 4 },
   { userId: 4, friendId: 1 },
   { userId: 1, friendId: 5 },
-  { userId: 5, friendId: 5 },
   { userId: 1, friendId: 6 },
   { userId: 6, friendId: 1 },
   { userId: 6, friendId: 5 },
@@ -25,7 +24,6 @@ const friends = [
   { userId: 5, friendId: 4 },
   { userId: 4, friendId: 5 },
   { userId: 5, friendId: 1 },
-  { userId: 1, friendId: 5 },
   { userId: 7, friendId: 9 },
   { userId: 9, friendId: 7 },
 ];
