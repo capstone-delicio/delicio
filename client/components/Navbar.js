@@ -8,7 +8,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <h1>Welcome!</h1>
 
-    <img src="../logo.png" height="100" />
+    {/*   <img src="../logo.png" height="100" /> */}
 
     <nav>
       {isLoggedIn ? (
