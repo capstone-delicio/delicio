@@ -8,7 +8,7 @@ const users = [
     // password_confirm: '11111',
     preferred_city: 'Chicago',
     phone_number: '3120001111',
-    isAdmin: false,
+    isAdmin: true,
     profile_picUrl:
       'https://img.kyodonews.net/english/public/images/posts/1edc0ccbabf9de35bcfca9e1ffa30a45/photo_l.jpg',
   },
@@ -23,7 +23,7 @@ const users = [
     phone_number: '9170001234',
     isAdmin: false,
     profile_picUrl:
-      'https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2021%2F09%2Fblackpink-rose-attending-met-gala-saint-laurent-nyc-0.jpg?w=960&cbr=1&q=90&fit=max',
+      'https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2021%2F09%2Fblackpink-rose-attending-met-gala-saint-laurent-nyc-0.jpg',
   },
   {
     id: 3,
@@ -63,6 +63,57 @@ const users = [
     isAdmin: false,
     profile_picUrl:
       'https://imageio.forbes.com/specials-images/imageserve/6202cc9ffef21c71b15f068a/Eileen-Gu-of-Team-China/960x0.jpg',
+  },
+  {
+    id: 6,
+    first_name: 'Nayeon',
+    last_name: 'Im',
+    email: 'nayeon@gmail.com',
+    password: '123123',
+    // password_confirm: '123123',
+    preferred_city: 'Miami',
+    phone_number: '7860908765',
+    isAdmin: false,
+    profile_picUrl:
+      'https://channel-korea.com/wp-content/uploads/2021/05/nayeon-quoracom.jpeg',
+  },
+  {
+    id: 7,
+    first_name: 'Jackson',
+    last_name: 'Wang',
+    email: 'jackson@gmail.com',
+    password: '321123',
+    // password_confirm: '321123',
+    preferred_city: 'Miami',
+    phone_number: '7861118765',
+    isAdmin: false,
+    profile_picUrl:
+      'https://www.bollywoodhungama.com/wp-content/uploads/2020/05/GOT7s-Jackson-Wang-would-love-to-learn-Indian-dialect.jpg',
+  },
+  {
+    id: 8,
+    first_name: 'Lisa',
+    last_name: 'Manoban',
+    email: 'lisa@gmail.com',
+    password: '123321',
+    // password_confirm: '123321',
+    preferred_city: 'Los Angeles',
+    phone_number: '7861118765',
+    isAdmin: false,
+    profile_picUrl: 'https://otakukart.com/wp-content/uploads/2021/07/lisa.jpg',
+  },
+  {
+    id: 9,
+    first_name: 'Jisoo',
+    last_name: 'Kim',
+    email: 'jisoo@gmail.com',
+    password: '321123',
+    // password_confirm: '321123',
+    preferred_city: 'Chicago',
+    phone_number: '3121111234',
+    isAdmin: false,
+    profile_picUrl:
+      'https://images.news18.com/ibnlive/uploads/2021/08/1627891727_jisoo.jpg',
   },
 ]
 module.exports = users
