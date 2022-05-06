@@ -1,7 +1,16 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+const Sequelize = require('sequelize')
+const db = require('../db')
+const Restaurant = require('./Restaurant')
 
-const Restaurant_pics = db.define("restaurant_pics", {
+const Restaurant_pics = db.define('restaurant_pics', {
+  restaurantId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: {
+      model: Restaurant,
+      key: 'id',
+    },
+  },
   picture_Url: {
     type: Sequelize.TEXT,
     validate: { isUrl: true },
@@ -9,6 +18,6 @@ const Restaurant_pics = db.define("restaurant_pics", {
   description: {
     type: Sequelize.STRING,
   },
-});
+})
 
-module.exports = Restaurant_pics;
+module.exports = Restaurant_pics

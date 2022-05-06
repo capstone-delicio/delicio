@@ -1,15 +1,15 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
-const User = require("./User");
-const Restaurant = require("./Restaurant");
+const Sequelize = require('sequelize')
+const db = require('../db')
+const User = require('./User')
+const Restaurant = require('./Restaurant')
 
-const Event = db.define("event", {
-  organizer_id: {
+const Event = db.define('event', {
+  organizerId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {
       model: User,
-      key: "id",
+      key: 'id',
     },
   },
   event_name: {
@@ -26,18 +26,22 @@ const Event = db.define("event", {
     allowNull: true,
     defaultValue: null,
   },
-  restaurant_id: {
+  restaurantId: {
     type: Sequelize.INTEGER,
     allowNull: true,
     references: {
       model: Restaurant,
-      key: "id",
+      key: 'id',
     },
   },
   isScheduled: {
     type: Sequelize.BOOLEAN,
     allowNull: true,
   },
-});
+  vote_deadline: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+})
 
-module.exports = Event;
+module.exports = Event
