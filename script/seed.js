@@ -40,12 +40,22 @@ async function seed() {
     restaurant_pics.map((restaurant_pics) => {
       return Restaurant_pics.create(restaurant_pics);
     })
+
+  )
+
+  // Creating Users
+  // const users = await Promise.all([
+  //   User.create({ username: 'cody', password: '123' }),
+  //   User.create({ username: 'murphy', password: '123' }),
+  // ])
+
   );
   await Promise.all(
     friends.map((friend) => {
       return friends.create(friend);
     })
   );
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${restaurant.length} restaurant`);

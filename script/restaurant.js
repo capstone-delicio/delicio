@@ -628,8 +628,7 @@ const restaurant = [
     profile_picUrl:
       'https://resizer.otstatic.com/v2/photos/xlarge/1/25197462.jpg',
   },
-  {
-    id: 31,
+   id: 31,
     name: "Katsuya - L.A. Live",
     street: "800 W Olympic Blvd",
     city: "Los Angeles",
@@ -927,6 +926,326 @@ const restaurant = [
     opentableUrl:
       "https://www.opentable.com/r/katsuya-and-sbar-brentwood-sbe-brentwood?corrid=d221d327-92d6-46d3-a1d6-5a72fd7381dd&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00",
     profile_picUrl:"https://resizer.otstatic.com/v2/photos/xlarge/25549668.jpg",
+
   },
+  {
+
+    id: 46,
+    name: 'Gia Mia',
+    street: 'https://www.giamiapizzabar.com',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60126,
+    phone_number: '6304026195',
+    email: 'giamia@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '22:00',
+    description:
+      'Our main focus is chef-driven, farm-to-fork food concepts such as Neapolitan style wood-fired pizzas, creative small plates, fresh homemade pasta, antipasto, and hand-made mozzarella.',
+    price_range: '$',
+    website_Url: 'https://www.giamiapizzabar.com',
+    opentableUrl:
+      'https://www.opentable.com/r/gia-mia-elmhurst?corrid=f21838b9-6109-4faa-89a3-2c08fd0102d6&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://images.squarespace-cdn.com/content/v1/5d4740f8378ddd0001bf7990/1604433171524-1NREHGZBNELYXCGQVUC1/IMG_2513.jpg',
+  },
+  {
+    id: 47,
+    name: 'The Little Gem Restaurant',
+    street: '189 N Marion St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60301,
+    phone_number: '7086135491',
+    email: 'little@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '23:00',
+    description:
+      'This Intimate, Stylish Little Restaurant is Elegant and Romantic. With a Warm and Welcoming Atmosphere.',
+    price_range: '$',
+    website_Url: 'https://thelittlegemcafe.com/menu',
+    opentableUrl:
+      'https://www.opentable.com/r/the-little-gem-restaurant-oak-park?corrid=f21838b9-6109-4faa-89a3-2c08fd0102d6&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/1/24766370.jpg',
+  },
+  {
+    id: 48,
+    name: 'La Parra Restaurant and Bar',
+    street: '6710 Cermak Rd',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60402,
+    phone_number: '7083175339',
+    email: 'parra@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '23:00',
+    description:
+      'Serving classic and modern Mediterranean favorites. We use only the freshest ingredients. We look forward to serving you soon.',
+    price_range: '$$$',
+    website_Url: 'https://laparrarestaurantandbar.com/',
+    opentableUrl:
+      'https://www.opentable.com/r/la-parra-restaurant-and-bar-berwyn?corrid=f21838b9-6109-4faa-89a3-2c08fd0102d6&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/2/41745993.jpg',
+  },
+  {
+    id: 49,
+    name: 'Mate Ne',
+    street: 'https://matanenewasian.com/',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60126,
+    phone_number: '6303595869',
+    email: 'mateme@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '22:00',
+    description:
+      'Former celebrity Chef of Sunda and James Beard foundation, Jess De Guzman and Restaurateur/Sommelier Of Koi and Michael Jordan team up to bring New Asian Cuisine and Fabulous wines to the vibrant Elmhurst community.',
+    price_range: '$$$',
+    website_Url: 'matanenewasian.com',
+    opentableUrl:
+      'https://www.opentable.com/r/mata-ne-elmhurst?corrid=f21838b9-6109-4faa-89a3-2c08fd0102d6&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/wide-huge/3/47566331.jpg',
+  },
+  {
+    id: 50,
+    name: 'La Lupita',
+    street: '6539 Cermak Rd',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60402,
+    phone_number: '7087888226',
+    email: 'lupita@gmail.com',
+    password: '123',
+    open_time: '9:00',
+    close_time: '22:00',
+    description:
+      'We are passionate about providing you with a wide range of fresh. Our menu is classic, yet progressive. We offer all your favorite Mexican food staples, prime meats, seafood and Lupita’s signatures “Pozole” Mole, Menudo and much more. ',
+    price_range: '$',
+    website_Url: 'http://lalupitaberwyn.com/',
+    opentableUrl:
+      'https://www.opentable.com/r/la-lupita-berwyn?corrid=f21838b9-6109-4faa-89a3-2c08fd0102d6&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://b.zmtcdn.com/data/pictures/6/16741186/3cdc156041bae7c7cf0e90fc2456c3a8_featured_v2.jpg',
+  },
+  {
+    id: 51,
+    name: 'Summer House Santa Monica',
+    street: '1954 N Halsted Rd',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60614,
+    phone_number: '7736344100',
+    email: 'summer@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '22:00',
+    description:
+      'Located in Chicago’s Lincoln Park neighborhood, Summer House is the place for sunshine all year round. Warm, laid-back West Coast vibes fill the restaurant making it a top Instagrammable destination, complete with beach house décor, a beautiful retractable glass ceiling, and an all-seasons courtyard patio.',
+    price_range: '$',
+    website_Url: 'https://www.summerhouserestaurants.com/lincoln-park/',
+    opentableUrl:
+      'https://www.opentable.com/summer-house?corrid=f21838b9-6109-4faa-89a3-2c08fd0102d6&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl: '',
+  },
+  {
+    id: 52,
+    name: 'The Hampton Social - Streeterville',
+    street: '164 E Grand Ave',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60611,
+    phone_number: '3124141861',
+    email: 'hampton@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '22:00',
+    description:
+      "Coastal cuisine with a focus on seasonally inspired dishes and fresh ingredients. Whether it's business or pleasure, you can escape to The Hamptons any night of the week.",
+    price_range: '$$$',
+    website_Url: 'https://www.thehamptonsocial.com',
+    opentableUrl:
+      'https://www.opentable.com/r/the-hampton-social-streeterville-chicago?corrid=15bc8d02-6d61-40d9-8cf6-d92f5a14b6d8&avt=eyJ2IjoyLCJtIjowLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/25995649.jpg',
+  },
+
+  {
+    id: 53,
+    name: 'Beatrix - River North',
+    street: '519 North Clark St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60654,
+    phone_number: '3122841377',
+    email: 'beatrix@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '23:00',
+    description:
+      'Beatrix is a neighborhood coffeehouse, restaurant and meeting place in Chicago’s River North, Streeterville, Fulton Market and Oak Brook neighborhoods.',
+    price_range: '',
+    website_Url: '',
+    opentableUrl:
+      'https://www.opentable.com/beatrix-river-north?corrid=6dad6ea2-6c70-4946-a12a-d2300eaaf7f2&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/1/25230501.jpg',
+  },
+
+  {
+    id: 54,
+    name: 'Cira',
+    street: '200 N. Green St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60607,
+    phone_number: '3127611777',
+    email: 'cira@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '23:00',
+    description:
+      'Cira is a modern, Mediterranean restaurant, serving breakfast, lunch, and dinner, as well as weekend brunch. ',
+    price_range: '$',
+    website_Url: 'https://cirachicago.com/',
+    opentableUrl:
+      'https://www.opentable.com/r/cira-chicago?corrid=6dad6ea2-6c70-4946-a12a-d2300eaaf7f2&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/3/26277125.png',
+  },
+
+  {
+    id: 55,
+    name: 'Mercadito - River North',
+    street: '108 W. Kinzie St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60610,
+    phone_number: '3123298555',
+    email: 'mercadito@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '23:30',
+    description:
+      'We are the city’s top Mexican restaurant for authentic cuisine, specialty tequila and mezcal cocktails, located in the heart of River North. ',
+    price_range: '$$$',
+    website_Url: 'https://www.mercaditorivernorth.com/',
+    opentableUrl:
+      'https://www.opentable.com/r/mercadito-river-north-chicago?corrid=6dad6ea2-6c70-4946-a12a-d2300eaaf7f2&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/1/23712354.jpg',
+  },
+  {
+    id: 56,
+    name: 'Parlor Pizza Bar - West Loop',
+    street: '108 N Green St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60607,
+    phone_number: '3126006090',
+    email: 'parlor@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '23:00',
+    description:
+      "In the heart of West Loop, we've proudly been serving you pizza for years",
+    price_range: '$',
+    website_Url: 'parlorchicago.com',
+    opentableUrl:
+      'https://www.opentable.com/parlor-pizza-bar?corrid=6dad6ea2-6c70-4946-a12a-d2300eaaf7f2&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/1/24065578.jpg',
+  },
+  {
+    id: 57,
+    name: "Formento's",
+    street: '925 West Randolph St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60607,
+    phone_number: '3126907295',
+    email: 'formentos@gmail.com',
+    password: '123',
+    open_time: '16:30',
+    close_time: '21:00',
+    description:
+      "Located in Fulton Market District within Chicago's bustling West Loop, Formento's is an Italian restaurant steeped with the bright and fresh flavors of Italy.",
+    price_range: '$$$',
+    website_Url: 'http://www.formentos.com/',
+    opentableUrl:
+      'https://www.opentable.com/formentos?corrid=6dad6ea2-6c70-4946-a12a-d2300eaaf7f2&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/1/25850989.jpg',
+  },
+  {
+    id: 58,
+    name: 'Blanco Cocina + Cantina - Oak Brook',
+    street: '2022 Spring Rd',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60523,
+    phone_number: '6303202034',
+    email: 'blanco1@gmail.com',
+    password: '123',
+    open_time: '11:00',
+    close_time: '22:00',
+    description:
+      "Blanco is more than your typical Mexican restaurant, it's an escape from the ordinary, a happy hour hang out, a place to sit back, recharge and party.",
+    price_range: '$',
+    website_Url:
+      'https://www.blancotacostequila.com/locations/blanco-tacos-tequila-oak-brook-il/',
+    opentableUrl:
+      'https://www.opentable.com/r/blanco-cocina-and-cantina-oak-brook?corrid=6dad6ea2-6c70-4946-a12a-d2300eaaf7f2&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://media.bizj.us/view/img/12072972/blanco-cocina-cantina-oak-brook*1024xx1544-873-29-0.jpg',
+  },
+  {
+    id: 59,
+    name: 'Vermilion',
+    street: '10 West Hubbard St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60654,
+    phone_number: '3125274060',
+    email: 'vermilion@gmail.com',
+    password: '123',
+    open_time: '17:30',
+    close_time: '23:00',
+    description:
+      'We are lauded Best Restaurants by Travel & Leisure, Bon Appetit, Esquire, Town & Country, Wine Enthusiast, Chicago magazine.',
+    price_range: '$$$',
+    website_Url: 'http://www.thevermilionrestaurant.com/',
+    opentableUrl:
+      'https://www.opentable.com/vermilion-chicago?corrid=5e09fb67-4b8e-47ac-909a-847a138ac942&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://resizer.otstatic.com/v2/photos/xlarge/3/31886261.jpg',
+  },
+  {
+    id: 60,
+    name: 'Union Sushi + Barbeque Bar',
+    street: '230 W Erie St',
+    city: 'Chicago',
+    state: 'IL',
+    zip: 60654,
+    phone_number: '3126624888',
+    email: 'union@gmail.com',
+    password: '123',
+    open_time: '16:30',
+    close_time: '23:00',
+    description:
+      'Where the quality and simplicity of Japanese cuisine meets the bustling energy of a downtown essential.',
+    price_range: '$$$',
+    website_Url: 'https://www.eatatunion.com/',
+    opentableUrl:
+      'https://www.opentable.com/r/union-sushi-and-barbeque-bar-chicago?corrid=5e09fb67-4b8e-47ac-909a-847a138ac942&avt=eyJ2IjoyLCJtIjoxLCJwIjowLCJzIjowLCJuIjowfQ&p=2&sd=2022-05-06T19%3A00%3A00',
+    profile_picUrl:
+      'https://media-cdn.tripadvisor.com/media/photo-s/17/e3/8b/a0/just-in-the-door-bar.jpg',
+  }
 ]
 module.exports = restaurant
