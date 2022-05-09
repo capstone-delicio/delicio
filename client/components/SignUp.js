@@ -77,12 +77,12 @@ const Signup = () => {
           <p>
             Already have an account? <Link to="/login">Login</Link>
           </p>
-        </Grid>
 
-        {error && error.response && (
-          <div style={{ color: 'red' }}> {error.response.data} </div>
-        )}
-        <div style={{ color: 'red' }}>{passwordError}</div>
+          {error && error.response && (
+            <div style={{ color: 'red' }}> {error.response.data} </div>
+          )}
+          <div style={{ color: 'red' }}>{passwordError}</div>
+        </Grid>
       </form>
     </div>
   )
