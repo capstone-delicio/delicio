@@ -34,12 +34,11 @@ User.belongsToMany(User, {
 Restaurant.belongsToMany(Cuisine, { through: "rest_cuisine" });
 Cuisine.belongsToMany(Restaurant, { through: "rest_cuisine" });
 
-// Cuisine.hasMany(Restaurant, {
-//   foreignKey: 'id',
-// })
-
 User.belongsToMany(Event, { through: "event_attendees" });
 Event.belongsToMany(User, { through: "event_attendees" });
+
+User.belongsToMany(Restaurant, { through: "bookmarked_restaurant" });
+Restaurant.belongsToMany(User, { through: "bookmarked_restaurant" });
 
 Restaurant.hasMany(Restaurant_pics);
 Restaurant_pics.belongsTo(Restaurant);

@@ -97,6 +97,7 @@ async function seed() {
   await userH.addEvent(birthday);
   await userI.addEvent(birthday);
 
+
   // await userA.removePerson(userB);
 
   // await Promise.all(
