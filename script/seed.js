@@ -53,6 +53,11 @@ async function seed() {
       return Restaurant_pics.create(restaurant_pics);
     })
   );
+  await Promise.all(
+    events.map((event) => {
+      return Event.create(event);
+    })
+  );
 
   await Promise.all(
     friends.map((friend) => {
@@ -67,11 +72,31 @@ async function seed() {
   // );
 
   // console.log("proto", User.__proto__);
-  console.log(Object.keys(User.prototype));
-
+  console.log("magic methods", Object.keys(Restaurant.prototype));
+  // testing methods and associations
   const userA = await User.findByPk(1);
   const userB = await User.findByPk(5);
+  const userC = await User.findByPk(3);
+  const userD = await User.findByPk(4);
+  const userF = await User.findByPk(5);
+  const userG = await User.findByPk(6);
+  const userH = await User.findByPk(7);
+  const userI = await User.findByPk(8);
+
+  const gradEvent = await Event.findByPk(1);
+  const birthday = await Event.findByPk(2);
+
   await userA.addPerson(userB);
+
+  await userA.addEvent(gradEvent);
+  await userC.addEvent(gradEvent);
+  await userD.addEvent(gradEvent);
+  await userF.addEvent(gradEvent);
+  await userF.addEvent(birthday);
+  await userG.addEvent(birthday);
+  await userH.addEvent(birthday);
+  await userI.addEvent(birthday);
+
   // await userA.removePerson(userB);
 
   // await Promise.all(

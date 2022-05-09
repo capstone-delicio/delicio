@@ -27,15 +27,25 @@ User.belongsToMany(User, {
   through: Friend,
 });
 
+// rest, cuisine - m:m
+// restaurant belongs to many cuisines
+// cuisines
+
+Restaurant.belongsToMany(Cuisine, { through: "rest_cuisine" });
+Cuisine.belongsToMany(Restaurant, { through: "rest_cuisine" });
+
 // Cuisine.hasMany(Restaurant, {
 //   foreignKey: 'id',
 // })
 
-// User.belongsToMany(Event, { through: "event_attendees" });
-// Event.belongsToMany(User, { through: "event_attendees" });
+User.belongsToMany(Event, { through: "event_attendees" });
+Event.belongsToMany(User, { through: "event_attendees" });
 
 Restaurant.hasMany(Restaurant_pics);
 Restaurant_pics.belongsTo(Restaurant);
+
+Restaurant.hasMany(Event);
+Event.belongsTo(Restaurant);
 
 Event.hasMany(Event_picks);
 User.hasMany(Event_picks);
