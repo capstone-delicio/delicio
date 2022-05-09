@@ -12,9 +12,9 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const formName = e.target.name
-    const email = e.target.email.value
-    const password = e.target.password.value
+    const formName = event.target.name
+    const email = event.target.email.value
+    const password = event.target.password.value
     dispatch(authenticate(email, password, formName))
   }
 
