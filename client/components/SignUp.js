@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { authenticateSignUp } from '../store'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
 const Signup = () => {
   const [passwordError, setPasswordError] = useState('')
@@ -40,49 +43,42 @@ const Signup = () => {
   return (
     <div id="signups">
       <form id="signupForm" onSubmit={handleSubmit} name="signup">
-        <div>
-          <label htmlFor="first_name">
-            <small>First Name</small>
-          </label>
-          <input name="first_name" type="text" />
-        </div>
-        <div>
-          <label htmlFor="last_name">
-            <small>Last Name</small>
-          </label>
-          <input name="last_name" type="text" />
-        </div>
-        <div>
-          <label htmlFor="phone_number">
-            <small>Phone Number</small>
-          </label>
-          <input name="phone_number" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">
-            <small>Confirm Password</small>
-          </label>
-          <input name="confirmPassword" type="password" />
-        </div>
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+        >
+          <Grid item>
+            <TextField name="first_name" label="First Name" type="text" />
+          </Grid>
+          <Grid item>
+            <TextField name="last_name" label="Last Name" type="text" />
+          </Grid>
+          <Grid item>
+            <TextField name="phone_number" label="Phone Number" type="text" />
+          </Grid>
+          <Grid item>
+            <TextField name="email" label="Email" type="text" />
+          </Grid>
+          <Grid item>
+            <TextField name="password" label="Password" type="password" />
+          </Grid>
+          <Grid item>
+            <TextField
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+            />
+          </Grid>
+          <Button variant="contained" color="primary" type="submit">
+            Sign Up
+          </Button>
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </Grid>
 
-        <div>
-          <button type="submit">Sign Up</button>
-        </div>
-        <p>
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
         {error && error.response && (
           <div style={{ color: 'red' }}> {error.response.data} </div>
         )}

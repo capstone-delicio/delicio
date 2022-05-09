@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { authenticate } from '../store'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
-
 import Button from '@material-ui/core/Button'
 
 const Login = () => {
@@ -40,22 +39,6 @@ const Login = () => {
           <Button variant="contained" color="primary" type="submit">
             Login
           </Button>
-
-          {/*<Grid container justifyContent="center">
-          <label htmlFor="email">
-            <small>Email: </small>
-          </label>
-          <input name="email" type="text" />
-        </Grid>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>*/}
 
           <p>
             Dont have an account? <Link to="/signup">Sign Up</Link>
