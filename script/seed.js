@@ -60,18 +60,18 @@ async function seed() {
     })
   )
 
-  // await Promise.all(
-  //   restaurant_pics.map((Event_picks) => {
-  //     return Event_picks.create(event_picks);
-  //   })
-  // );
+  await Promise.all(
+    restaurant_pics.map((Event_picks) => {
+      return Event_picks.create(event_picks)
+    })
+  )
 
   // console.log("proto", User.__proto__);
-  console.log(Object.keys(User.prototype))
+  // console.log(Object.keys(User.prototype))
 
-  const userA = await User.findByPk(1)
-  const userB = await User.findByPk(5)
-  await userA.addPerson(userB)
+  // const userA = await User.findByPk(1)
+  // const userB = await User.findByPk(5)
+  // await userA.addPerson(userB)
   // await userA.removePerson(userB);
 
   // await Promise.all(
