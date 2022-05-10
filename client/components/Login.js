@@ -41,7 +41,7 @@ const Login = () => {
           </Button>
 
           <p>
-            Dont have an account? <Link to="/signup">Sign Up</Link>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
           </p>
           {error && error.response && (
             <div style={{ color: 'red' }}> {error.response.data} </div>
