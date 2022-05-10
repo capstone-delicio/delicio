@@ -6,9 +6,10 @@ const User = require("./models/User");
 const Restaurant = require("./models/Restaurant");
 const Event = require("./models/Event");
 const Cuisine = require("./models/Cuisine");
-const Restaurant_pics = require("./models/Restaurant_pics");
+// const Restaurant_pics = require("./models/Restaurant_pics");
 const Event_picks = require("./models/Event_picks");
 const Friend = require("./models/Friend");
+const Bookmarked = require("./models/Bookmarked");
 
 //associations could go here!
 // friends is the through table
@@ -27,18 +28,30 @@ User.belongsToMany(User, {
   through: Friend,
 });
 
-// Cuisine.hasMany(Restaurant, {
-//   foreignKey: 'id',
-// })
+// rest, cuisine - m:m
+// restaurant belongs to many cuisines
+// cuisines
 
-// User.belongsToMany(Event, { through: "event_attendees" });
-// Event.belongsToMany(User, { through: "event_attendees" });
+// Restaurant.belongsToMany(Cuisine, { through: "rest_cuisine" });
+// Cuisine.belongsToMany(Restaurant, { through: "rest_cuisine" });
 
-Restaurant.hasMany(Restaurant_pics);
-Restaurant_pics.belongsTo(Restaurant);
+User.belongsToMany(Event, { through: "event_attendees" });
+Event.belongsToMany(User, { through: "event_attendees" });
 
-Event.hasMany(Event_picks);
-User.hasMany(Event_picks);
+// User.belongsToMany(Restaurant, { through: "bookmarked_restaurant" });
+// Restaurant.belongsToMany(User, { through: "bookmarked_restaurant" });
+
+// Restaurant.hasMany(Restaurant_pics);
+// Restaurant_pics.belongsTo(Restaurant);
+
+// Restaurant.hasMany(Event);
+// Event.belongsTo(Restaurant);
+
+// Event.hasMany(Event_picks);
+// User.hasMany(Event_picks);
+
+// User.belongsToMany(Event, { through: Event_picks });
+// Event.belongsToMany(User, { through: Event_picks });
 
 // Restaurant.hasMany(Event);
 // Event.belongsTo(Restaurant);
@@ -53,8 +66,9 @@ module.exports = {
     Restaurant,
     Event,
     Cuisine,
-    Restaurant_pics,
+    // Restaurant_pics,
     Event_picks,
     Friend,
+    Bookmarked,
   },
 };
