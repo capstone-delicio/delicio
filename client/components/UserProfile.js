@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {update} from '../store/user'
+import { connect } from 'react-redux'
+import { getUser, update } from '../store'
 
 /**
  * COMPONENT
@@ -10,7 +9,7 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      ...this.props.user
+      ...this.props.user,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -31,24 +30,24 @@ class UserProfile extends React.Component {
       id: id,
       first_name: first_name,
       last_name: last_name,
-      prof_picUrl : prof_picUrl,
-      phone_number : phone_number,
-      preferred_city : preferred_city,
+      prof_picUrl: prof_picUrl,
+      phone_number: phone_number,
+      preferred_city: preferred_city,
       email: email,
-      password: password
+      password: password,
     }
     this.props.update(updatedUser, this.props.history)
     // this.setState({})
   }
   async handleChange(event) {
     await this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     })
   }
 
   componentDidMount() {
     try {
-      this.props.getUserCartInfo(this.props.user)
+      this.props.getUser(this.props.user)
       this.setState({})
     } catch (error) {
       console.error(error)
@@ -56,7 +55,7 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    console.log(this.props, 'props')
+    console.log(this.props.users, 'props')
     const props = this.props.user
 
     return (
@@ -64,7 +63,9 @@ class UserProfile extends React.Component {
         <div className="profile-info">
           <h2>Welcome, {props.first_name}!</h2>
           <h3>Name</h3>
-          <p>{props.first_name} {props.last_name}</p>
+          <p>
+            {props.first_name} {props.last_name}
+          </p>
           <h3>Email</h3>
           <p>{props.email}</p>
           <h3>City</h3>
@@ -81,20 +82,20 @@ class UserProfile extends React.Component {
               <label htmlFor="first_name">Update First Name:</label>
             </h3>
             <input
-              first_name = "first_name"
-              type = "text"
-              placeholder = {props.first_name}
-              onChange = {this.handleChange}
+              first_name="first_name"
+              type="text"
+              placeholder={props.first_name}
+              onChange={this.handleChange}
             />
 
             <h3>
-              <label htmlFor = "last_name">Update Last Name:</label>
+              <label htmlFor="last_name">Update Last Name:</label>
             </h3>
             <input
-              last_name = "last_name"
-              type = "text"
-              placeholder = {props.first_name}
-              onChange = {this.handleChange}
+              last_name="last_name"
+              type="text"
+              placeholder={props.first_name}
+              onChange={this.handleChange}
             />
 
             <h3>
@@ -155,23 +156,24 @@ class UserProfile extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   // console.log('STATE', state)
   return {
     user: state.user,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    update: user => dispatch(update(user)),
+    getUser: (id) => dispatch(getUser(id)),
+    update: (user) => dispatch(update(user)),
   }
 }
 export default connect(mapState, mapDispatch)(UserProfile)
 
-/**
- * PROP TYPES
- */
-UserProfile.propTypes = {
-  email: PropTypes.string
-}
+// /**
+//  * PROP TYPES
+//  */
+// UserProfile.propTypes = {
+//   email: PropTypes.string,
+// }

@@ -7,7 +7,7 @@ import Questions from './components/Questions'
 import Friends from './components/Friends'
 import Home from './components/Home'
 import { me } from './store'
-import UserProfile from "./components/UserProfile";
+import UserProfile from './components/UserProfile'
 
 /**
  * COMPONENT
@@ -27,8 +27,8 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/questions" component={Questions} />
             <Route path="/friends" component={Friends} />
-            <Redirect to="/home" />
             <Route path="/userprofile" component={UserProfile} />
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
