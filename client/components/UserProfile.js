@@ -72,7 +72,7 @@ class UserProfile extends React.Component {
               <label htmlFor="first_name">Update First Name:</label>
             </h3>
             <input
-              first_name="first_name"
+              name="first_name"
               type="text"
               placeholder={props.first_name}
               onChange={this.handleChange}
@@ -82,7 +82,7 @@ class UserProfile extends React.Component {
               <label htmlFor="last_name">Update Last Name:</label>
             </h3>
             <input
-              last_name="last_name"
+              name="last_name"
               type="text"
               placeholder={props.last_name}
               onChange={this.handleChange}
@@ -123,7 +123,7 @@ class UserProfile extends React.Component {
             </h3>
             <input
               name="photo"
-              type="URL"
+              type="text"
               placeholder={props.prof_picUrl}
               onChange={this.handleChange}
             />
