@@ -17,7 +17,7 @@ class UserProfile extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const id = this.state.id
+    // const id = this.state.id
     const first_name = this.state.first_name
     const last_name = this.state.last_name
     const preferred_city = this.state.preferred_city
@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
     const password = this.state.password
 
     let updatedUser = {
-      id: id,
+      // id: id,
       first_name: first_name,
       last_name: last_name,
       prof_picUrl: prof_picUrl,
@@ -55,25 +55,13 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    console.log(this.props.users, 'props')
+    console.log(this.props, 'props')
     const props = this.props.user
 
     return (
       <div className="profile">
         <div className="profile-info">
           <h2>Welcome, {props.first_name}!</h2>
-          <h3>Name</h3>
-          <p>
-            {props.first_name} {props.last_name}
-          </p>
-          <h3>Email</h3>
-          <p>{props.email}</p>
-          <h3>City</h3>
-          <p>{props.preferred_city}</p>
-          <h3>Phone Number</h3>
-          <p>{props.phone_number}</p>
-          <h3>Photo</h3>
-          <p>{props.prof_picUrl}</p>
         </div>
 
         <div className="update-form-container">
@@ -94,7 +82,7 @@ class UserProfile extends React.Component {
             <input
               last_name="last_name"
               type="text"
-              placeholder={props.first_name}
+              placeholder={props.last_name}
               onChange={this.handleChange}
             />
 
@@ -134,7 +122,7 @@ class UserProfile extends React.Component {
             <input
               name="photo"
               type="URL"
-              placeholder={props.state}
+              placeholder={props.prof_picUrl}
               onChange={this.handleChange}
             />
           </form>

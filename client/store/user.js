@@ -24,35 +24,20 @@ const updateProfile = (prof) => ({
 /**
  * THUNK CREATORS
  */
-//  export const me = () => async (dispatch) => {
-//   try {
-//     const { data } = await axios.get("/auth/me", {
-//       headers: { authorization: localStorage.getItem("token") },
-//     });
-//     dispatch(getProfile(data));
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
-export const getUser = (id) => async (dispatch) => {
+export const getUser = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/api/users/${id}`)
-    console.log(data)
-
+    const { data } = await axios.get('/auth/me', {
+      headers: { authorization: localStorage.getItem('token') },
+    })
     dispatch(getProfile(data))
   } catch (err) {
     console.error(err)
   }
 }
-// export const getUser = (id) => {
-//   return async (dispatch) => {
-//     const { data } = await axios.get(`/api/users/${id}`)
-//     dispatch(getProfile(data))
-//   }
-// }
+
 export const update = (user) => async (dispatch) => {
   try {
-    const { data } = await axios.put(`/api/users/${user.id}/profile`, user)
+    const { data } = await axios.put(`/api/users/${user.id}`, user)
     dispatch(updateProfile(data))
   } catch (error) {
     console.error(error)
@@ -67,7 +52,9 @@ export default function (state = profile, action) {
     case GET_PROFILE:
       return { ...action.prof }
     case UPDATE_PROFILE:
-      return { ...action.prof }
+      return state.map((prof) =>
+        prof.id === action.prof.id ? action.prof : prof
+      )
     default:
       return state
   }
