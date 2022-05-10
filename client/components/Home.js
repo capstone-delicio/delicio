@@ -1,14 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-import { Link } from 'react-router-dom'
-import Grid from '@material-ui/core/Grid'
+import React from "react";
+import { connect, useSelector } from "react-redux";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 
 /**
  * COMPONENT
  */
 export const Home = (props) => {
-  const { first_name } = props
+  const { first_name } = props;
 
   return (
     <div>
@@ -30,16 +30,17 @@ export const Home = (props) => {
         </Button>
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
  */
+//C: useSelector hook
 const mapState = (state) => {
   return {
     first_name: state.auth.first_name,
-  }
-}
+  };
+};
 
-export default connect(mapState)(Home)
+export default connect(mapState)(Home);

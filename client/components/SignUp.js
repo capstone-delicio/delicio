@@ -1,28 +1,29 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { authenticateSignUp } from '../store'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { authenticateSignUp } from "../store";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const Signup = () => {
-  const [passwordError, setPasswordError] = useState('')
-  const dispatch = useDispatch()
+  const [passwordError, setPasswordError] = useState("");
+  //C: I see that useDispatch hook is used here. Great!
+  const dispatch = useDispatch();
 
   const { error } = useSelector((state) => {
-    return state.auth
-  })
+    return state.auth;
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const formName = e.target.name
-    const first_name = e.target.first_name.value
-    const last_name = e.target.last_name.value
-    const phone_number = e.target.phone_number.value
-    const email = e.target.email.value
-    const password = e.target.password.value
-    const confirmPassword = e.target.confirmPassword.value
+    e.preventDefault();
+    const formName = e.target.name;
+    const first_name = e.target.first_name.value;
+    const last_name = e.target.last_name.value;
+    const phone_number = e.target.phone_number.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
     if (confirmPassword === password) {
       dispatch(
         authenticateSignUp(
@@ -33,12 +34,13 @@ const Signup = () => {
           password,
           formName
         )
-      )
+      );
     }
     if (confirmPassword !== password) {
-      setPasswordError('Passwords do not match')
+      setPasswordError("Passwords do not match");
     }
-  }
+  };
+  //C: I like that you chose to check for matching passwords. Good work!
 
   return (
     <div id="signups">
@@ -79,13 +81,13 @@ const Signup = () => {
           </p>
 
           {error && error.response && (
-            <div style={{ color: 'red' }}> {error.response.data} </div>
+            <div style={{ color: "red" }}> {error.response.data} </div>
           )}
-          <div style={{ color: 'red' }}>{passwordError}</div>
+          <div style={{ color: "red" }}>{passwordError}</div>
         </Grid>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

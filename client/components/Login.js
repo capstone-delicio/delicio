@@ -1,25 +1,26 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { authenticate } from '../store'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { authenticate } from "../store";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const Login = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { error } = useSelector((state) => {
-    return state.auth
-  })
+    return state.auth;
+  });
 
+  //C: variables can be kept with useState hook
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const formName = event.target.name
-    const email = event.target.email.value
-    const password = event.target.password.value
-    dispatch(authenticate(email, password, formName))
-  }
+    event.preventDefault();
+    const formName = event.target.name;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    dispatch(authenticate(email, password, formName));
+  };
 
   return (
     <div id="logins">
@@ -44,12 +45,12 @@ const Login = () => {
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </p>
           {error && error.response && (
-            <div style={{ color: 'red' }}> {error.response.data} </div>
+            <div style={{ color: "red" }}> {error.response.data} </div>
           )}
         </Grid>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -1,7 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logout } from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
 // import logo from
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
@@ -29,23 +29,25 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     </nav>
     <hr />
   </div>
-)
+);
 
 /**
  * CONTAINER
  */
+//C: useSelector hook
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-  }
-}
+  };
+};
 
+//C: useDispatch hook
 const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
+      dispatch(logout());
     },
-  }
-}
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);
