@@ -13,14 +13,15 @@ const getSingleRest = () => {
   type: GET_SINGLE_REST;
 };
 
+const auth = {
+  Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
+};
+
 // Thunks
 export const _getRests = (params) => async (dispatch) => {
   // expect params to be an object
   const { location, limit, price, cuisine } = params;
 
-  const auth = {
-    Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-  };
   const autocompleteParams = {
     text: cuisine,
     latitude: "",
@@ -68,24 +69,3 @@ export const _getRests = (params) => async (dispatch) => {
     return { Error: err.stack };
   }
 };
-
-// const config = {
-//   headers: {
-//     Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-//   },
-//   params: {
-//     term: "restaurants",
-//     location: "Chicago",
-//     // radius: 10000,
-//     // sort_by: "relevance",
-//     limit: 2,
-//   },
-// };
-// const url = "https://api.yelp.com/v3/businesses/search";
-
-// try {
-//   const response = await axios.get(url, config);
-//   return response.data;
-// } catch (err) {
-//   return { Error: err.stack };
-// }
