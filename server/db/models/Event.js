@@ -27,12 +27,15 @@ const Event = db.define("event", {
     defaultValue: null,
   },
   restaurantId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: true,
-    references: {
-      model: Restaurant,
-      key: "id",
-    },
+    // references: {
+    //   model: Restaurant,
+    //   key: "id",
+    // },
+  },
+  restaurantAlias: {
+    type: Sequelize.STRING,
   },
   isScheduled: {
     type: Sequelize.BOOLEAN,

@@ -6,7 +6,7 @@ const User = require("./models/User");
 const Restaurant = require("./models/Restaurant");
 const Event = require("./models/Event");
 const Cuisine = require("./models/Cuisine");
-const Restaurant_pics = require("./models/Restaurant_pics");
+// const Restaurant_pics = require("./models/Restaurant_pics");
 const Event_picks = require("./models/Event_picks");
 const Friend = require("./models/Friend");
 
@@ -31,23 +31,28 @@ User.belongsToMany(User, {
 // restaurant belongs to many cuisines
 // cuisines
 
-Restaurant.belongsToMany(Cuisine, { through: "rest_cuisine" });
-Cuisine.belongsToMany(Restaurant, { through: "rest_cuisine" });
+// Restaurant.belongsToMany(Cuisine, { through: "rest_cuisine" });
+// Cuisine.belongsToMany(Restaurant, { through: "rest_cuisine" });
 
-User.belongsToMany(Event, { through: "event_attendees" });
-Event.belongsToMany(User, { through: "event_attendees" });
+// User.belongsToMany(Event, { through: "event_attendees" });
+// Event.belongsToMany(User, { through: "event_attendees" });
 
 User.belongsToMany(Restaurant, { through: "bookmarked_restaurant" });
 Restaurant.belongsToMany(User, { through: "bookmarked_restaurant" });
 
-Restaurant.hasMany(Restaurant_pics);
-Restaurant_pics.belongsTo(Restaurant);
+// Restaurant.hasMany(Restaurant_pics);
+// Restaurant_pics.belongsTo(Restaurant);
 
-Restaurant.hasMany(Event);
-Event.belongsTo(Restaurant);
+// Restaurant.hasMany(Event);
+// Event.belongsTo(Restaurant);
 
+// Event.hasMany(Event_picks);
+// User.hasMany(Event_picks);
+
+Event_picks.belongsTo(Event);
 Event.hasMany(Event_picks);
-User.hasMany(Event_picks);
+
+
 
 // Restaurant.hasMany(Event);
 // Event.belongsTo(Restaurant);
@@ -62,7 +67,7 @@ module.exports = {
     Restaurant,
     Event,
     Cuisine,
-    Restaurant_pics,
+    // Restaurant_pics,
     Event_picks,
     Friend,
   },

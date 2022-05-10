@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 const Event = require("./Event");
-const Restaurant_pics = require("./Restaurant_pics");
+// const Restaurant_pics = require("./Restaurant_pics");
 const User = require("./User");
 
 const Event_picks = db.define("event_picks", {
@@ -28,12 +28,21 @@ const Event_picks = db.define("event_picks", {
       key: "id",
     },
   },
-  restaurant_picsId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Restaurant_pics,
-      key: "id",
-    },
+  restaurantId: {
+    type: Sequelize.STRING,
+  },
+  restaurantAlias: {
+    type: Sequelize.STRING,
+  },
+  restaurant_picUrl: {
+    type: Sequelize.STRING,
+    // references: {
+    //   model: Restaurant_pics,
+    //   key: "id",
+    // },
+  },
+  picDescription: {
+    type: Sequelize.TEXT,
   },
 });
 

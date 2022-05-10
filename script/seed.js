@@ -2,25 +2,13 @@
 
 const {
   db,
-  models: {
-    User,
-    Restaurant,
-    Event,
-    Cuisine,
-    Restaurant_pics,
-    Event_picks,
-    Friend,
-  },
+  models: { User, Event, Event_picks, Friend },
 } = require("../server/db");
 
 const users = require("./users");
-const restaurant = require("./restaurant");
-const cuisine = require("./cuisine");
-const restaurant_pics = require("./restaurant_pics");
-// const { friends, person } = require("./friends");
 const friends = require("./friends");
 const attendees = require("./attendees");
-const eventPicks = require("./eventPicks");
+// const eventPicks = require("./eventPicks");
 const bookmarked_restaurants = require("./bookmarked_restaurants");
 const events = require("./events");
 
@@ -38,32 +26,18 @@ async function seed() {
       return User.create(users);
     })
   );
-  await Promise.all(
-    restaurant.map((restaurant) => {
-      return Restaurant.create(restaurant);
-    })
-  );
-  await Promise.all(
-    cuisine.map((cuisine) => {
-      return Cuisine.create(cuisine);
-    })
-  );
-  await Promise.all(
-    restaurant_pics.map((restaurant_pics) => {
-      return Restaurant_pics.create(restaurant_pics);
-    })
-  );
+
   await Promise.all(
     events.map((event) => {
       return Event.create(event);
     })
   );
 
-  await Promise.all(
-    friends.map((friend) => {
-      return Friend.create(friend);
-    })
-  );
+  // await Promise.all(
+  //   friends.map((friend) => {
+  //     return Friend.create(friend);
+  //   })
+  // );
 
   // await Promise.all(
   //   restaurant_pics.map((Event_picks) => {
@@ -72,7 +46,7 @@ async function seed() {
   // );
 
   // console.log("proto", User.__proto__);
-  console.log("magic methods", Object.keys(Restaurant.prototype));
+  // console.log("magic methods", Object.keys(Event.prototype));
   // testing methods and associations
   const userA = await User.findByPk(1);
   const userB = await User.findByPk(5);
@@ -83,10 +57,12 @@ async function seed() {
   const userH = await User.findByPk(7);
   const userI = await User.findByPk(8);
 
+  // adding friend
+  await userA.addPerson(userB);
+
+  // adding event attendees
   const gradEvent = await Event.findByPk(1);
   const birthday = await Event.findByPk(2);
-
-  await userA.addPerson(userB);
 
   await userA.addEvent(gradEvent);
   await userC.addEvent(gradEvent);
@@ -96,7 +72,6 @@ async function seed() {
   await userG.addEvent(birthday);
   await userH.addEvent(birthday);
   await userI.addEvent(birthday);
-
 
   // await userA.removePerson(userB);
 
@@ -114,9 +89,9 @@ async function seed() {
   // await userList[0].addFriend(userList[1]);
 
   console.log(`seeded ${users.length} users`);
-  console.log(`seeded ${restaurant.length} restaurant`);
-  console.log(`seeded ${cuisine.length} cuisine`);
-  console.log(`seeded ${restaurant_pics.length} restaurant_pics`);
+  // console.log(`seeded ${restaurant.length} restaurant`);
+  // console.log(`seeded ${cuisine.length} cuisine`);
+  // console.log(`seeded ${restaurant_pics.length} restaurant_pics`);
   console.log(`seeded ${friends.length} friends`);
   console.log(`seeded successfully`);
   // return {
