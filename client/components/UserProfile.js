@@ -19,12 +19,11 @@ class UserProfile extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const id = this.state.id
-    const first_name = this.state.irst_name
+    const first_name = this.state.first_name
     const last_name = this.state.last_name
-    const address = this.state.address
-    const city = this.state.city
-    const state = this.state.state
-    const zipCode = this.state.zipCode
+    const preferred_city = this.state.preferred_city
+    const prof_picUrl = this.state.prof_picUrl
+    const phone_number = this.state.phone_number
     const email = this.state.email
     const password = this.state.password
 
@@ -32,10 +31,9 @@ class UserProfile extends React.Component {
       id: id,
       first_name: first_name,
       last_name: last_name,
-      address: address,
-      state: state,
-      city: city,
-      zipCode: zipCode,
+      prof_picUrl : prof_picUrl,
+      phone_number : phone_number,
+      preferred_city : preferred_city,
       email: email,
       password: password
     }
@@ -69,14 +67,12 @@ class UserProfile extends React.Component {
           <p>{props.first_name} {props.last_name}</p>
           <h3>Email</h3>
           <p>{props.email}</p>
-          <h3>Street Address</h3>
-          <p>{props.address}</p>
           <h3>City</h3>
-          <p>{props.city}</p>
-          <h3>State</h3>
-          <p>{props.state}</p>
-          <h3>Zip</h3>
-          <p>{props.zipCode}</p>
+          <p>{props.preferred_city}</p>
+          <h3>Phone Number</h3>
+          <p>{props.phone_number}</p>
+          <h3>Photo</h3>
+          <p>{props.prof_picUrl}</p>
         </div>
 
         <div className="update-form-container">
@@ -112,12 +108,12 @@ class UserProfile extends React.Component {
             />
 
             <h3>
-              <label htmlFor="address">Update Street Address:</label>
+              <label htmlFor="phone_number">Update Phone Number:</label>
             </h3>
             <input
-              name="address"
+              name="phone_number"
               type="text"
-              placeholder={props.address}
+              placeholder={props.phone_number}
               onChange={this.handleChange}
             />
 
@@ -127,26 +123,17 @@ class UserProfile extends React.Component {
             <input
               name="city"
               type="text"
-              placeholder={props.city}
+              placeholder={props.preferred_city}
               onChange={this.handleChange}
             />
 
             <h3>
-              <label htmlFor="state">Update State :</label>
+              <label htmlFor="photo">Update Photo :</label>
             </h3>
             <input
-              name="state"
-              type="text"
+              name="photo"
+              type="URL"
               placeholder={props.state}
-              onChange={this.handleChange}
-            />
-            <h3>
-              <label htmlFor="zipCode">Update Zip:</label>
-            </h3>
-            <input
-              name="zipCode"
-              type="text"
-              placeholder={props.zipCode}
               onChange={this.handleChange}
             />
           </form>
@@ -159,10 +146,6 @@ class UserProfile extends React.Component {
               Edit Profile
             </button>
           </div>
-        </div>
-
-        <div className="order-history">
-          <h2>{props.name}'s Order History:</h2>
         </div>
       </div>
     )
