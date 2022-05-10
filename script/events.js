@@ -1,12 +1,12 @@
 const events = [
   {
     id: 1,
-    organizerId: 2,
+    organizerId: 1,
     event_name: "Fullstack Grads Brunch",
     event_date: "2022-05-28",
     event_time: "13:00",
-    restaurantId: "okaqMJEoHfHblpKz9Q-CMA",
-    restaurantAlias: "the-perch-chicago",
+    // restaurantId: "okaqMJEoHfHblpKz9Q-CMA",
+    // restaurantAlias: "the-perch-chicago",
     vote_deadline: "2022-05-17T23:59:59.000Z",
   },
   {

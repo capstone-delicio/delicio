@@ -2,14 +2,14 @@
 
 const {
   db,
-  models: { User, Event, Event_picks, Friend },
+  models: { User, Event, Event_picks, Friend, Bookmarked },
 } = require("../server/db");
 
 const users = require("./users");
 const friends = require("./friends");
 const attendees = require("./attendees");
-// const eventPicks = require("./eventPicks");
-const bookmarked_restaurants = require("./bookmarked_restaurants");
+const eventPicks = require("./eventPicks");
+const bookmarked = require("./bookmarked");
 const events = require("./events");
 
 // console.log(friends);
@@ -30,6 +30,18 @@ async function seed() {
   await Promise.all(
     events.map((event) => {
       return Event.create(event);
+    })
+  );
+
+  await Promise.all(
+    eventPicks.map((pick) => {
+      return Event_picks.create(pick);
+    })
+  );
+
+  await Promise.all(
+    bookmarked.map((mark) => {
+      return Bookmarked.create(mark);
     })
   );
 
@@ -66,8 +78,8 @@ async function seed() {
 
   await userA.addEvent(gradEvent);
   await userC.addEvent(gradEvent);
-  await userD.addEvent(gradEvent);
-  await userF.addEvent(gradEvent);
+  // await userD.addEvent(gradEvent);
+  // await userF.addEvent(gradEvent);
   await userF.addEvent(birthday);
   await userG.addEvent(birthday);
   await userH.addEvent(birthday);
