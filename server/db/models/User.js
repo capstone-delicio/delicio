@@ -31,6 +31,7 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       isEmail: true,
     },
@@ -66,10 +67,10 @@ User.prototype.generateToken = function () {
 /**
  * classMethods
  */
-User.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } })
+User.authenticate = async function ({ email, password }) {
+  const user = await this.findOne({ where: { email } })
   if (!user || !(await user.correctPassword(password))) {
-    const error = Error('Incorrect username/password')
+    const error = Error('Incorrect email/password')
     error.status = 401
     throw error
   }
@@ -101,19 +102,11 @@ const hashPassword = async (user) => {
   }
 }
 
-User.beforeCreate(async (user) => {
-  user.password_confirm = undefined
-  await hashPassword(user)
-})
+// User.beforeCreate(async (user) => {
+//   user.password_confirm = undefined
+//   await hashPassword(user)
+// })
 
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)
-
-User.beforeBulkCreate((users) =>
-  Promise.all(
-    users.map((user) => {
-      user.password_confirm = undefined
-      hashPassword(user)
-    })
-  )
-)
+User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)))

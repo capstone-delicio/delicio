@@ -1,15 +1,34 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import Button from '@material-ui/core/Button'
+import { Link } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
 
 /**
  * COMPONENT
  */
-export const Home = props => {
-  const {username} = props
+export const Home = (props) => {
+  const { first_name } = props
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+      >
+        <h3>Welcome {first_name}!</h3>
+        <h3>Do you want to?</h3>
+        <Button variant="contained" color="primary" href="/questions">
+          Find Restaurants
+        </Button>
+        <br />
+        <br />
+        <Button variant="contained" color="primary" href="/friends">
+          Plan with Friends
+        </Button>
+      </Grid>
     </div>
   )
 }
@@ -17,9 +36,9 @@ export const Home = props => {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    username: state.auth.username
+    first_name: state.auth.first_name,
   }
 }
 

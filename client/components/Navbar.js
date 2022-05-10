@@ -1,11 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../store";
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store'
+// import logo from
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>FS-App-Template TESTING123</h1>
+    <h1>Welcome!</h1>
+
+    {/*   <img src="../logo.png" height="100" /> */}
+
     <nav>
       {isLoggedIn ? (
         <div>
@@ -25,7 +29,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     </nav>
     <hr />
   </div>
-);
+)
 
 /**
  * CONTAINER
@@ -33,15 +37,15 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-  };
-};
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout());
+      dispatch(logout())
     },
-  };
-};
+  }
+}
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(mapState, mapDispatch)(Navbar)
