@@ -41,13 +41,15 @@ class UserProfile extends React.Component {
   }
   async handleChange(event) {
     await this.setState({
+      ...this.state,
       [event.target.name]: event.target.value,
     })
   }
 
   componentDidMount() {
     try {
-      this.props.getUser(this.props.user)
+      console.log('mount', this.props.user)
+      this.props.getUser(this.props.user.id)
       this.setState({})
     } catch (error) {
       console.error(error)
@@ -145,7 +147,6 @@ class UserProfile extends React.Component {
  * CONTAINER
  */
 const mapState = (state) => {
-  // console.log('STATE', state)
   return {
     user: state.user,
   }
