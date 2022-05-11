@@ -86,7 +86,7 @@ const testAutoComplete = async () => {
       headers: auth,
       params: busSearchParams,
     });
-    return data;
+    return data.businesses;
   } catch (err) {
     return { Error: err.stack };
   }

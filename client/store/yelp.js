@@ -2,26 +2,27 @@ import axios from "axios";
 
 // Action Types
 const GET_RESTS = "GET_RESTS";
-const GET_SINGLE_REST = "GET_SINGLE_)REST";
+const GET_SINGLE_REST = "GET_SINGLE_REST";
 
 // Action Creators
-const getRests = () => {
-  type: GET_RESTS;
-};
+const getRests = (params) => ({
+  type: GET_RESTS,
+  rests: params,
+});
 
-const getSingleRest = () => {
-  type: GET_SINGLE_REST;
-};
-
-const auth = {
-  Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-};
+const getSingleRest = (id) => ({
+  type: GET_SINGLE_REST,
+  rest: id,
+});
 
 // Thunks
 export const _getRests = (params) => async (dispatch) => {
   // expect params to be an object
   const { location, limit, price, cuisine } = params;
 
+  const auth = {
+    Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
+  };
   const autocompleteParams = {
     text: cuisine,
     latitude: "",
@@ -64,8 +65,55 @@ export const _getRests = (params) => async (dispatch) => {
       headers: auth,
       params: busSearchParams,
     });
-    return data;
+    // return data;
+    dispatch(getRests(data.businesses));
   } catch (err) {
     return { Error: err.stack };
   }
 };
+
+export const _getSingleRest = (id) => async (dispatch) => {
+  const bizDetail_url = `https://api.yelp.com/v3/businesses/${id}`;
+  try {
+    const { data } = await axios.get(bizDetail_url, { headers: auth });
+    dispatch(getSingleRest(data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+// const config = {
+//   headers: {
+//     Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
+//   },
+//   params: {
+//     term: "restaurants",
+//     location: "Chicago",
+//     // radius: 10000,
+//     // sort_by: "relevance",
+//     limit: 2,
+//   },
+// };
+// const url = "https://api.yelp.com/v3/businesses/search";
+
+// try {
+//   const response = await axios.get(url, config);
+//   return response.data;
+// } catch (err) {
+//   return { Error: err.stack };
+// }
+
+// REDUCER
+const yelpState = {
+  // based on json file returned from search
+  rests: [],
+  rest: {},
+};
+
+export default function yelp(state = yelpState, action) {
+  switch (action.type) {
+    case GET_RESTS:
+      return { ...state, rests: action.rests };
+    case GET_SINGLE_REST:
+      return { ...state, rest: action.rest };
+  }
+}
