@@ -8,16 +8,17 @@ import { getUser, update } from '../store'
 class UserProfile extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      ...this.props.user,
-    }
+    // this.state = {
+    //   ...this.props.user,
+    // }
+    this.state = this.props.user
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    // const id = this.state.id
+    const id = this.state.id
     const first_name = this.state.first_name
     const last_name = this.state.last_name
     const preferred_city = this.state.preferred_city
@@ -27,7 +28,7 @@ class UserProfile extends React.Component {
     const password = this.state.password
 
     let updatedUser = {
-      // id: id,
+      id: id,
       first_name: first_name,
       last_name: last_name,
       prof_picUrl: prof_picUrl,
@@ -36,14 +37,17 @@ class UserProfile extends React.Component {
       email: email,
       password: password,
     }
+    console.log("updatedUser", updatedUser)
     this.props.update(updatedUser, this.props.history)
     // this.setState({})
   }
-  async handleChange(event) {
-    await this.setState({
+
+  handleChange(event) {
+    this.setState({
       ...this.state,
       [event.target.name]: event.target.value,
     })
+    console.log("handle change", this.state, this.props.user)
   }
 
   componentDidMount() {
@@ -57,8 +61,8 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    console.log(this.props, 'props')
     const props = this.props.user
+    console.log(props, 'props')
 
     return (
       <div className="profile">
@@ -74,7 +78,7 @@ class UserProfile extends React.Component {
             <input
               name="first_name"
               type="text"
-              placeholder={props.first_name}
+              value={props.first_name}
               onChange={this.handleChange}
             />
 
@@ -84,7 +88,7 @@ class UserProfile extends React.Component {
             <input
               name="last_name"
               type="text"
-              placeholder={props.last_name}
+              value={props.last_name}
               onChange={this.handleChange}
             />
 
@@ -94,7 +98,7 @@ class UserProfile extends React.Component {
             <input
               name="email"
               type="text"
-              placeholder={props.email}
+              value={props.email}
               onChange={this.handleChange}
             />
 
@@ -104,7 +108,7 @@ class UserProfile extends React.Component {
             <input
               name="phone_number"
               type="text"
-              placeholder={props.phone_number}
+              value={props.phone_number}
               onChange={this.handleChange}
             />
 
@@ -114,7 +118,7 @@ class UserProfile extends React.Component {
             <input
               name="city"
               type="text"
-              placeholder={props.preferred_city}
+              value={props.preferred_city}
               onChange={this.handleChange}
             />
 
@@ -124,7 +128,7 @@ class UserProfile extends React.Component {
             <input
               name="photo"
               type="text"
-              placeholder={props.prof_picUrl}
+              value={props.prof_picUrl}
               onChange={this.handleChange}
             />
           </form>
