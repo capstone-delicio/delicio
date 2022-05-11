@@ -1,7 +1,4 @@
-// Loading the dependencies. We don't need pretty
-// because we shall not log html to the terminal
 const axios = require("axios");
-// const cheerio = require("cheerio");
 var JSSoup = require("jssoup").default;
 
 // URL of the page we want to scrape
@@ -18,25 +15,33 @@ async function scrapeData() {
     const imgElements = soup.findAll("img");
 
     const foodImages = imgElements.filter((el) => {
-      const alt = el.attrs.alt;
-      const strArr = alt.split(" ");
-      const idx = strArr.indexOf("States.");
-      const description = strArr.slice(idx + 1).join(" ");
+      // filter for only images with food descriptions
+      let hasFoodDescription = false;
+
+      if (el.attrs.alt) {
+        const imgDescArr = el.attrs.alt.split(" ");
+        const idx = imgDescArr.indexOf("States");
+        const idx2 = imgDescArr.indexOf("States.");
+        if (idx === imgDescArr.length - 1 || idx2 === imgDescArr.length - 1) {
+          hasFoodDescription = false;
+        } else {
+          // set the alt attribute to only equal food description
+          hasFoodDescription = true;
+          const index = idx !== -1 ? idx : idx2;
+          el.attrs.alt = imgDescArr.slice(index + 1).join(" ");
+        }
+      }
 
       return (
         el.attrs.class === "photo-box-img" &&
-        el.attrs.height >= 226 &&
-        description.length > 0
+        el.attrs.height > 200 &&
+        hasFoodDescription
       );
     });
 
     const imgSrc = foodImages.map((el) => {
       return { imgDesc: el.attrs.alt, imgSrc: el.attrs.src };
     });
-
-    // const myString = imgSrc[0].imgDesc.split(" ");
-    // const idx = myString.indexOf("States.");
-    // console.log(myString.slice(idx + 1).join(" "));
 
     console.log(imgSrc);
   } catch (err) {
