@@ -17,6 +17,7 @@ app.use(express.json());
 app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
 app.use("/yelp", require("../yelp"));
+app.use("/yelp_scraper", require("../yelp_scraper"));
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))
