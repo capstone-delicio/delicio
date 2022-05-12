@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
 import {
@@ -15,6 +15,7 @@ const Questions = () => {
   const dispatch = useDispatch();
   // state.yelp = what is inside combined reducer
   const yelp = useSelector((state) => state.yelp);
+  const isMounted = useRef(false);
 
   const handleChange = (event) => {
     setPrice(event.target.value);
@@ -33,10 +34,12 @@ const Questions = () => {
 
   useEffect(() => {
     // now go thru restaurant list and scrape for pics
-    if (yelp.rests.length > 0) {
+    if (isMounted.current) {
       yelp.rests.forEach((rest) => {
         dispatch(_getRestPhotos(rest.id, rest.alias));
       });
+    } else {
+      isMounted.current = true;
     }
   }, [yelp.rests]);
 

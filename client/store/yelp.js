@@ -35,8 +35,10 @@ export const _getRestPhotos = (id, alias) => async (dispatch) => {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, num);
   }
-  const subsetPics = getMultipleRandom(data, 3);
-  dispatch(getRestPhotos(subsetPics));
+  if (data) {
+    const subsetPics = getMultipleRandom(data, 3);
+    dispatch(getRestPhotos(subsetPics));
+  }
 };
 
 export const _getRests = (params) => async (dispatch) => {
