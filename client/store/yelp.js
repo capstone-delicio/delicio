@@ -35,8 +35,10 @@ export const _getRestPhotos = (id, alias) => async (dispatch) => {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, num);
   }
-  const subsetPics = getMultipleRandom(data, 3);
-  dispatch(getRestPhotos(subsetPics));
+  if (data) {
+    const subsetPics = getMultipleRandom(data, 3);
+    dispatch(getRestPhotos(subsetPics));
+  }
 };
 
 export const _getRests = (params) => async (dispatch) => {
@@ -109,8 +111,8 @@ export const _getSingleRest = (id) => async (dispatch) => {
 };
 
 // REDUCER
+// based on json file returned from search
 const yelpState = {
-  // based on json file returned from search
   rests: [],
   rest: {},
   restPhotos: [],
@@ -119,14 +121,13 @@ const yelpState = {
 export default function yelp(state = yelpState, action) {
   switch (action.type) {
     case GET_RESTS:
-      return { rests: action.rests };
+      return { ...state, rests: action.rests };
     case GET_SINGLE_REST:
       return { ...state, rest: action.rest };
     case GET_REST_PHOTOS:
-      console.log("inside reducer", state);
       return {
         ...state,
-        // restPhotos: [...state.restPhotos, ...action.pics],
+        restPhotos: [...state.restPhotos, ...action.pics],
       };
     default:
       return state;

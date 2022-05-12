@@ -50,5 +50,3 @@ export default async function scrapeData(alias) {
     console.error(err);
   }
 }
-// Invoke the above function
-scrapeData();
