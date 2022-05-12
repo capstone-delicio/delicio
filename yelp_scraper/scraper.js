@@ -2,7 +2,8 @@ const axios = require("axios");
 var JSSoup = require("jssoup").default;
 
 // URL of the page we want to scrape
-const url = "https://www.yelp.com/biz_photos/frontera-grill-chicago?tab=food";
+const alias = "the-perch-chicago";
+const url = `https://www.yelp.com/biz_photos/${alias}?tab=food`;
 
 // Async function which scrapes the data
 async function scrapeData() {

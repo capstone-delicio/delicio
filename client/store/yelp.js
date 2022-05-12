@@ -106,7 +106,7 @@ export const _getRests = (params) => async (dispatch) => {
     })
     .join(",");
 
-  // return a list of restaurants that fullfill the params
+  // return a list of restaurants that fullfil the params
   const busSearchParams = {
     term: "restaurants",
     location,

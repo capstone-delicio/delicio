@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const res = require("express/lib/response");
 
 const auth = {
   Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
 };
 
-const fetchYelpRest = async (rest_id) => {
+const getBiz = async (rest_id) => {
   const url = `https://api.yelp.com/v3/businesses/${rest_id}`;
   try {
     const { data } = await axios.get(url, { headers: auth });
@@ -17,6 +18,7 @@ const fetchYelpRest = async (rest_id) => {
 };
 
 const bizSearch = async () => {
+  // const bizSearch = async (params) => {
   // const { location, limit, price, cuisine } = params;
   const cuisine = "mex";
 
@@ -37,7 +39,6 @@ const bizSearch = async () => {
       params: autocompleteParams,
     });
     catArr = [...data.categories];
-    // return data;
   } catch (err) {
     return { Error: err.stack };
   }
@@ -46,7 +47,8 @@ const bizSearch = async () => {
       return cat.alias;
     })
     .join(",");
-  // return a list of restaurants that fullfill the params
+
+  // return a list of restaurants that fullfil the params
   const busSearchParams = {
     term: "restaurants",
     location: "Chicago",
@@ -77,7 +79,7 @@ router.get("/biz", async (req, res) => {
 
 router.get("/:rest_id", async (req, res) => {
   const rest_id = req.params.rest_id;
-  const data = await fetchYelpRest(rest_id);
+  const data = await getBiz(rest_id);
   res.json(data);
 });
 
