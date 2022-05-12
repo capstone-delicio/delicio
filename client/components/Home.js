@@ -25,7 +25,7 @@ export const Home = (props) => {
         </Button>
         <br />
         <br />
-        <Button variant="contained" color="primary" href="/friends">
+        <Button variant="contained" color="primary" href="/eventinput">
           Plan with Friends
         </Button>
       </Grid>
