@@ -8,6 +8,7 @@ import Friends from './components/Friends'
 import Home from './components/Home'
 import { me } from './store'
 import EditUser from './components/EditUser'
+import SingleRestaurant from './components/SingleRestaurant'
 
 /**
  * COMPONENT
@@ -28,6 +29,7 @@ class Routes extends Component {
             <Route path="/questions" component={Questions} />
             <Route path="/friends" component={Friends} />
             <Route path="/edituser" component={EditUser} />
+            <Route path="/singlerestaurant" component={SingleRestaurant} />
             <Redirect to="/home" />
           </Switch>
         ) : (

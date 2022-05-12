@@ -2,38 +2,32 @@ import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import React, { useState, useEffect } from "react";
-import { getRests, getSingleRest } from "../store/yelp";
+import { getSingleRest } from "../store/yelp";
 import axios from 'axios'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 
 const SingleRestaurant = () => {
-  const { id } = useParams()
-  let history = useHistory()
-  const restraunt = useSelector(state=>state.rest)
+
+  const rest = useSelector(state=>state.rest)
+
+  useEffect(() => {
+    props.getSingleRest(props.match.params.rest.id);
+  }, []);
   const dispatch = useDispatch()
 
-  const [formState, setFormState] = useState({
-      id:restraunt.id,
-  })
-
-  const SubmitHandler = async (e) => {
-      e.preventDefault()
-      dispatch(_getSingleRest(formState))
-      history.push('/')
-
-  }
-
     return (
-      <div className="single-product-page">
-        <div key={restraunt.id}>
-          <img className="restraunt-img" src={restraunt.imageUrl} />
+
+      <div className="single-restaurant-page">
+        <h1>hello from single rest</h1>
+        <div key={rest.id}>
+          <img className="restraunt-img" src={restaurant.imageUrl} />
         </div>
 
-        <div className="single-restraunt-page-info">
-          <h3>{restraunt.name}</h3>
-          <p>{restraunt.description}</p>
-          <p>{restraunt.pricerange}</p>
+        <div className="single-restaurant-page-info">
+          <h3>{restaurant.name}</h3>
+          <p>{restaurant.description}</p>
+          <p>{restaurant.pricerange}</p>
 
         </div>
       </div>
