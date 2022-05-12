@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import yelp from "./yelp";
 
-const reducer = combineReducers({ auth });
+const reducer = combineReducers({ auth, yelp });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
