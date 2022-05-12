@@ -19,9 +19,11 @@ app.use("/api", require("./api"));
 app.use("/yelp", require("../yelp"));
 // app.use("/yelp_scraper", require("../yelp_scraper"));
 
+
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))
 );
+
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -38,9 +40,11 @@ app.use((req, res, next) => {
 });
 
 // sends index.html
+
 app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public/index.html"));
 });
+
 
 // error handling endware
 app.use((err, req, res, next) => {
