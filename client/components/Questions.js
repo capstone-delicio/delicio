@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { _getRests } from "../store/yelp";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { _getRestPhotos, _getRests } from "../store/yelp";
 import {
   TextField,
   Grid,
@@ -13,6 +13,8 @@ import {
 const Questions = () => {
   const [price, setPrice] = useState("");
   const dispatch = useDispatch();
+  // state.yelp = what is inside combined reducer
+  const yelp = useSelector((state) => state.yelp);
 
   const handleChange = (event) => {
     setPrice(event.target.value);
@@ -26,10 +28,17 @@ const Questions = () => {
     const price = e.target.price.value;
     const cuisine = e.target.cuisine.value;
 
-    console.log("questions.js", location, limit, price, cuisine);
-
     dispatch(_getRests({ location, limit, price, cuisine }));
   };
+
+  useEffect(() => {
+    // now go thru restaurant list and scrape for pics
+    if (yelp.rests.length > 0) {
+      yelp.rests.forEach((rest) => {
+        dispatch(_getRestPhotos(rest.id, rest.alias));
+      });
+    }
+  }, [yelp.rests]);
 
   return (
     <div id="questions">
