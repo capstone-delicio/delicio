@@ -23,25 +23,17 @@ const EditUser = () => {
         preferred_city: user.preferred_city
     })
 
-    // useEffect(() => {
-    //     LoadUser()
-    // }, [])
     const onChangeHandler = (e) => {
-        // console.log(e.target.value)
+
         setFormState({ ...formState, [e.target.name]: e.target.value })
     }
     const SubmitHandler = async (e) => {
         e.preventDefault()
-        // await axios.put(`/users/${id}`, user)
+
         dispatch(updateUserThunk(formState))
         history.push('/')
 
     }
-
-    // const LoadUser = async () => {
-    //     const result = await axios.get(`/users/${id}`)
-    //     setUser(result.data)
-    // }
     const { first_name, last_name, email, phone_number, preferred_city } = user
     return (
         <div>
