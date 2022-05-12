@@ -5,6 +5,7 @@ import axios from "axios";
 // Action Types
 const GET_RESTS = "GET_RESTS";
 const GET_SINGLE_REST = "GET_SINGLE_REST";
+const GET_REST_PHOTOS = "GET_REST_PHOTOS";
 
 // Action Creators
 const getRests = (params) => ({
@@ -17,12 +18,69 @@ const getSingleRest = (id) => ({
   rest: id,
 });
 
+
 const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
 const auth = {
   Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
 };
 
+const getRestPhotos = (alias) => ({
+  type: GET_REST_PHOTOS,
+  alias: alias,
+});
+
+
 // Thunks
+export const _getRestPhotos = (alias) => async (dispatch) => {
+  const url = `https://www.yelp.com/biz_photos/${alias}`;
+  const queryParams = {
+    tab: "food",
+  };
+  try {
+    // use Axios to grab html
+    const { data } = await axios.get(url, queryParams);
+
+    // Load HTML we fetched in the previous line, findAll img
+    const soup = new JSSoup(data);
+    const imgElements = soup.findAll("img");
+
+    // Filter for Food imgs with food descriptions
+    const foodImages = imgElements.filter((el) => {
+      // filter for only images with food descriptions
+      let hasFoodDescription = false;
+
+      if (el.attrs.alt) {
+        const imgDescArr = el.attrs.alt.split(" ");
+        const idx = imgDescArr.indexOf("States");
+        const idx2 = imgDescArr.indexOf("States.");
+        if (idx === imgDescArr.length - 1 || idx2 === imgDescArr.length - 1) {
+          hasFoodDescription = false;
+        } else {
+          // set the alt attribute to only equal food description
+          hasFoodDescription = true;
+          const index = idx !== -1 ? idx : idx2;
+          el.attrs.alt = imgDescArr.slice(index + 1).join(" ");
+        }
+      }
+
+      return (
+        el.attrs.class === "photo-box-img" &&
+        el.attrs.height > 200 &&
+        hasFoodDescription
+      );
+    });
+
+    // return an array of obj with description & imgUrls
+    const imgSrc = foodImages.map((el) => {
+      return { imgDesc: el.attrs.alt, imgSrc: el.attrs.src };
+    });
+
+    dispatch(getRestPhotos(imgSrc));
+  } catch (err) {
+    return { Error: err.stack };
+  }
+};
+
 export const _getRests = (params) => async (dispatch) => {
   // expect params to be an object
   const { location, limit, price, cuisine } = params;
@@ -67,7 +125,7 @@ export const _getRests = (params) => async (dispatch) => {
     })
     .join(",");
 
-  // return a list of restaurants that fullfill the params
+  // return a list of restaurants that fullfil the params
   const busSearchParams = {
     term: "restaurants",
     location,
@@ -100,32 +158,13 @@ export const _getSingleRest = (id) => async (dispatch) => {
     console.error(err);
   }
 };
-// const config = {
-//   headers: {
-//     Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-//   },
-//   params: {
-//     term: "restaurants",
-//     location: "Chicago",
-//     // radius: 10000,
-//     // sort_by: "relevance",
-//     limit: 2,
-//   },
-// };
-// const url = "https://api.yelp.com/v3/businesses/search";
-
-// try {
-//   const response = await axios.get(url, config);
-//   return response.data;
-// } catch (err) {
-//   return { Error: err.stack };
-// }
 
 // REDUCER
 const yelpState = {
   // based on json file returned from search
   rests: [],
   rest: {},
+  restPhotos: [],
 };
 
 export default function yelp(state = yelpState, action) {
@@ -134,6 +173,10 @@ export default function yelp(state = yelpState, action) {
       return { ...state, rests: action.rests };
     case GET_SINGLE_REST:
       return { ...state, rest: action.rest };
+    case GET_REST_PHOTOS:
+      return { ...state, restPhotos: action.imgSrc };
+    default:
+      return yelpState;
   }
   return state;
 }

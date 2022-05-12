@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useRouteMatch } from 'react-router-dom'
 import history from '../history'
 
 const TOKEN = 'token'
@@ -7,12 +8,12 @@ const TOKEN = 'token'
  * ACTION TYPES
  */
 const SET_AUTH = 'SET_AUTH'
-
+const UPDATE_USER = 'UPDATE_USER'
 /**
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth })
-
+const updateUser = (user) =>({type: UPDATE_USER, user})
 /**
  * THUNK CREATORS
  */
@@ -25,6 +26,14 @@ export const me = () => async (dispatch) => {
       },
     })
     return dispatch(setAuth(res.data))
+  }
+}
+export const updateUserThunk = (user) => async (dispatch) =>{
+  try {
+    const {data} = await axios.put(`/api/users/${user.id}`,user)
+    dispatch(updateUser(data))
+  } catch (error) {
+       console.log(error)
   }
 }
 
@@ -74,6 +83,8 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth
+    case UPDATE_USER:
+      return {...state,...action.user}
     default:
       return state
   }
