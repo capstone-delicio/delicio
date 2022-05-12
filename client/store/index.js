@@ -6,7 +6,9 @@ import auth from './auth'
 import yelp from './yelp'
 import user from './user'
 
-const reducer = combineReducers({ auth, user })
+
+const reducer = combineReducers({ auth, user, yelp })
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
