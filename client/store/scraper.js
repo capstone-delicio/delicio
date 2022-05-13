@@ -2,14 +2,15 @@ const axios = require("axios");
 var JSSoup = require("jssoup").default;
 
 // URL of the page we want to scrape
-const alias = "the-perch-chicago";
-const url = `https://www.yelp.com/biz_photos/${alias}?tab=food`;
+// const alias = "the-perch-chicago";
 
 // Async function which scrapes the data
-async function scrapeData() {
+export default async function scrapeData(alias) {
+  const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+  const url = `https://www.yelp.com/biz_photos/${alias}?tab=food`;
   try {
     // Fetch HTML of the page we want to scrape
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(proxyUrl + url);
 
     // Load HTML we fetched in the previous line
     const soup = new JSSoup(data);
@@ -44,10 +45,8 @@ async function scrapeData() {
       return { imgDesc: el.attrs.alt, imgSrc: el.attrs.src };
     });
 
-    console.log(imgSrc);
+    return imgSrc;
   } catch (err) {
     console.error(err);
   }
 }
-// Invoke the above function
-scrapeData();
