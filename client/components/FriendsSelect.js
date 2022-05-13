@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
-import { _getFriends } from "../store";
+import { _getFriends, _setSelectedFriends } from "../store";
 
 // Styling -------------------------
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +64,10 @@ function FriendsSelect() {
     dispatch(_getFriends(user.id));
   }, []);
 
+  useEffect(() => {
+    dispatch(_setSelectedFriends(selected));
+  }, [selected]);
+
   const friendsArr = friendStore.friends;
   const friends = friendsArr.map((friend) => {
     return friend.first_name + " " + friend.last_name;
@@ -85,8 +89,8 @@ function FriendsSelect() {
     setSelected(value);
   };
 
-  return !friends ? (
-    <h1>friends not found</h1>
+  return !friends.length > 0 ? (
+    <h4>Please Add Friends</h4>
   ) : (
     <FormControl className={classes.formControl}>
       <InputLabel id="mutiple-select-label">Select Friends to Join</InputLabel>

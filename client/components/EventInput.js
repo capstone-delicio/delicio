@@ -53,7 +53,7 @@ const EventInput = () => {
 
           <Grid item>
             {/* <p>Event Date:</p> */}
-            <InputLabel>Event Name:</InputLabel>
+            <InputLabel>Event Date:</InputLabel>
             <TextField name="event_date" type="date" />
           </Grid>
 
