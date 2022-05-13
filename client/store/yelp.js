@@ -29,7 +29,7 @@ const getRestPhotos = (pics) => ({
 
 // Thunks
 export const _getRestPhotos = (id, alias) => async (dispatch) => {
-  const data = await scrapeData(alias);
+  const data = await scrapeData(id, alias);
   // pick a random 3 photos
   function getMultipleRandom(arr, num) {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
