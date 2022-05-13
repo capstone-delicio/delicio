@@ -20,6 +20,7 @@ router.get('/', async (req, res, next) => {
 //ROUTE: api/events
 router.post('/', async (req, res, next) => {
   try {
+    console.log(req.body)
     let newEvent = await Event.create(req.body)
     res.json(newEvent)
   } catch (err) {

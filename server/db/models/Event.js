@@ -4,14 +4,14 @@ const User = require('./User')
 const Restaurant = require('./Restaurant')
 
 const Event = db.define('event', {
-  // organizerId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   references: {
-  //     model: User,
-  //     key: 'id',
-  //   },
-  // },
+  organizerId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'id',
+    },
+  },
   event_name: {
     type: Sequelize.JSON,
     allowNull: false,

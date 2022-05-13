@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import history from '../history'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -8,13 +9,21 @@ import { addEvent } from '../store'
 const EventInput = () => {
   const dispatch = useDispatch()
 
+  const user = useSelector((state) => {
+    return state.auth
+  })
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    const organizerId = user.id
     const event_name = e.target.event_name.value
     const event_date = e.target.event_date.value
     const event_time = e.target.event_time.value
     const vote_deadline = e.target.vote_deadline.value
-    dispatch(addEvent(event_name, event_date, event_time, vote_deadline))
+    dispatch(
+      addEvent(organizerId, event_name, event_date, event_time, vote_deadline)
+    )
+    history.push('/questions')
   }
 
   return (
@@ -26,7 +35,8 @@ const EventInput = () => {
           justifyContent="center"
           direction="column"
         >
-          <h3>Please input your event and voting deadline</h3>
+          <h3>Please fill in the following information</h3>
+
           <Grid item>
             <p>Event Name:</p>
             <TextField name="event_name" type="text" />
@@ -51,13 +61,6 @@ const EventInput = () => {
             Submit
           </Button>
           <br />
-          {/*<Button variant="contained" color="primary" href="/friends">
-            Next
-          </Button>*/}
-          {/*<Button variant="contained" color="primary" href="/questions">
-            Answer your questions
-          </Button>*/}
-          {/**/}
         </Grid>
       </form>
     </div>

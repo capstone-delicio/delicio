@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import jwt from 'jsonwebtoken'
 
 const TOKEN = 'token'
 
@@ -22,25 +21,15 @@ const createEvent = (event) => {
  * THUNK CREATORS
  */
 export const addEvent =
-  (event_name, event_date, event_time, vote_deadline) => async (dispatch) => {
+  (organizerId, event_name, event_date, event_time, vote_deadline) =>
+  async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN)
-
-      // if (token) {
-      //   jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
-      //     if (err) {
-      //       console.log(err.message)
-      //       next()
-      //     } else {
-      //       console.log(decodedToken)
-      //     }
-      //   })
-      // }
-
       if (token) {
+        console.log(token)
         const { data } = await axios.post(
           `/api/events`,
-          { event_name, event_date, event_time, vote_deadline },
+          { organizerId, event_name, event_date, event_time, vote_deadline },
           {
             headers: {
               authorization: token,
