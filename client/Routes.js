@@ -7,9 +7,10 @@ import Questions from './components/Questions'
 import Home from './components/Home'
 import { me } from './store'
 import EditUser from './components/EditUser'
+
+import SingleRestaurant from './components/SingleRestaurant'
 import EventInput from './components/EventInput'
 import SwipePage from "./components/SwipePage";
-
 
 /**
  * COMPONENT
@@ -30,6 +31,9 @@ class Routes extends Component {
             <Route path="/questions" component={Questions} />
 
             <Route path="/edituser" component={EditUser} />
+
+            <Route path="/singlerestaurant" component={SingleRestaurant} />
+
 
             <Route path="/card" component={SwipePage} />
 
