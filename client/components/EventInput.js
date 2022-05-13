@@ -5,6 +5,7 @@ import history from "../history";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
 import FriendsSelect from "./FriendsSelect";
 
 const EventInput = () => {
@@ -45,22 +46,26 @@ const EventInput = () => {
         >
           <h3>Please fill in the following information</h3>
           <Grid item>
-            <p>Event Name:</p>
+            {/* <p>Event Name:</p> */}
+            <InputLabel>Event Name:</InputLabel>
             <TextField name="event_name" type="text" />
           </Grid>
 
           <Grid item>
-            <p>Event Date:</p>
+            {/* <p>Event Date:</p> */}
+            <InputLabel>Event Name:</InputLabel>
             <TextField name="event_date" type="date" />
           </Grid>
 
           <Grid item>
-            <p>Event Time:</p>
+            {/* <p>Event Time:</p> */}
+            <InputLabel>Event Time:</InputLabel>
             <TextField name="event_time" type="time" />
           </Grid>
 
           <Grid item>
-            <p>Voting Deadline:</p>
+            {/* <p>Voting Deadline:</p> */}
+            <InputLabel>Voting Deadline:</InputLabel>
             <TextField name="vote_deadline" type="date" />
           </Grid>
 
