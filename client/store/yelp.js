@@ -77,7 +77,9 @@ export const _getRests = (params) => async (dispatch) => {
         return cat.alias;
       })
       .join(",");
+    categories += `,${cuisine}`;
   }
+
   console.log("categories after map:", categories);
 
   // return a list of restaurants that fullfil the params
