@@ -71,11 +71,15 @@ async function seed() {
   const userH = await User.findByPk(7);
   const userI = await User.findByPk(8);
 
-  // adding friend
+  // adding friends
   await userA.addPerson(userB);
   await userA.addPerson(userC);
   await userA.addPerson(userD);
   await userA.addPerson(userF);
+  await userA.addPerson(userI);
+  await userF.addPerson(userA);
+  await userF.addPerson(userB);
+  await userC.addPerson(userI);
 
   // adding event attendees
   const gradEvent = await Event.findByPk(1);

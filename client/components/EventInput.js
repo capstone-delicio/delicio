@@ -1,37 +1,38 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { addEvent } from '../store'
-import history from '../history'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addEvent } from "../store";
+import history from "../history";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import FriendsSelect from "./FriendsSelect";
 
 const EventInput = () => {
-  const [dateError, setDateError] = useState('')
+  const [dateError, setDateError] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => {
-    return state.auth
-  })
+    return state.auth;
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const organizerId = user.id
-    const event_name = e.target.event_name.value
-    const event_date = e.target.event_date.value
-    const event_time = e.target.event_time.value
-    const vote_deadline = e.target.vote_deadline.value
+    e.preventDefault();
+    const organizerId = user.id;
+    const event_name = e.target.event_name.value;
+    const event_date = e.target.event_date.value;
+    const event_time = e.target.event_time.value;
+    const vote_deadline = e.target.vote_deadline.value;
     if (vote_deadline < event_date) {
       dispatch(
         addEvent(organizerId, event_name, event_date, event_time, vote_deadline)
-      )
-      history.push('/questions')
+      );
+      history.push("/questions");
     }
     if (vote_deadline > event_date) {
-      setDateError('Deadline must be before event date')
+      setDateError("Deadline must be before event date");
     }
-  }
+  };
 
   return (
     <div>
@@ -62,7 +63,12 @@ const EventInput = () => {
             <p>Voting Deadline:</p>
             <TextField name="vote_deadline" type="date" />
           </Grid>
-          <div style={{ color: 'red' }}>{dateError}</div>
+
+          <Grid item>
+            <FriendsSelect />
+          </Grid>
+
+          <div style={{ color: "red" }}>{dateError}</div>
           <Button variant="contained" color="primary" type="submit">
             Submit
           </Button>
@@ -70,7 +76,7 @@ const EventInput = () => {
         </Grid>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default EventInput
+export default EventInput;
