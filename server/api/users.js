@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {
   models: { User },
 } = require('../db')
+const { requireToken, isAdmin } = require('./gateKeeper')
 module.exports = router
 
 //ROUTE: api/users

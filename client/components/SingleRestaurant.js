@@ -1,45 +1,34 @@
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import React, { useState, useEffect } from "react";
-import { getRests, getSingleRest } from "../store/yelp";
-import axios from 'axios'
-import { useHistory, useParams } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from "react";
+import yelp, { _getRestPhotos, _getRests, _getSingleRest } from "../store/yelp";
 import {useSelector,useDispatch} from 'react-redux'
 
-const SingleRestaurant = () => {
-  const { id } = useParams()
-  let history = useHistory()
-  const restraunt = useSelector(state=>state.rest)
+const SingleRestaurant = (props)=> {
+
   const dispatch = useDispatch()
+  const yelp = useSelector((state) => state.yelp);
 
-  const [formState, setFormState] = useState({
-      id:restraunt.id,
-  })
-
-  const SubmitHandler = async (e) => {
-      e.preventDefault()
-      dispatch(_getSingleRest(formState))
-      history.push('/')
-
-  }
+  useEffect(() => {
+   //props.id=rest.id
+    dispatch(_getSingleRest('okaqMJEoHfHblpKz9Q-CMA'))
+  },[])
 
     return (
-      <div className="single-product-page">
-        <div key={restraunt.id}>
-          <img className="restraunt-img" src={restraunt.imageUrl} />
-        </div>
+      <div>
+        <div className='container'>
+           <div className='restaurant'></div>
+        <h2>Restaurant</h2>
+        <h2>{yelp.rest.name}</h2>
+        <h4>Price: {yelp.rest.price}</h4>
+        <img src={yelp.rest.image_url} />
+        <h4>Location: {yelp.rest.adress}</h4>
+        <h4>Populer Dish: {yelp.rest.photos}</h4>
+          </div>
+       </div>
+    );
+  }
 
-        <div className="single-restraunt-page-info">
-          <h3>{restraunt.name}</h3>
-          <p>{restraunt.description}</p>
-          <p>{restraunt.pricerange}</p>
 
-            <button onClick={this.handleAddToCart} type="submit">
-              Add To Cart
-            </button>
-        </div>
-      </div>
-    )
-}
-export default SingleRestaurant
+export default SingleRestaurant;
