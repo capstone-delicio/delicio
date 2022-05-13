@@ -5,9 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import auth from './auth'
 import yelp from './yelp'
 import user from './user'
+import event from './event'
 
-
-const reducer = combineReducers({ auth, user, yelp })
+const reducer = combineReducers({ auth, user, yelp, event })
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -18,3 +18,4 @@ export default store
 export * from './auth'
 export * from './yelp'
 export * from './user'
+export * from './event'

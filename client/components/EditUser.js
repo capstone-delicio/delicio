@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory, useParams } from 'react-router-dom'
 import { updateUserThunk } from '../store/auth'
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-
 
 const EditUser = () => {
     const { id } = useParams()
@@ -89,15 +88,20 @@ const EditUser = () => {
                             />
                         </Grid>
 
-                        <button className='btn btn-warning btn-block' onChange = {e => SubmitHandler(e)}>Update User</button>
-
-                      </form>
-                      </Grid>
-                </div>
-
-            </div>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                onChange={(e) => SubmitHandler(e)}
+              >
+                Update User
+              </Button>
+            </Grid>
+          </form>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default EditUser

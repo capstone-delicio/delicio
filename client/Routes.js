@@ -4,22 +4,24 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Signup from './components/SignUp'
 import Login from './components/Login'
 import Questions from './components/Questions'
-import Friends from './components/Friends'
 import Home from './components/Home'
 import { me } from './store'
 import EditUser from './components/EditUser'
+
 import SingleRestaurant from './components/SingleRestaurant'
+import EventInput from './components/EventInput'
+import SwipePage from "./components/SwipePage";
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.loadInitialData();
   }
 
   render() {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn } = this.props;
 
     return (
       <div>
@@ -27,9 +29,16 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/questions" component={Questions} />
-            <Route path="/friends" component={Friends} />
+
             <Route path="/edituser" component={EditUser} />
+
             <Route path="/singlerestaurant" component={SingleRestaurant} />
+
+
+            <Route path="/card" component={SwipePage} />
+
+            <Route path="/eventinput" component={EventInput} />
+
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -40,7 +49,7 @@ class Routes extends Component {
           </Switch>
         )}
       </div>
-    )
+    );
   }
 }
 
@@ -52,17 +61,17 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
-  }
-}
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
-      dispatch(me())
+      dispatch(me());
     },
-  }
-}
+  };
+};
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(connect(mapState, mapDispatch)(Routes));
