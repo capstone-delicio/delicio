@@ -12,7 +12,9 @@ const UPDATE_USER = 'UPDATE_USER'
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth })
+
 const updateUser = (user) => ({ type: UPDATE_USER, user })
+
 /**
  * THUNK CREATORS
  */
@@ -27,6 +29,7 @@ export const me = () => async (dispatch) => {
     return dispatch(setAuth(res.data))
   }
 }
+
 export const updateUserThunk = (user) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/api/users/${user.id}`, user)

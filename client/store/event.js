@@ -1,4 +1,7 @@
 import axios from 'axios'
+// import jwt from 'jsonwebtoken'
+
+const TOKEN = 'token'
 
 /**
  * ACTION TYPES
@@ -21,13 +24,31 @@ const createEvent = (event) => {
 export const addEvent =
   (event_name, event_date, event_time, vote_deadline) => async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/events`, {
-        event_name,
-        event_date,
-        event_time,
-        vote_deadline,
-      })
-      dispatch(createEvent(data))
+      const token = window.localStorage.getItem(TOKEN)
+
+      // if (token) {
+      //   jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
+      //     if (err) {
+      //       console.log(err.message)
+      //       next()
+      //     } else {
+      //       console.log(decodedToken)
+      //     }
+      //   })
+      // }
+
+      if (token) {
+        const { data } = await axios.post(
+          `/api/events`,
+          { event_name, event_date, event_time, vote_deadline },
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        )
+        dispatch(createEvent(data))
+      }
     } catch (error) {
       console.log(error)
     }

@@ -29,52 +29,35 @@ const EventInput = () => {
           <h3>Please input your event and voting deadline</h3>
           <Grid item>
             <p>Event Name:</p>
-            <TextField
-              name="event_name"
-              // label="Event Name"
-              // onChange={handleChange}
-              // value={event_name}
-              type="text"
-            />
+            <TextField name="event_name" type="text" />
           </Grid>
+
           <Grid item>
             <p>Event Date:</p>
-            <TextField
-              name="event_date"
-              // label="YYYY-MM-DD"
-              // onChange={handleChange}
-              // value={event_date}
-              type="date"
-            />
+            <TextField name="event_date" type="date" />
           </Grid>
+
           <Grid item>
             <p>Event Time:</p>
-            <TextField
-              name="event_time"
-              // label="HH:MM:SS"
-              // onChange={handleChange}
-              // value={event_time}
-              type="time"
-            />
+            <TextField name="event_time" type="time" />
           </Grid>
+
           <Grid item>
             <p>Voting Deadline:</p>
-            <TextField
-              name="vote_deadline"
-              // label="YYYY-MM-DD"
-              // label="YYYY-MM-DDTHH:MM:SSZ"
-              // onChange={handleChange}
-              // value={vote_deadline}
-              type="date"
-            />
+            <TextField name="vote_deadline" type="date" />
           </Grid>
+
           <Button variant="contained" color="primary" type="submit">
-            Submit Event Time
+            Submit
           </Button>
           <br />
-          <Button variant="contained" color="primary" href="/friends">
+          {/*<Button variant="contained" color="primary" href="/friends">
             Next
-          </Button>
+          </Button>*/}
+          {/*<Button variant="contained" color="primary" href="/questions">
+            Answer your questions
+          </Button>*/}
+          {/**/}
         </Grid>
       </form>
     </div>

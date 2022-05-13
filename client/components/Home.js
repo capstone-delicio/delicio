@@ -1,8 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
+
+// useSelector((state) => {
+//   return state.first_name
+// })
 
 /**
  * COMPONENT

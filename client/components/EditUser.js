@@ -50,12 +50,12 @@ const EditUser = () => {
               justifyContent="center"
               direction="column"
             >
-              <h2 className="profile-info">Update User</h2>
+              <h2 className="profile-info">Update Your Profile</h2>
               <Grid className="form-group">
                 <TextField
                   type="text"
                   className="form-control form-control-lg"
-                  label="Enter Your First Name"
+                  label="Update Your First Name"
                   name="first_name"
                   defaultValue={first_name}
                   onChange={(e) => onChangeHandler(e)}
@@ -65,7 +65,7 @@ const EditUser = () => {
                 <TextField
                   type="text"
                   className="form-control form-control-lg"
-                  label="Enter Your Last Name"
+                  label="Update Your Last Name"
                   name="last_name"
                   defaultValue={last_name}
                   onChange={(e) => onChangeHandler(e)}
@@ -75,7 +75,7 @@ const EditUser = () => {
                 <TextField
                   type="text"
                   className="form-control form-control-lg"
-                  label="Enter Your Email"
+                  label="Update Your Email"
                   name="email"
                   defaultValue={email}
                   onChange={(e) => onChangeHandler(e)}
@@ -85,7 +85,7 @@ const EditUser = () => {
                 <TextField
                   type="text"
                   className="form-control form-control-lg"
-                  label="Enter Your Prederred City"
+                  label="Update Your Preferred City"
                   name="preferred_city"
                   defaultValue={preferred_city}
                   onChange={(e) => onChangeHandler(e)}
@@ -95,7 +95,7 @@ const EditUser = () => {
                 <TextField
                   type="text"
                   className="form-control form-control-lg"
-                  label="Enter Your Phone"
+                  label="Update Your Phone"
                   name="phone_number"
                   defaultValue={phone_number}
                   onChange={(e) => onChangeHandler(e)}
