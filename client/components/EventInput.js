@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { addEvent } from '../store'
 import history from '../history'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import { addEvent } from '../store'
 
 const EventInput = () => {
+  const [dateError, setDateError] = useState('')
+
   const dispatch = useDispatch()
 
   const user = useSelector((state) => {
@@ -20,10 +22,15 @@ const EventInput = () => {
     const event_date = e.target.event_date.value
     const event_time = e.target.event_time.value
     const vote_deadline = e.target.vote_deadline.value
-    dispatch(
-      addEvent(organizerId, event_name, event_date, event_time, vote_deadline)
-    )
-    history.push('/questions')
+    if (vote_deadline < event_date) {
+      dispatch(
+        addEvent(organizerId, event_name, event_date, event_time, vote_deadline)
+      )
+      history.push('/questions')
+    }
+    if (vote_deadline > event_date) {
+      setDateError('Deadline must be before event date')
+    }
   }
 
   return (
@@ -36,7 +43,6 @@ const EventInput = () => {
           direction="column"
         >
           <h3>Please fill in the following information</h3>
-
           <Grid item>
             <p>Event Name:</p>
             <TextField name="event_name" type="text" />
@@ -56,7 +62,7 @@ const EventInput = () => {
             <p>Voting Deadline:</p>
             <TextField name="vote_deadline" type="date" />
           </Grid>
-
+          <div style={{ color: 'red' }}>{dateError}</div>
           <Button variant="contained" color="primary" type="submit">
             Submit
           </Button>
@@ -66,4 +72,5 @@ const EventInput = () => {
     </div>
   )
 }
+
 export default EventInput
