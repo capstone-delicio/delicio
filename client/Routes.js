@@ -1,14 +1,15 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Signup from './components/SignUp'
-import Login from './components/Login'
-import Questions from './components/Questions'
-import Home from './components/Home'
-import { me } from './store'
-import EditUser from './components/EditUser'
-import EventInput from './components/EventInput'
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import Signup from "./components/SignUp";
+import Login from "./components/Login";
+import Questions from "./components/Questions";
+import Home from "./components/Home";
+import { me } from "./store";
+import EditUser from "./components/EditUser";
+import EventInput from "./components/EventInput";
 import SwipePage from "./components/SwipePage";
+import FriendsSelect from "./components/FriendsSelect"
 import SingleRestaurant from './components/SingleRestaurant'
 
 

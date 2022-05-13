@@ -17,6 +17,7 @@ const getSingleRest = (id) => ({
   rest: id,
 });
 
+// Constants
 const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
 const auth = {
   Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
