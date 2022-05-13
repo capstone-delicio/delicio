@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import { eventInput } from '../store'
+import { addEvent } from '../store'
 
 const EventInput = () => {
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const event_name = e.target.event_name
+    const event_name = e.target.event_name.value
     const event_date = e.target.event_date.value
     const event_time = e.target.event_time.value
-    dispatch(addEvent(event_name, event_date, event_time))
+    const vote_deadline = e.target.vote_deadline.value
+    dispatch(addEvent(event_name, event_date, event_time, vote_deadline))
   }
 
   return (
@@ -25,18 +26,54 @@ const EventInput = () => {
           justifyContent="center"
           direction="column"
         >
-          <h3>hello from event input</h3>
+          <h3>Please input your event and voting deadline</h3>
           <Grid item>
-            <TextField name="event_name" label="Event Name" type="text" />
+            <p>Event Name:</p>
+            <TextField
+              name="event_name"
+              // label="Event Name"
+              // onChange={handleChange}
+              // value={event_name}
+              type="text"
+            />
           </Grid>
           <Grid item>
-            <TextField name="event_date" label="Event Date" type="text" />
+            <p>Event Date:</p>
+            <TextField
+              name="event_date"
+              // label="YYYY-MM-DD"
+              // onChange={handleChange}
+              // value={event_date}
+              type="date"
+            />
           </Grid>
           <Grid item>
-            <TextField name="event_time" label="Event Time" type="text" />
+            <p>Event Time:</p>
+            <TextField
+              name="event_time"
+              // label="HH:MM:SS"
+              // onChange={handleChange}
+              // value={event_time}
+              type="time"
+            />
           </Grid>
+          <Grid item>
+            <p>Voting Deadline:</p>
+            <TextField
+              name="vote_deadline"
+              // label="YYYY-MM-DD"
+              // label="YYYY-MM-DDTHH:MM:SSZ"
+              // onChange={handleChange}
+              // value={vote_deadline}
+              type="date"
+            />
+          </Grid>
+          <Button variant="contained" color="primary" type="submit">
+            Submit Event Time
+          </Button>
+          <br />
           <Button variant="contained" color="primary" href="/friends">
-            Select Your Friends
+            Next
           </Button>
         </Grid>
       </form>

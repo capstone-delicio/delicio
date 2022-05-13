@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {
-  models: { Event },
+  models: { User, Event },
 } = require('../db')
+const { requireToken, isAdmin } = require('./gateKeeper')
 module.exports = router
 
 //ROUTE: api/events

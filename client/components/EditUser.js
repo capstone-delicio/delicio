@@ -43,14 +43,14 @@ const EditUser = () => {
     <div>
       <div className="container">
         <div className="profile">
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-            direction="column"
-          >
-            <h2 className="profile-info">Update User</h2>
-            <form onSubmit={(e) => SubmitHandler(e)}>
+          <form onSubmit={(e) => SubmitHandler(e)}>
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              direction="column"
+            >
+              <h2 className="profile-info">Update User</h2>
               <Grid className="form-group">
                 <TextField
                   type="text"
@@ -109,8 +109,8 @@ const EditUser = () => {
               >
                 Update User
               </Button>
-            </form>
-          </Grid>
+            </Grid>
+          </form>
         </div>
       </div>
     </div>

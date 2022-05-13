@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { _getRests } from "../store/yelp";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { _getRests } from '../store/yelp'
 import {
   TextField,
   Grid,
@@ -8,28 +8,28 @@ import {
   InputLabel,
   MenuItem,
   Button,
-} from "@material-ui/core";
+} from '@material-ui/core'
 
 const Questions = () => {
-  const [price, setPrice] = useState("");
-  const dispatch = useDispatch();
+  const [price, setPrice] = useState('')
+  const dispatch = useDispatch()
 
   const handleChange = (event) => {
-    setPrice(event.target.value);
-  };
+    setPrice(event.target.value)
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const location = e.target.location.value;
+    e.preventDefault()
+    const location = e.target.location.value
 
-    const limit = e.target.limit.value;
-    const price = e.target.price.value;
-    const cuisine = e.target.cuisine.value;
+    const limit = e.target.limit.value
+    const price = e.target.price.value
+    const cuisine = e.target.cuisine.value
 
-    console.log("questions.js", location, limit, price, cuisine);
+    console.log('questions.js', location, limit, price, cuisine)
 
-    dispatch(_getRests({ location, limit, price, cuisine }));
-  };
+    dispatch(_getRests({ location, limit, price, cuisine }))
+  }
 
   return (
     <div id="questions">
@@ -85,10 +85,10 @@ const Questions = () => {
         </Grid>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Questions;
+export default Questions
 // import React, { useState } from "react";
 // import {
 //   Typography,
