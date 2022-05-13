@@ -53,6 +53,7 @@ export const _getRests = (params) => async (dispatch) => {
   };
 
   // run cuisine thru autocomplete Yelp API
+  // hello testing
   const auto_url = `https://api.yelp.com/v3/autocomplete`;
 
   let catArr = [];
