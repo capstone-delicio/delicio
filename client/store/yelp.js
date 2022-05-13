@@ -153,6 +153,7 @@ export const _getSingleRest = (id) => async (dispatch) => {
     const { data } = await axios.get(proxyUrl + bizDetail_url, {
       headers: auth,
     });
+    console.log(data)
     dispatch(getSingleRest(data));
   } catch (err) {
     console.error(err);

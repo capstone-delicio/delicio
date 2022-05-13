@@ -1,36 +1,34 @@
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import React, { useState, useEffect } from "react";
-import { getSingleRest } from "../store/yelp";
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from "react";
+import yelp, { _getRestPhotos, _getRests, _getSingleRest } from "../store/yelp";
 import {useSelector,useDispatch} from 'react-redux'
 
-const SingleRestaurant = () => {
+const SingleRestaurant = (props)=> {
 
-  const rest = useSelector(state=>state.rest)
+  const dispatch = useDispatch()
+  const yelp = useSelector((state) => state.yelp);
 
   useEffect(() => {
-    props.getSingleRest(props.match.params.rest.id);
-  }, []);
-  const dispatch = useDispatch()
+   //props.id=rest.id
+    dispatch(_getSingleRest('okaqMJEoHfHblpKz9Q-CMA'))
+  },[])
 
     return (
+      <div>
+        <div className='container'>
+           <div className='restaurant'></div>
+        <h2>Restaurant</h2>
+        <h2>{yelp.rest.name}</h2>
+        <h4>Price: {yelp.rest.price}</h4>
+        <img src={yelp.rest.image_url} />
+        <h4>Location: {yelp.rest.adress}</h4>
+        <h4>Populer Dish: {yelp.rest.photos}</h4>
+          </div>
+       </div>
+    );
+  }
 
-      <div className="single-restaurant-page">
-        <h1>hello from single rest</h1>
-        <div key={rest.id}>
-          <img className="restraunt-img" src={restaurant.imageUrl} />
-        </div>
 
-        <div className="single-restaurant-page-info">
-          <h3>{restaurant.name}</h3>
-          <p>{restaurant.description}</p>
-          <p>{restaurant.pricerange}</p>
-
-        </div>
-      </div>
-    )
-}
-export default SingleRestaurant
+export default SingleRestaurant;
