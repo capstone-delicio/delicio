@@ -1,15 +1,15 @@
 //this is the access point for all things database related!
 
-const db = require("./db");
+const db = require('./db')
 
-const User = require("./models/User");
-const Restaurant = require("./models/Restaurant");
-const Event = require("./models/Event");
-const Cuisine = require("./models/Cuisine");
+const User = require('./models/User')
+const Restaurant = require('./models/Restaurant')
+const Event = require('./models/Event')
+const Cuisine = require('./models/Cuisine')
 // const Restaurant_pics = require("./models/Restaurant_pics");
-const Event_picks = require("./models/Event_picks");
-const Friend = require("./models/Friend");
-const Bookmarked = require("./models/Bookmarked");
+const Event_picks = require('./models/Event_picks')
+const Friend = require('./models/Friend')
+const Bookmarked = require('./models/Bookmarked')
 
 //associations could go here!
 // friends is the through table
@@ -18,15 +18,15 @@ const Bookmarked = require("./models/Bookmarked");
 // User.belongsToMany(User, { through: Friend });
 
 User.belongsToMany(User, {
-  as: "person",
-  foreignKey: "userId",
+  as: 'person',
+  foreignKey: 'userId',
   through: Friend,
-});
+})
 User.belongsToMany(User, {
-  as: "usersFriend",
-  foreignKey: "friendId",
+  as: 'usersFriend',
+  foreignKey: 'friendId',
   through: Friend,
-});
+})
 
 // rest, cuisine - m:m
 // restaurant belongs to many cuisines
@@ -35,8 +35,8 @@ User.belongsToMany(User, {
 // Restaurant.belongsToMany(Cuisine, { through: "rest_cuisine" });
 // Cuisine.belongsToMany(Restaurant, { through: "rest_cuisine" });
 
-User.belongsToMany(Event, { through: "event_attendees" });
-Event.belongsToMany(User, { through: "event_attendees" });
+User.belongsToMany(Event, { through: 'event_attendees' })
+Event.belongsToMany(User, { through: 'event_attendees' })
 
 // User.belongsToMany(Restaurant, { through: "bookmarked_restaurant" });
 // Restaurant.belongsToMany(User, { through: "bookmarked_restaurant" });
@@ -71,4 +71,4 @@ module.exports = {
     Friend,
     Bookmarked,
   },
-};
+}
