@@ -1,23 +1,23 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
-const User = require("./User");
-const Restaurant = require("./Restaurant");
+const Sequelize = require('sequelize')
+const db = require('../db')
+const User = require('./User')
+const Restaurant = require('./Restaurant')
 
-const Event = db.define("event", {
+const Event = db.define('event', {
   organizerId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {
       model: User,
-      key: "id",
+      key: 'id',
     },
   },
   event_name: {
-    type: Sequelize.STRING,
+    type: Sequelize.JSON,
     allowNull: false,
   },
   event_date: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     allowNull: true,
     defaultValue: null,
   },
@@ -45,6 +45,6 @@ const Event = db.define("event", {
     type: Sequelize.DATE,
     allowNull: false,
   },
-});
+})
 
-module.exports = Event;
+module.exports = Event

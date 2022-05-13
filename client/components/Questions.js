@@ -1,6 +1,9 @@
+
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
+
 import {
   TextField,
   Grid,
@@ -8,29 +11,34 @@ import {
   InputLabel,
   MenuItem,
   Button,
-} from "@material-ui/core";
+} from '@material-ui/core'
 
 const Questions = () => {
+
   const [price, setPrice] = useState("");
   const dispatch = useDispatch();
   // state.yelp = what is inside combined reducer
   const yelp = useSelector((state) => state.yelp);
   const isMounted = useRef(false);
+  let history = useHistory();
+
 
   const handleChange = (event) => {
-    setPrice(event.target.value);
-  };
+    setPrice(event.target.value)
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const location = e.target.location.value;
+    e.preventDefault()
+    const location = e.target.location.value
 
-    const limit = e.target.limit.value;
-    const price = e.target.price.value;
-    const cuisine = e.target.cuisine.value;
+    const limit = e.target.limit.value
+    const price = e.target.price.value
+    const cuisine = e.target.cuisine.value
+
 
     dispatch(_getRests({ location, limit, price, cuisine }));
   };
+
 
   useEffect(() => {
     // now go thru restaurant list and scrape for pics
@@ -38,6 +46,7 @@ const Questions = () => {
       yelp.rests.forEach((rest) => {
         dispatch(_getRestPhotos(rest.id, rest.alias));
       });
+      history.push("/card");
     } else {
       isMounted.current = true;
     }
@@ -97,10 +106,10 @@ const Questions = () => {
         </Grid>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Questions;
+export default Questions
 // import React, { useState } from "react";
 // import {
 //   Typography,

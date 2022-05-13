@@ -4,10 +4,11 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
 import Questions from "./components/Questions";
-import Friends from "./components/Friends";
 import Home from "./components/Home";
 import { me } from "./store";
 import EditUser from "./components/EditUser";
+import EventInput from "./components/EventInput";
+import SwipePage from "./components/SwipePage";
 import FriendsSelect from "./components/FriendsSelect";
 
 /**
@@ -27,9 +28,13 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/questions" component={Questions} />
-            <Route path="/friends" component={Friends} />
+
             <Route path="/edituser" component={EditUser} />
-            <Route path="/friends-select" component={FriendsSelect} />
+
+            <Route path="/card" component={SwipePage} />
+
+            <Route path="/eventinput" component={EventInput} />
+
             <Redirect to="/home" />
           </Switch>
         ) : (

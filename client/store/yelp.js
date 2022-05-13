@@ -30,7 +30,7 @@ const getRestPhotos = (pics) => ({
 
 // Thunks
 export const _getRestPhotos = (id, alias) => async (dispatch) => {
-  const data = await scrapeData(alias);
+  const data = await scrapeData(id, alias);
   // pick a random 3 photos
   function getMultipleRandom(arr, num) {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
@@ -54,6 +54,7 @@ export const _getRests = (params) => async (dispatch) => {
   };
 
   // run cuisine thru autocomplete Yelp API
+  // hello testing
   const auto_url = `https://api.yelp.com/v3/autocomplete`;
 
   let catArr = [];
@@ -69,12 +70,19 @@ export const _getRests = (params) => async (dispatch) => {
   }
 
   // take the results of category array and put into Yelp business search api
+  let categories = cuisine;
+  console.log("categories before map:", categories);
+  console.log("catArr", catArr);
+  if (catArr.length) {
+    categories = catArr
+      .map((cat) => {
+        return cat.alias;
+      })
+      .join(",");
+    categories += `,${cuisine}`;
+  }
 
-  const categories = catArr
-    .map((cat) => {
-      return cat.alias;
-    })
-    .join(",");
+  console.log("categories after map:", categories);
 
   // return a list of restaurants that fullfil the params
   const busSearchParams = {

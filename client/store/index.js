@@ -6,8 +6,9 @@ import auth from "./auth";
 import yelp from "./yelp";
 import user from "./user";
 import friends from "./friends";
+import event from "./event";
 
-const reducer = combineReducers({ auth, user, yelp, friends });
+const reducer = combineReducers({ auth, user, yelp, friends, event });
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -19,3 +20,4 @@ export * from "./auth";
 export * from "./yelp";
 export * from "./user";
 export * from "./friends";
+export * from "./event";
