@@ -9,7 +9,9 @@ import { me } from "./store";
 import EditUser from "./components/EditUser";
 import EventInput from "./components/EventInput";
 import SwipePage from "./components/SwipePage";
-import FriendsSelect from "./components/FriendsSelect";
+import FriendsSelect from "./components/FriendsSelect"
+import SingleRestaurant from './components/SingleRestaurant'
+
 
 /**
  * COMPONENT
@@ -34,7 +36,7 @@ class Routes extends Component {
             <Route path="/card" component={SwipePage} />
 
             <Route path="/eventinput" component={EventInput} />
-
+            <Route path="/singlerestaurant" component={SingleRestaurant} />
             <Redirect to="/home" />
           </Switch>
         ) : (
