@@ -1,24 +1,24 @@
-const router = require('express').Router()
+const router = require("express").Router();
 const {
   models: { User },
-} = require('../db')
-module.exports = router
+} = require("../db");
+module.exports = router;
 
 //ROUTE: api/users
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll();
     // {
     //   // explicitly select only the id and email fields - even though
     //   // users' passwords are encrypted, it won't help if we just
     //   // send everything to anyone who asks!
     //   attributes: ['id', 'email'],
     // }
-    res.json(users)
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 // router.get('/:id', async (req, res, next) => {
 //   try {
@@ -29,14 +29,14 @@ router.get('/', async (req, res, next) => {
 //   }
 // })
 
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    let user = await User.findByPk(req.params.id)
-    res.json(await user.update(req.body))
+    let user = await User.findByPk(req.params.id);
+    res.json(await user.update(req.body));
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 // router.put('/:id', async (req, res, next) => {
 //   try {
