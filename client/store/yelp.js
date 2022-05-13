@@ -68,12 +68,17 @@ export const _getRests = (params) => async (dispatch) => {
   }
 
   // take the results of category array and put into Yelp business search api
-
-  const categories = catArr
-    .map((cat) => {
-      return cat.alias;
-    })
-    .join(",");
+  let categories = cuisine;
+  console.log("categories before map:", categories);
+  console.log("catArr", catArr);
+  if (catArr.length) {
+    categories = catArr
+      .map((cat) => {
+        return cat.alias;
+      })
+      .join(",");
+  }
+  console.log("categories after map:", categories);
 
   // return a list of restaurants that fullfil the params
   const busSearchParams = {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
 import {
@@ -16,6 +17,7 @@ const Questions = () => {
   // state.yelp = what is inside combined reducer
   const yelp = useSelector((state) => state.yelp);
   const isMounted = useRef(false);
+  let history = useHistory();
 
   const handleChange = (event) => {
     setPrice(event.target.value);
@@ -38,6 +40,7 @@ const Questions = () => {
       yelp.rests.forEach((rest) => {
         dispatch(_getRestPhotos(rest.id, rest.alias));
       });
+      history.push("/card");
     } else {
       isMounted.current = true;
     }

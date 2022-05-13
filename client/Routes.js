@@ -8,7 +8,7 @@ import Friends from "./components/Friends";
 import Home from "./components/Home";
 import { me } from "./store";
 import EditUser from "./components/EditUser";
-import Card from "./components/Card";
+import SwipePage from "./components/SwipePage";
 
 /**
  * COMPONENT
@@ -29,7 +29,7 @@ class Routes extends Component {
             <Route path="/questions" component={Questions} />
             <Route path="/friends" component={Friends} />
             <Route path="/edituser" component={EditUser} />
-            <Route path="/card" component={Card} />
+            <Route path="/card" component={SwipePage} />
             <Redirect to="/home" />
           </Switch>
         ) : (
