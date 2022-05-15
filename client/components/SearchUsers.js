@@ -5,30 +5,6 @@ import { _getAllUsers } from "../store";
 import Autosuggest from "react-autosuggest";
 import AutosuggestHighlightMatch from "autosuggest-highlight/match";
 import AutosuggestHighlightParse from "autosuggest-highlight/parse";
-import { PermPhoneMsg } from "@material-ui/icons";
-
-// const people = [
-//   {
-//     first: "Charlie",
-//     last: "Brown",
-//     twitter: "https://upload.wikimedia.org/wikipedia/en/2/22/Charlie_Brown.png",
-//   },
-//   {
-//     first: "Charlotte",
-//     last: "White",
-//     twitter: "https://upload.wikimedia.org/wikipedia/en/e/e9/Lucy_van_Pelt.png",
-//   },
-//   {
-//     first: "Chloe",
-//     last: "Jones",
-//     twitter: "ladylexy",
-//   },
-//   {
-//     first: "Cooper",
-//     last: "King",
-//     twitter: "steveodom",
-//   },
-// ];
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
