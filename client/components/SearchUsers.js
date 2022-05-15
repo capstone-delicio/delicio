@@ -33,7 +33,7 @@ function renderSuggestion(suggestion, { query }) {
   const parts = AutosuggestHighlightParse(suggestionText, matches);
 
   const searchBoxStyle = {
-    backgroundImage: `url(${suggestion.twitter})`,
+    backgroundImage: `url(${suggestion.picUrl})`,
     backgroundSize: "50px",
   };
 
@@ -54,11 +54,12 @@ function renderSuggestion(suggestion, { query }) {
   );
 }
 
-//Component ----------------
+//Component -----------------------------------
 function SearchUsers() {
   // local states
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [selected, setSelected] = useState({});
 
   // dispatch
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ function SearchUsers() {
     return {
       first: user.first_name,
       last: user.last_name,
-      twitter: user.prof_picUrl,
+      picUrl: user.prof_picUrl,
       id: user.id,
     };
   });
@@ -96,21 +97,35 @@ function SearchUsers() {
     setSuggestions([]);
   };
 
+  const onSuggestionSelected = (e, { suggestion }) => {
+    e.preventDefault();
+
+    setSelected((selected) => ({
+      ...selected,
+      ...suggestion,
+    }));
+  };
+
   const inputProps = {
     placeholder: "Start typing...",
     value,
     onChange: onChange,
   };
 
+  // need to add onSuggestionSelected below
   return (
-    <Autosuggest
-      suggestions={suggestions}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      getSuggestionValue={getSuggestionValue}
-      renderSuggestion={renderSuggestion}
-      inputProps={inputProps}
-    />
+    <div>
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        onSuggestionSelected={onSuggestionSelected}
+        inputProps={inputProps}
+      />
+      <h1>{selected.first}</h1>
+    </div>
   );
 }
 export default SearchUsers;
