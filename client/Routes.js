@@ -9,7 +9,7 @@ import { me } from "./store";
 import EditUser from "./components/EditUser";
 import EventInput from "./components/EventInput";
 import SwipePage from "./components/SwipePage";
-import FriendsSelect from "./components/FriendsSelect";
+import SearchUsers from "./components/SearchUsers";
 
 /**
  * COMPONENT
@@ -34,6 +34,8 @@ class Routes extends Component {
             <Route path="/card" component={SwipePage} />
 
             <Route path="/eventinput" component={EventInput} />
+
+            <Route path="/search-friends" component={SearchUsers} />
 
             <Redirect to="/home" />
           </Switch>
