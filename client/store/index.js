@@ -7,8 +7,16 @@ import yelp from "./yelp";
 import user from "./user";
 import friends from "./friends";
 import event from "./event";
+import eventPicks from "./eventPicks";
 
-const reducer = combineReducers({ auth, user, yelp, friends, event });
+const reducer = combineReducers({
+  auth,
+  user,
+  yelp,
+  friends,
+  event,
+  eventPicks,
+});
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

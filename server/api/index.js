@@ -4,6 +4,7 @@ module.exports = router;
 router.use("/users", require("./users"));
 router.use("/friends", require("./friends"));
 router.use("/events", require("./event"));
+router.use("/eventpicks", require("./eventpicks"));
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
