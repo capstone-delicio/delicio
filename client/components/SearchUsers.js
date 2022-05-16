@@ -95,9 +95,10 @@ function SearchUsers() {
 
   const onSuggestionsClearRequested = () => {
     setSuggestions([]);
+    setValue("");
   };
 
-  const onSuggestionSelected = (e, { suggestion }) => {
+  const onSuggestionSelected = (e, { suggestion, method }) => {
     e.preventDefault();
 
     setSelected((selected) => ({
@@ -107,7 +108,7 @@ function SearchUsers() {
   };
 
   const inputProps = {
-    placeholder: "Start typing...",
+    placeholder: "Find friends...",
     value,
     onChange: onChange,
   };
@@ -115,6 +116,7 @@ function SearchUsers() {
   // need to add onSuggestionSelected below
   return (
     <div>
+      <button onClick={onSuggestionsClearRequested}>Clear input</button>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}

@@ -58,6 +58,8 @@ function FriendsSelect() {
   const user = useSelector((state) => state.auth);
   // stores list of selected values from the list of friends
   const [selected, setSelected] = useState([]);
+  const [currentFriend, setCurrentFriend] = useState({});
+  const [selectedId, setSelectedId] = useState([]);
 
   useEffect(() => {
     // Get Friends List from db
@@ -65,12 +67,21 @@ function FriendsSelect() {
   }, []);
 
   useEffect(() => {
-    dispatch(_setSelectedFriends(selected));
+    // NEED TO ADD FRIENDS USER ID
+    // console.log(selected);
+    const selectedFriendsId = selected.map((el) => {
+      const foundFriend = friends.filter((friend) => {
+        return friend.name === el;
+      });
+      return { name: el, id: foundFriend[0].id };
+    });
+    dispatch(_setSelectedFriends(selectedFriendsId));
   }, [selected]);
 
   const friendsArr = friendStore.friends;
+
   const friends = friendsArr.map((friend) => {
-    return friend.first_name + " " + friend.last_name;
+    return { name: friend.first_name + " " + friend.last_name, id: friend.id };
   });
 
   const classes = useStyles();
@@ -82,10 +93,16 @@ function FriendsSelect() {
 
   const handleChange = (event) => {
     const value = event.target.value;
+
     if (value[value.length - 1] === "all") {
-      setSelected(selected.length === friends.length ? [] : friends);
+      setSelected(
+        selected.length === friends.length
+          ? []
+          : friends.map((friend) => friend.name)
+      );
       return;
     }
+
     setSelected(value);
   };
 
@@ -122,14 +139,17 @@ function FriendsSelect() {
             primary="Select All"
           />
         </MenuItem>
-        {friends.map((friend) => (
-          <MenuItem key={friend} value={friend}>
-            <ListItemIcon>
-              <Checkbox checked={selected.indexOf(friend) > -1} />
-            </ListItemIcon>
-            <ListItemText primary={friend} />
-          </MenuItem>
-        ))}
+        {friends.map((friend, idx) => {
+          // console.log(friend);
+          return (
+            <MenuItem key={idx} value={friend.name}>
+              <ListItemIcon>
+                <Checkbox checked={selected.indexOf(friend.name) > -1} />
+              </ListItemIcon>
+              <ListItemText primary={friend.name} />
+            </MenuItem>
+          );
+        })}
       </Select>
     </FormControl>
   );
