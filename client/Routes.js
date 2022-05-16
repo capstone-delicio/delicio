@@ -9,8 +9,9 @@ import { me } from "./store";
 import EditUser from "./components/EditUser";
 import EventInput from "./components/EventInput";
 import SwipePage from "./components/SwipePage";
-import FriendsSelect from "./components/FriendsSelect"
+import SearchUsers from "./components/SearchUsers";
 import SingleRestaurant from './components/SingleRestaurant'
+
 
 
 /**
@@ -36,7 +37,13 @@ class Routes extends Component {
             <Route path="/card" component={SwipePage} />
 
             <Route path="/eventinput" component={EventInput} />
+
+
+            <Route path="/search-friends" component={SearchUsers} />
+
+
             <Route path="/singlerestaurant" component={SingleRestaurant} />
+
             <Redirect to="/home" />
           </Switch>
         ) : (
