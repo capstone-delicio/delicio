@@ -60,7 +60,7 @@ async function seed() {
 
   // console.log("proto", User.__proto__);
 
-  // console.log("magic methods", Object.keys(Event.prototype));
+  console.log("magic methods", Object.keys(Event_picks.prototype));
   // testing methods and associations
   const userA = await User.findByPk(1);
   const userB = await User.findByPk(5);

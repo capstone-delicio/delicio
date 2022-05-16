@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,34 +10,34 @@ import {
   InputLabel,
   MenuItem,
   Button,
-} from '@material-ui/core'
+} from "@material-ui/core";
 
 const Questions = () => {
-
   const [price, setPrice] = useState("");
+  const [stateLimit, setStateLimit] = useState(1);
+
   const dispatch = useDispatch();
   // state.yelp = what is inside combined reducer
   const yelp = useSelector((state) => state.yelp);
   const isMounted = useRef(false);
   let history = useHistory();
 
-
   const handleChange = (event) => {
-    setPrice(event.target.value)
-  }
+    setPrice(event.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const location = e.target.location.value
+    e.preventDefault();
+    const location = e.target.location.value;
 
-    const limit = e.target.limit.value
-    const price = e.target.price.value
-    const cuisine = e.target.cuisine.value
+    const limit = e.target.limit.value;
+    const price = e.target.price.value;
+    const cuisine = e.target.cuisine.value;
 
+    setStateLimit(limit);
 
     dispatch(_getRests({ location, limit, price, cuisine }));
   };
-
 
   useEffect(() => {
     // now go thru restaurant list and scrape for pics
@@ -46,11 +45,19 @@ const Questions = () => {
       yelp.rests.forEach((rest) => {
         dispatch(_getRestPhotos(rest.id, rest.alias));
       });
-      history.push("/card");
+      // history.push("/card");
     } else {
       isMounted.current = true;
     }
   }, [yelp.rests]);
+
+  // wait until photos array has all photos before pushing to /card
+  useEffect(() => {
+    const expectedNumPhotos = Number(stateLimit) * 3;
+    if (yelp.restPhotos.length === expectedNumPhotos) {
+      history.push("/card");
+    }
+  }, [yelp.restPhotos]);
 
   return (
     <div id="questions">
@@ -106,10 +113,10 @@ const Questions = () => {
         </Grid>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Questions
+export default Questions;
 // import React, { useState } from "react";
 // import {
 //   Typography,
