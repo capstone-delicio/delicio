@@ -13,6 +13,9 @@ const SwipePage = () => {
   //  yelp.restPhotos for photo array
   const event = useSelector((state) => state.event);
   const friends = useSelector((state) => state.friends);
+  const user = useSelector((state) => {
+    return state.auth;
+  });
 
   // set photos swiped right to isLiked
 
@@ -70,8 +73,19 @@ const SwipePage = () => {
   // if (yelp.restPhotos) {
   useEffect(() => {
     let eventId = event.event.id;
+    const attendees = [
+      ...friends.setSelectedFriends,
+      { name: `${user.first_name} ${user.last_name}`, id: user.id },
+    ];
 
-    friends.friends.forEach((friend) => {
+    console.log("attendees", attendees);
+
+    // .push({
+    //   name: `${user.first_name} ${user.last_name}`,
+    //   id: user.id,
+    // });
+
+    attendees.forEach((friend) => {
       // console.log(friend.id);
       let userId = friend.id;
 
@@ -94,6 +108,7 @@ const SwipePage = () => {
       });
     });
   }, []);
+
   // }
 
   return (
