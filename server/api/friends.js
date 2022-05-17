@@ -5,9 +5,8 @@ const {
 
 module.exports = router;
 
-// Route: api/friends
+// Route: /api/friends
 router.get("/:id", async (req, res, next) => {
-  console.log(req.params.id);
   try {
     const friends = await User.findOne({
       where: { id: req.params.id },
@@ -18,6 +17,19 @@ router.get("/:id", async (req, res, next) => {
       },
     });
     res.json(friends.person);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Route: /api/friends/update Add a Friend
+router.post("/update", async (req, res, next) => {
+  try {
+    console.log("inside route", req.body.userId, req.body.friendId);
+    const user = await User.findByPk(req.body.userId);
+    const friend = await User.findByPk(req.body.friendId);
+    await user.addPerson(friend);
+    res.json(friend);
   } catch (error) {
     console.log(error);
   }

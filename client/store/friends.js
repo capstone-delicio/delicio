@@ -5,6 +5,7 @@ const TOKEN = "token";
 // Action Types
 const GET_FRIENDS = "GET_FRIENDS";
 const SET_SELECTED_FRIENDS = "SET_SELECTED_FRIENDS";
+const ADD_FRIEND = "ADD FRIEND";
 
 // Action Creators
 const getFriends = (friends) => ({
@@ -17,8 +18,14 @@ const setSelectedFriends = (selectedFriends) => ({
   selectedFriends,
 });
 
+const addFriend = (person) => ({
+  type: ADD_FRIEND,
+  person,
+});
+
 // Thunk Creators
 export const _getFriends = (id) => async (dispatch) => {
+  console.log("inside get friends thunk");
   const { data } = await axios.get(`/api/friends/${id}`);
   dispatch(getFriends(data));
 };
@@ -27,9 +34,19 @@ export const _setSelectedFriends = (selectedFriends) => (dispatch) => {
   dispatch(setSelectedFriends(selectedFriends));
 };
 
+export const _addFriend = (userId, friendId) => async (dispatch) => {
+  console.log("addFriend inside thunk");
+  const { data } = await axios.post("/api/friends/update", {
+    userId,
+    friendId,
+  });
+  dispatch(addFriend(data));
+};
+
 const initialState = {
   friends: [],
   selectedFriends: [],
+  addedFriend: {},
 };
 
 // Reducer
@@ -39,6 +56,9 @@ export default function (state = initialState, action) {
       return { ...state, friends: action.friends };
     case SET_SELECTED_FRIENDS:
       return { ...state, setSelectedFriends: action.selectedFriends };
+    case ADD_FRIEND:
+      console.log(action.person);
+      return { ...state, addedFriend: action.person };
     default:
       return state;
   }
