@@ -139,6 +139,10 @@ function SearchUsers() {
   const handleAddUser = (e) => {
     e.preventDefault;
     dispatch(_addFriend(loggedInUser.id, selected.id));
+    setSelected({});
+    setIsFound(false);
+    setIsCopied(false);
+    setSelectedUser("");
   };
 
   function AddUserButton() {
