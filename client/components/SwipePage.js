@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TinderCard from "react-tinder-card";
-import { Button } from "@material-ui/core";
 import { _addEventPicks, _updateEventPicks } from "../store/eventPicks";
 
 const SwipePage = () => {
-  const [lastDirection, setLastDirection] = useState();
-
   const dispatch = useDispatch();
 
   const yelp = useSelector((state) => state.yelp);
@@ -19,11 +16,10 @@ const SwipePage = () => {
 
   // set photos swiped right to isLiked
 
-  const swiped = (direction, swipedPhoto) => {
+  const swiped = (direction, restaurant_picUrl) => {
     if (direction === "right") {
-      dispatch(_updateEventPicks(swipedPhoto));
+      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id));
     }
-    setLastDirection(direction);
   };
 
   const outOfFrame = (name) => {
@@ -78,13 +74,9 @@ const SwipePage = () => {
           <TinderCard
             className="swipe"
             key={idx}
-            // need to grab eventpicksId -- HOWWWWW
-            onSwipe={(dir) => swiped(dir, photo.id)}
+            onSwipe={(dir) => swiped(dir, photo.imgSrc)}
             onCardLeftScreen={() => outOfFrame(photo.imgDesc)}
           >
-            {/* <Button onClick={() => console.log(`hello from ${photo.id}`)}>
-              MORE INFO{" "}
-            </Button> */}
             <div
               style={{ backgroundImage: "url(" + photo.imgSrc + ")" }}
               className="card"
@@ -94,15 +86,6 @@ const SwipePage = () => {
           </TinderCard>
         ))}
       </div>
-      {/* <Button onClick={() => console.log("clicked done")}>Done</Button> */}
-      <Button
-        onClick={handleOnClick}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Next
-      </Button>
     </div>
   );
 };
