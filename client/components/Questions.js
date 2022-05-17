@@ -117,7 +117,9 @@ const Questions = () => {
 };
 
 export default Questions;
-//C: rewritten??? can be removed?
+
+//C: Possibly being used in the future
+
 // import React, { useState } from "react";
 // import {
 //   Typography,
