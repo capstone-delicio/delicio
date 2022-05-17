@@ -25,7 +25,6 @@ router.get("/:id", async (req, res, next) => {
 // Route: /api/friends/update Add a Friend
 router.post("/update", async (req, res, next) => {
   try {
-    console.log("inside route", req.body.userId, req.body.friendId);
     const user = await User.findByPk(req.body.userId);
     const friend = await User.findByPk(req.body.friendId);
     await user.addPerson(friend);

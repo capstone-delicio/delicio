@@ -72,7 +72,6 @@ function FriendsSelect() {
 
   useEffect(() => {
     // NEED TO ADD FRIENDS USER ID
-    // console.log(selected);
     const selectedFriendsId = selected.map((el) => {
       const foundFriend = friends.filter((friend) => {
         return friend.name === el;
@@ -115,52 +114,56 @@ function FriendsSelect() {
     history.push("/search-friends");
   };
 
-  return !friends.length > 0 ? (
-    <Button onClick={handleFindFriends}>Please Add Friends</Button>
-  ) : (
-    <FormControl className={classes.formControl}>
-      <InputLabel id="mutiple-select-label">Select Friends to Join</InputLabel>
-      <Select
-        labelId="mutiple-select-label"
-        multiple
-        value={selected}
-        onChange={handleChange}
-        renderValue={(selected) => selected.join(", ")}
-        MenuProps={MenuProps}
-      >
-        <MenuItem
-          value="all"
-          classes={{
-            root: isAllSelected ? classes.selectedAll : "",
-          }}
+  return (
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="mutiple-select-label">
+          Select Friends to Join
+        </InputLabel>
+        <Select
+          labelId="mutiple-select-label"
+          multiple
+          value={selected}
+          onChange={handleChange}
+          renderValue={(selected) => selected.join(", ")}
+          MenuProps={MenuProps}
         >
-          <ListItemIcon>
-            <Checkbox
-              classes={{ indeterminate: classes.indeterminateColor }}
-              checked={isAllSelected}
-              indeterminate={
-                selected.length > 0 && selected.length < friends.length
-              }
+          <MenuItem
+            value="all"
+            classes={{
+              root: isAllSelected ? classes.selectedAll : "",
+            }}
+          >
+            <ListItemIcon>
+              <Checkbox
+                classes={{ indeterminate: classes.indeterminateColor }}
+                checked={isAllSelected}
+                indeterminate={
+                  selected.length > 0 && selected.length < friends.length
+                }
+              />
+            </ListItemIcon>
+            <ListItemText
+              classes={{ primary: classes.selectAllText }}
+              primary="Select All"
             />
-          </ListItemIcon>
-          <ListItemText
-            classes={{ primary: classes.selectAllText }}
-            primary="Select All"
-          />
-        </MenuItem>
-        {friends.map((friend, idx) => {
-          // console.log(friend);
-          return (
-            <MenuItem key={idx} value={friend.name}>
-              <ListItemIcon>
-                <Checkbox checked={selected.indexOf(friend.name) > -1} />
-              </ListItemIcon>
-              <ListItemText primary={friend.name} />
-            </MenuItem>
-          );
-        })}
-      </Select>
-    </FormControl>
+          </MenuItem>
+          {friends.map((friend, idx) => {
+            return (
+              <MenuItem key={idx} value={friend.name}>
+                <ListItemIcon>
+                  <Checkbox checked={selected.indexOf(friend.name) > -1} />
+                </ListItemIcon>
+                <ListItemText primary={friend.name} />
+              </MenuItem>
+            );
+          })}
+        </Select>
+        <Button variant="outlined" onClick={handleFindFriends}>
+          Add or Find Friends
+        </Button>
+      </FormControl>
+    </div>
   );
 }
 
