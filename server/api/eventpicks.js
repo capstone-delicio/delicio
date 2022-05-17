@@ -5,9 +5,9 @@ const {
 const { requireToken, isAdmin } = require("./gateKeeper");
 module.exports = router;
 
-// GET /api/select
+// GET /api/eventpicks
 // get all selections or event picks associated with user
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, async (req, res, next) => {
   try {
     // res.send("hi");
     const eventPicks = await Event_picks.findAll({
@@ -20,11 +20,24 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// POST /api/select
+// POST /api/eventpicks
 // adding event picks when invited to an event
 router.post("/", async (req, res, next) => {
   try {
     let eventPicks = await Event_picks.create(req.body);
+    res.json(eventPicks);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PUT /api/eventpicks/:id
+// only allow updates to users' events
+router.put("/:id", requireToken, async (req, res, next) => {
+  try {
+    let eventPicks = await Event_picks.update(req.body, {
+      where: { id: req.params.id, userId: req.user.id },
+    });
     res.json(eventPicks);
   } catch (err) {
     next(err);
