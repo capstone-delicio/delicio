@@ -55,7 +55,6 @@ export default function (state = initialState, action) {
     case SET_SELECTED_FRIENDS:
       return { ...state, setSelectedFriends: action.selectedFriends };
     case ADD_FRIEND:
-      console.log(action.person);
       return { ...state, addedFriend: action.person };
     default:
       return state;

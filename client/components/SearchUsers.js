@@ -61,6 +61,7 @@ function SearchUsers() {
   // local states
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
   const [selected, setSelected] = useState({});
   const [isFound, setIsFound] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -116,6 +117,7 @@ function SearchUsers() {
       ...suggestion,
     }));
 
+    setSelectedUser(suggestion.first + " " + suggestion.last);
     setIsFound(true);
   };
 
@@ -137,6 +139,10 @@ function SearchUsers() {
   const handleAddUser = (e) => {
     e.preventDefault;
     dispatch(_addFriend(loggedInUser.id, selected.id));
+    setSelected({});
+    setIsFound(false);
+    setIsCopied(false);
+    setSelectedUser("");
   };
 
   function AddUserButton() {
@@ -166,7 +172,7 @@ function SearchUsers() {
 
   const inputProps = {
     placeholder: "Find friends...",
-    value,
+    value: value ? value : selectedUser,
     onChange: onChange,
   };
 
