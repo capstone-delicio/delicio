@@ -25,7 +25,6 @@ const addFriend = (person) => ({
 
 // Thunk Creators
 export const _getFriends = (id) => async (dispatch) => {
-  console.log("inside get friends thunk");
   const { data } = await axios.get(`/api/friends/${id}`);
   dispatch(getFriends(data));
 };
@@ -35,7 +34,6 @@ export const _setSelectedFriends = (selectedFriends) => (dispatch) => {
 };
 
 export const _addFriend = (userId, friendId) => async (dispatch) => {
-  console.log("addFriend inside thunk");
   const { data } = await axios.post("/api/friends/update", {
     userId,
     friendId,

@@ -2,12 +2,12 @@ const router = require("express").Router();
 const {
   models: { Event_picks, Event, User },
 } = require("../db");
-const { requireToken, isAdmin } = require("./gateKeeper");
+// const { requireToken, isAdmin } = require("./gateKeeper");
 module.exports = router;
 
 // GET /api/eventpicks
 // get all selections or event picks associated with user
-router.get("/", requireToken, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     // res.send("hi");
     const eventPicks = await Event_picks.findAll({
@@ -33,12 +33,23 @@ router.post("/", async (req, res, next) => {
 
 // PUT /api/eventpicks/:id
 // only allow updates to users' events
-router.put("/:id", requireToken, async (req, res, next) => {
+router.put("/update", async (req, res, next) => {
+  // console.log("inside server", req.body);
   try {
-    let eventPicks = await Event_picks.update(req.body, {
-      where: { id: req.params.id, userId: req.user.id },
-    });
-    res.json(eventPicks);
+    let response = await Event_picks.update(
+      { isLiked: true, isSubmitted: true },
+      {
+        where: {
+          eventId: req.body.eventId,
+          restaurant_picUrl: req.body.restaurant_picUrl,
+          userId: req.body.userId,
+        },
+        // returns entire record
+        returning: true,
+      }
+    );
+    // returning just the json, excludes the arr
+    res.json(response[1][0]);
   } catch (err) {
     next(err);
   }
