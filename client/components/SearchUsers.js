@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { _getAllUsers } from "../store";
+import { _getAllUsers, _addFriend, _getFriends } from "../store";
 
 import Autosuggest from "react-autosuggest";
 import AutosuggestHighlightMatch from "autosuggest-highlight/match";
 import AutosuggestHighlightParse from "autosuggest-highlight/parse";
+
+import { Button, Box } from "@material-ui/core";
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -60,12 +62,16 @@ function SearchUsers() {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selected, setSelected] = useState({});
+  const [isFound, setIsFound] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   // dispatch
   const dispatch = useDispatch();
 
   // store
   const userStore = useSelector((state) => state.user);
+  const loggedInUser = useSelector((state) => state.auth);
+  const friendsStore = useSelector((state) => state.friends);
   const usersArr = userStore.users;
 
   // component did mount
@@ -73,6 +79,10 @@ function SearchUsers() {
     // Get All users from db
     dispatch(_getAllUsers());
   }, []);
+
+  useEffect(() => {
+    dispatch(_getFriends(loggedInUser.id));
+  }, [friendsStore.addedFriend]);
 
   let people = [];
   people = usersArr?.map((user) => {
@@ -105,7 +115,54 @@ function SearchUsers() {
       ...selected,
       ...suggestion,
     }));
+
+    setIsFound(true);
   };
+
+  const onClearButton = (e) => {
+    e.preventDefault;
+    setSelected({});
+    setIsFound(false);
+    setIsCopied(false);
+  };
+
+  const handleCopy = (e) => {
+    e.preventDefault;
+    setIsCopied(true);
+    return navigator.clipboard.writeText(
+      "https://capstone-delicio.herokuapp.com/"
+    );
+  };
+
+  const handleAddUser = (e) => {
+    e.preventDefault;
+    dispatch(_addFriend(loggedInUser.id, selected.id));
+  };
+
+  function AddUserButton() {
+    return (
+      <Box m={2}>
+        <Button
+          variant="contained"
+          onClick={handleAddUser}
+        >{`Add ${selected.first} ${selected.last} as a Friend`}</Button>
+      </Box>
+    );
+  }
+
+  function InviteFriend() {
+    return (
+      <div>
+        <p>
+          Can't find your friend? <br />
+          Invite them to Delicio with this link:
+        </p>
+        <Button variant="contained" onClick={handleCopy}>
+          {isCopied ? "Copied!" : "https://capstone-delicio.herokuapp.com/"}
+        </Button>
+      </div>
+    );
+  }
 
   const inputProps = {
     placeholder: "Find friends...",
@@ -116,7 +173,11 @@ function SearchUsers() {
   // need to add onSuggestionSelected below
   return (
     <div>
-      <button onClick={onSuggestionsClearRequested}>Clear input</button>
+      <Box m={2}>
+        <Button variant="contained" onClick={onClearButton}>
+          Reset
+        </Button>
+      </Box>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -126,7 +187,7 @@ function SearchUsers() {
         onSuggestionSelected={onSuggestionSelected}
         inputProps={inputProps}
       />
-      <h1>{selected.first}</h1>
+      <div>{selected.first ? AddUserButton() : InviteFriend()}</div>
     </div>
   );
 }
