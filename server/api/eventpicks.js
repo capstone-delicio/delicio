@@ -33,12 +33,22 @@ router.post("/", async (req, res, next) => {
 
 // PUT /api/eventpicks/:id
 // only allow updates to users' events
-router.put("/:id", requireToken, async (req, res, next) => {
+router.put("/update", requireToken, async (req, res, next) => {
   try {
-    let eventPicks = await Event_picks.update(req.body, {
-      where: { id: req.params.id, userId: req.user.id },
-    });
-    res.json(eventPicks);
+    let response = await Event_picks.update(
+      { isLiked: true },
+      {
+        where: {
+          eventId: req.body.eventId,
+          restaurant_picUrl: req.body.restaurant_picUrl,
+          userId: req.body.userId,
+        },
+        // returns entire record
+        returning: true,
+      }
+    );
+    // returning just the json, excludes the arr
+    res.json(response[1][0]);
   } catch (err) {
     next(err);
   }

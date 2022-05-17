@@ -12,10 +12,11 @@ const addEventPicks = (event) => ({
   event,
 });
 
-const updateEventPicks = (id, event) => ({
+const updateEventPicks = (eventId, restaurant_picUrl, userId) => ({
   type: UPDATE_EVENTPICKS,
-  id,
-  event,
+  eventId,
+  restaurant_picUrl,
+  userId,
 });
 
 // THUNK
@@ -52,14 +53,20 @@ export const _addEventPicks =
     }
   };
 
-export const _updateEventPicks = (eventId) => async (dispatch) => {
-  try {
-    const { data } = await axios.put(`api/eventpicks/${eventId}`, event);
-    dispatch(updateEventPicks(data));
-  } catch (err) {
-    console.error(err);
-  }
-};
+export const _updateEventPicks =
+  (eventId, restaurant_picUrl, userId) => async (dispatch) => {
+    try {
+      await axios.put(`/api/eventpicks/update`, {
+        eventId,
+        restaurant_picUrl,
+        userId,
+      });
+
+      dispatch(updateEventPicks(eventPicksId));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 const initialState = {
   eventPicks: [],

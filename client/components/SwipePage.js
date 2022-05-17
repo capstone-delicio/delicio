@@ -19,9 +19,9 @@ const SwipePage = () => {
 
   // set photos swiped right to isLiked
 
-  const swiped = (direction, swipedPhoto) => {
+  const swiped = (direction, restaurant_picUrl) => {
     if (direction === "right") {
-      dispatch(_updateEventPicks(swipedPhoto));
+      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id));
     }
     setLastDirection(direction);
   };
