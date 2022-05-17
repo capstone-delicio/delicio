@@ -9,7 +9,6 @@ function Timer() {
   // console.log('eventtimer', event.event.vote_deadline)
 
   const calculateTimeLeft = () => {
-    let year = new Date().getFullYear()
     // console.log(year)
     const difference = +new Date(`${event.event.vote_deadline}`) - +new Date()
     let timeLeft = {}
@@ -36,7 +35,7 @@ function Timer() {
   })
   const submit = !event.event.isScheduled
   const timerComponents = []
-  console.log('schedule UP', event.event.isScheduled)
+  console.log('schedule', event.event.isScheduled)
   Object.keys(timeLeft).forEach((interval) => {
     if (!timeLeft[interval]) {
       return
@@ -52,7 +51,7 @@ function Timer() {
 
   return (
     <div>
-      <h5>Countdown</h5>
+      <h5>Submit Countdown</h5>
       {timerComponents.length ? timerComponents : submit && <p>TIME IS UP</p>}
     </div>
   )

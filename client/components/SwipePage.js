@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import TinderCard from 'react-tinder-card'
 import { Button } from '@material-ui/core'
 import { _addEventPicks, _updateEventPicks } from '../store/eventPicks'
+import Timer from './Timer'
 
 const SwipePage = () => {
   const [lastDirection, setLastDirection] = useState()
@@ -72,6 +73,7 @@ const SwipePage = () => {
 
   return (
     <div className="swipe-container">
+      <Timer />
       <h1>Restaurant Selections</h1>
       <div className="card-container">
         {yelp.restPhotos.map((photo, idx) => (
