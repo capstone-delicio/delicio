@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { _updateSubmit } from '../store/eventPicks'
 
 function Timer() {
   const dispatch = useDispatch()
@@ -9,7 +10,6 @@ function Timer() {
   // console.log('eventtimer', event.event.vote_deadline)
 
   const calculateTimeLeft = () => {
-    // console.log(year)
     const difference = +new Date(`${event.event.vote_deadline}`) - +new Date()
     let timeLeft = {}
 
@@ -21,21 +21,22 @@ function Timer() {
         seconds: Math.floor((difference / 1000) % 60),
       }
     }
-
     return timeLeft
   }
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
-  const [year] = useState(new Date().getFullYear())
 
   useEffect(() => {
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft())
     }, 1000)
   })
-  const submit = !event.event.isScheduled
+
+  const handleSubmit = () => {
+    dispatch(_updateSubmit(event.event.id))
+  }
+
   const timerComponents = []
-  console.log('schedule', event.event.isScheduled)
   Object.keys(timeLeft).forEach((interval) => {
     if (!timeLeft[interval]) {
       return
@@ -47,12 +48,12 @@ function Timer() {
       </span>
     )
   })
-  // console.log('scheduledown', event.event.isScheduled)
 
   return (
     <div>
-      <h5>Submit Countdown</h5>
-      {timerComponents.length ? timerComponents : submit && <p>TIME IS UP</p>}
+      <h5>Time left to Submit</h5>
+      {timerComponents.length ? timerComponents : handleSubmit()}
+      <h5>Countdown Ends on {event.event.vote_deadline}</h5>
     </div>
   )
 }
