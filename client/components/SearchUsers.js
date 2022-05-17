@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { _getAllUsers, _addFriend, _getFriends } from "../store";
 
 import Autosuggest from "react-autosuggest";
@@ -76,6 +77,8 @@ function SearchUsers() {
   const friendsStore = useSelector((state) => state.friends);
   const usersArr = userStore.users;
 
+  let history = useHistory();
+
   // component did mount
   useEffect(() => {
     // Get All users from db
@@ -150,6 +153,11 @@ function SearchUsers() {
     setSelectedUser("");
   };
 
+  const handleGoBack = (e) => {
+    e.preventDefault;
+    history.push("/eventinput");
+  };
+
   function AddUserButton() {
     return (
       <Box m={2}>
@@ -173,6 +181,14 @@ function SearchUsers() {
           {isCopied ? "Copied!" : "https://capstone-delicio.herokuapp.com/"}
         </Button>
       </div>
+    );
+  }
+
+  function BackToEvent() {
+    return (
+      <Button variant="outlined" onClick={handleGoBack}>
+        Back to Event Planning
+      </Button>
     );
   }
 
@@ -201,6 +217,7 @@ function SearchUsers() {
       />
       <div>{isFound ? AddUserButton() : null}</div>
       {InviteFriend()}
+      <Box m={2}>{BackToEvent()}</Box>
     </div>
   );
 }
