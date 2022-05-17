@@ -10,9 +10,7 @@ import EditUser from "./components/EditUser";
 import EventInput from "./components/EventInput";
 import SwipePage from "./components/SwipePage";
 import SearchUsers from "./components/SearchUsers";
-import SingleRestaurant from './components/SingleRestaurant'
-
-
+import SingleRestaurant from "./components/SingleRestaurant";
 
 /**
  * COMPONENT
@@ -38,9 +36,7 @@ class Routes extends Component {
 
             <Route path="/eventinput" component={EventInput} />
 
-
             <Route path="/search-friends" component={SearchUsers} />
-
 
             <Route path="/singlerestaurant" component={SingleRestaurant} />
 

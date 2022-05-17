@@ -6,9 +6,11 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import { _getFriends, _setSelectedFriends } from "../store";
+import { useHistory } from "react-router-dom";
 
 // Styling -------------------------
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +63,8 @@ function FriendsSelect() {
   const [currentFriend, setCurrentFriend] = useState({});
   const [selectedId, setSelectedId] = useState([]);
 
+  let history = useHistory();
+
   useEffect(() => {
     // Get Friends List from db
     dispatch(_getFriends(user.id));
@@ -106,8 +110,13 @@ function FriendsSelect() {
     setSelected(value);
   };
 
+  const handleFindFriends = (e) => {
+    e.preventDefault();
+    history.push("/search-friends");
+  };
+
   return !friends.length > 0 ? (
-    <h4>Please Add Friends</h4>
+    <Button onClick={handleFindFriends}>Please Add Friends</Button>
   ) : (
     <FormControl className={classes.formControl}>
       <InputLabel id="mutiple-select-label">Select Friends to Join</InputLabel>
