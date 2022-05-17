@@ -12,11 +12,9 @@ const addEventPicks = (event) => ({
   event,
 });
 
-const updateEventPicks = (eventId, restaurant_picUrl, userId) => ({
+const updateEventPicks = (event) => ({
   type: UPDATE_EVENTPICKS,
-  eventId,
-  restaurant_picUrl,
-  userId,
+  event,
 });
 
 // THUNK
@@ -55,21 +53,22 @@ export const _addEventPicks =
 
 export const _updateEventPicks =
   (eventId, restaurant_picUrl, userId) => async (dispatch) => {
+    console.log("inside thunk", eventId, restaurant_picUrl, userId);
     try {
-      await axios.put(`/api/eventpicks/update`, {
+      const updatePicks = await axios.put(`/api/eventpicks/update`, {
         eventId,
         restaurant_picUrl,
         userId,
       });
 
-      dispatch(updateEventPicks(eventPicksId));
+      dispatch(updateEventPicks(updatePicks));
     } catch (err) {
       console.error(err);
     }
   };
 
 const initialState = {
-  eventPicks: [],
+  eventPicks: {},
 };
 
 // REDUCER
@@ -79,11 +78,7 @@ export default function (state = initialState, action) {
       return { ...state, eventPicks: action.event };
 
     case UPDATE_EVENTPICKS:
-      const filteredEventPicks = [...state.eventPicks].filter(
-        (pick) => pick.id !== action.event.id
-      );
-      return { ...state, eventPicks: [...filteredEventPicks, action.event] };
-    // return { ...state, eventPicks: action.event };
+      return { ...state, eventPicks: action.event };
 
     default:
       return state;
