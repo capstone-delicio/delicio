@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import TinderCard from "react-tinder-card";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import TinderCard from 'react-tinder-card'
 import Timer from './Timer'
-import { _addEventPicks, _updateEventPicks } from "../store/eventPicks";
+import { _addEventPicks, _updateEventPicks } from '../store/eventPicks'
 
 const SwipePage = () => {
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch()
 
   const yelp = useSelector((state) => state.yelp)
   //  yelp.restPhotos for photo array
@@ -18,13 +17,11 @@ const SwipePage = () => {
 
   // set photos swiped right to isLiked
 
-
   const swiped = (direction, restaurant_picUrl) => {
-    if (direction === "right") {
-      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id));
+    if (direction === 'right') {
+      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id))
     }
-  };
-
+  }
 
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
@@ -73,6 +70,7 @@ const SwipePage = () => {
   return (
     <div className="swipe-container">
       <Timer />
+
       <h1>Restaurant Selections</h1>
       <div className="card-container">
         {yelp.restPhotos.map((photo, idx) => (
