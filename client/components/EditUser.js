@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useHistory, useParams } from 'react-router-dom'
 import { updateUserThunk } from '../store/auth'
 import { useSelector, useDispatch } from 'react-redux'
@@ -22,9 +21,6 @@ const EditUser = () => {
     preferred_city: user.preferred_city,
   })
 
-  // useEffect(() => {
-  //     LoadUser()
-  // }, [])
   const onChangeHandler = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value })
   }
@@ -34,10 +30,6 @@ const EditUser = () => {
     history.push('/')
   }
 
-  // const LoadUser = async () => {
-  //     const result = await axios.get(`/users/${id}`)
-  //     setUser(result.data)
-  // }
   const { first_name, last_name, email, phone_number, preferred_city } = user
   return (
     <div>

@@ -1,62 +1,30 @@
-const router = require("express").Router();
+const router = require('express').Router()
 const {
   models: { User },
-} = require("../db");
-const { requireToken, isAdmin } = require("./gateKeeper");
-module.exports = router;
+} = require('../db')
+const { requireToken, isAdmin } = require('./gateKeeper')
+module.exports = router
 
 //ROUTE: api/users
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ["id", "first_name", "last_name", "prof_picUrl"],
-    });
-    res.json(users);
+      attributes: ['id', 'first_name', 'last_name', 'prof_picUrl'],
+    })
+    res.json(users)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
-// router.get('/:id', async (req, res, next) => {
-//   try {
-//     let user = await User.findByPk(req.params.id)
-//     res.json(user)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    let user = await User.findByPk(req.params.id);
-    res.json(await user.update(req.body));
+    let user = await User.findByPk(req.params.id)
+    res.json(await user.update(req.body))
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
-
-// router.put('/:id', async (req, res, next) => {
-//   try {
-//     const user = await User.update(req.body, {
-//       where: {
-//         id: req.params.id,
-//       },
-//       returning: true,
-//     })
-//     res.status(200).json(user)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// router.post('/', async (req, res, next) => {
-//   try {
-//     let newUser = await User.create(req.body)
-//     res.json(newUser)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+})

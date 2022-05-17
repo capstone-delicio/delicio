@@ -1,59 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import TinderCard from "react-tinder-card";
-import { Button } from "@material-ui/core";
-import { _addEventPicks, _updateEventPicks } from "../store/eventPicks";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import TinderCard from 'react-tinder-card'
+import { Button } from '@material-ui/core'
+import { _addEventPicks, _updateEventPicks } from '../store/eventPicks'
 
 const SwipePage = () => {
-  const [lastDirection, setLastDirection] = useState();
+  const [lastDirection, setLastDirection] = useState()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const yelp = useSelector((state) => state.yelp);
+  const yelp = useSelector((state) => state.yelp)
   //  yelp.restPhotos for photo array
-  const event = useSelector((state) => state.event);
-  const friends = useSelector((state) => state.friends);
+  const event = useSelector((state) => state.event)
+  const friends = useSelector((state) => state.friends)
   const user = useSelector((state) => {
-    return state.auth;
-  });
+    return state.auth
+  })
 
   // set photos swiped right to isLiked
 
   const swiped = (direction, swipedPhoto) => {
-    if (direction === "right") {
-      dispatch(_updateEventPicks(swipedPhoto));
+    if (direction === 'right') {
+      dispatch(_updateEventPicks(swipedPhoto))
     }
-    setLastDirection(direction);
-  };
+    setLastDirection(direction)
+  }
 
   const outOfFrame = (name) => {
-    console.log(name + " left the screen!");
-  };
+    console.log(name + ' left the screen!')
+  }
 
   const handleOnClick = () => {
-    e.preventDefault();
+    e.preventDefault()
     // sets isSubmit to be true
-  };
+  }
 
   useEffect(() => {
-    let eventId = event.event.id;
+    let eventId = event.event.id
     const attendees = [
       ...friends.setSelectedFriends,
       { name: `${user.first_name} ${user.last_name}`, id: user.id },
-    ];
+    ]
 
-    console.log("attendees", attendees);
+    console.log('attendees', attendees)
 
     attendees.forEach((friend) => {
       // console.log(friend.id);
-      let userId = friend.id;
+      let userId = friend.id
 
       yelp.restPhotos.map((photo) => {
         // return console.log("restPhotosId", photo.id);
-        let restaurantId = photo.id;
-        let restaurantAlias = photo.alias;
-        let restaurant_picUrl = photo.imgSrc;
-        let picDescription = photo.imgDesc;
+        let restaurantId = photo.id
+        let restaurantAlias = photo.alias
+        let restaurant_picUrl = photo.imgSrc
+        let picDescription = photo.imgDesc
         dispatch(
           _addEventPicks(
             eventId,
@@ -63,10 +63,10 @@ const SwipePage = () => {
             restaurant_picUrl,
             picDescription
           )
-        );
-      });
-    });
-  }, []);
+        )
+      })
+    })
+  }, [])
 
   // }
 
@@ -86,7 +86,7 @@ const SwipePage = () => {
               MORE INFO{" "}
             </Button> */}
             <div
-              style={{ backgroundImage: "url(" + photo.imgSrc + ")" }}
+              style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
               className="card"
             >
               <h3>{photo.imgDesc}</h3>
@@ -104,6 +104,6 @@ const SwipePage = () => {
         Next
       </Button>
     </div>
-  );
-};
-export default SwipePage;
+  )
+}
+export default SwipePage

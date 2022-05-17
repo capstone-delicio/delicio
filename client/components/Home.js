@@ -1,18 +1,15 @@
 import React from 'react'
-import { connect, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button'
-import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-
-// useSelector((state) => {
-//   return state.first_name
-// })
 
 /**
  * COMPONENT
  */
-export const Home = (props) => {
-  const { first_name } = props
+const Home = () => {
+  const firstName = useSelector((state) => {
+    return state.auth.first_name
+  })
 
   return (
     <div>
@@ -22,7 +19,7 @@ export const Home = (props) => {
         justifyContent="center"
         direction="column"
       >
-        <h3>Welcome {first_name}!</h3>
+        <h3>Welcome {firstName}!</h3>
         <h3>Do you want to?</h3>
         <Button variant="contained" color="primary" href="/questions">
           Find Restaurants
@@ -36,14 +33,4 @@ export const Home = (props) => {
     </div>
   )
 }
-
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    first_name: state.auth.first_name,
-  }
-}
-
-export default connect(mapState)(Home)
+export default Home

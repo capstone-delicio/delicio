@@ -12,7 +12,6 @@ const UPDATE_USER = 'UPDATE_USER'
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth })
-
 const updateUser = (user) => ({ type: UPDATE_USER, user })
 
 /**
@@ -41,8 +40,6 @@ export const updateUserThunk = (user) => async (dispatch) => {
 
 export const authenticate = (email, password, method) => async (dispatch) => {
   try {
-    // console.log(method)
-
     const res = await axios.post(`/auth/${method}`, { email, password })
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(me())
