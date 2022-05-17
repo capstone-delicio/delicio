@@ -44,6 +44,7 @@ export const addEvent =
     }
   };
 
+//C: event DS is an array because the user can have more than one even planned at a time?
 const initialState = {
   event: [],
 };

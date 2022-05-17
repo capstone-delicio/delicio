@@ -10,6 +10,8 @@ import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import { _getFriends, _setSelectedFriends } from "../store";
 
+//C: If intermediate color and background colors here are going to be reused it is a good
+//C: idea to create a module for the values and then import into each component they will be needed in
 // Styling -------------------------
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//C: where is the * 4.5 coming from?
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -58,6 +61,7 @@ function FriendsSelect() {
   const user = useSelector((state) => state.auth);
   // stores list of selected values from the list of friends
   const [selected, setSelected] = useState([]);
+  //C: unused states should be removed if not needed
   const [currentFriend, setCurrentFriend] = useState({});
   const [selectedId, setSelectedId] = useState([]);
 
@@ -69,6 +73,7 @@ function FriendsSelect() {
   useEffect(() => {
     // NEED TO ADD FRIENDS USER ID
     // console.log(selected);
+    //C: is this the fix for the unobtainable ID?
     const selectedFriendsId = selected.map((el) => {
       const foundFriend = friends.filter((friend) => {
         return friend.name === el;

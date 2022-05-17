@@ -84,3 +84,5 @@ router.get("/:rest_id", async (req, res) => {
 });
 
 module.exports = router;
+
+//C: should this be in server folder along with other routes?

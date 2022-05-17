@@ -30,6 +30,7 @@ const EventInput = () => {
       );
       history.push("/questions");
     }
+    //C: I like the frontend check for deadline along with the div to show error
     if (vote_deadline > event_date) {
       setDateError("Deadline must be before event date");
     }

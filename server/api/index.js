@@ -11,3 +11,5 @@ router.use((req, res, next) => {
   error.status = 404;
   next(error);
 });
+
+//C: very much like the modularization of api routes from auth routes. not necessary but shows thought

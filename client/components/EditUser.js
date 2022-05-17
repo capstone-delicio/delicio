@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useHistory, useParams } from 'react-router-dom'
-import { updateUserThunk } from '../store/auth'
-import { useSelector, useDispatch } from 'react-redux'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import React, { useState, useEffect } from "react";
+//C: if not using axios remove from imports
+import axios from "axios";
+import { useHistory, useParams } from "react-router-dom";
+import { updateUserThunk } from "../store/auth";
+import { useSelector, useDispatch } from "react-redux";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const EditUser = () => {
-  const { id } = useParams()
-  let history = useHistory()
-  const user = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const { id } = useParams();
+  let history = useHistory();
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const [formState, setFormState] = useState({
     id: user.id,
@@ -20,25 +21,27 @@ const EditUser = () => {
     email: user.email,
     phone_number: user.phone_number,
     preferred_city: user.preferred_city,
-  })
+  });
 
+  //C: make sure to delete all commented out code if not needed
   // useEffect(() => {
   //     LoadUser()
   // }, [])
   const onChangeHandler = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value })
-  }
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
   const SubmitHandler = async (e) => {
-    e.preventDefault()
-    dispatch(updateUserThunk(formState))
-    history.push('/')
-  }
+    e.preventDefault();
+    dispatch(updateUserThunk(formState));
+    history.push("/");
+  };
 
+  //C: make sure to delete all commented out code if not needed
   // const LoadUser = async () => {
   //     const result = await axios.get(`/users/${id}`)
   //     setUser(result.data)
   // }
-  const { first_name, last_name, email, phone_number, preferred_city } = user
+  const { first_name, last_name, email, phone_number, preferred_city } = user;
   return (
     <div>
       <div className="container">
@@ -114,7 +117,7 @@ const EditUser = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditUser
+export default EditUser;

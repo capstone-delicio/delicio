@@ -5,6 +5,7 @@ import { Button } from "@material-ui/core";
 import { _addEventPicks } from "../store/eventPicks";
 
 const SwipePage = () => {
+  //C: lastDirection state is unused only setting?
   const [lastDirection, setLastDirection] = useState();
 
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const SwipePage = () => {
     console.log(name + " left the screen!");
   };
 
+  //C: lots of commented out code...
   // dispatch setCurrentRest
   // history.push to renee's single rest comp
 

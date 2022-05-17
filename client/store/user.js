@@ -29,6 +29,7 @@ export default function (state = [], action) {
   }
 }
 
+//C: can be removed if not needed
 // /**
 //  * ACTION TYPES
 //  */

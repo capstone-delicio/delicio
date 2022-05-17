@@ -50,3 +50,5 @@ export default async function scrapeData(id, alias) {
     console.error(err);
   }
 }
+
+//C: This should probably be moved to a utility folder since it is not part of the store

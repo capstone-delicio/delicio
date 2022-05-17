@@ -1,0 +1,4 @@
+- getting 500 error when trying to update my profile (Only on local code)
+- getting 403 error when trying to view restaurants (both deployed and local)
+- styling is minimal (expected for now, just noting for future)
+- is there going to be a component that shows a user all of the events that they are connected to?

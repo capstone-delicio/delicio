@@ -6,6 +6,7 @@ import Autosuggest from "react-autosuggest";
 import AutosuggestHighlightMatch from "autosuggest-highlight/match";
 import AutosuggestHighlightParse from "autosuggest-highlight/parse";
 
+//C: love the use of regex. good work on figuring this out
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -84,6 +85,7 @@ function SearchUsers() {
     };
   });
 
+  //C: method argument is unused
   const onChange = (e, { newValue, method }) => {
     e.preventDefault();
     setValue(newValue);
@@ -98,6 +100,7 @@ function SearchUsers() {
     setValue("");
   };
 
+  //C: method argument unused
   const onSuggestionSelected = (e, { suggestion, method }) => {
     e.preventDefault();
 

@@ -12,3 +12,5 @@ switch (action.type) {
   case SET_CARD:
   // return [...state];
 }
+
+//C: no logic for reducer here. im guessing this is still being worked on

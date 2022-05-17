@@ -17,6 +17,8 @@ const getSingleRest = (id) => ({
   rest: id,
 });
 
+//C: good use of .env variable to hide your api key
+//C: i like the use of variables for urls and authorization keys. helps keep code clean and readable
 // Constants
 const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
 const auth = {
