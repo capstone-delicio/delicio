@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { _updateSubmit } from '../store/eventPicks'
+import moment from 'moment'
 
 function Timer() {
   const dispatch = useDispatch()
   const event = useSelector((state) => {
     return state.event
   })
-  // console.log('eventtimer', event.event.vote_deadline)
 
   const calculateTimeLeft = () => {
     const difference = +new Date(`${event.event.vote_deadline}`) - +new Date()
@@ -49,11 +49,13 @@ function Timer() {
     )
   })
 
+  let isoDate = event.event.vote_deadline
+  let newDate = moment.utc(isoDate).format('MMM Do, YYYY')
+
   return (
     <div>
-      <h5>Time left to Submit</h5>
+      <h4>Countdown Ends on {newDate}</h4>
       {timerComponents.length ? timerComponents : handleSubmit()}
-      <h5>Countdown Ends on {event.event.vote_deadline}</h5>
     </div>
   )
 }
