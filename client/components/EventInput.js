@@ -45,6 +45,11 @@ const EventInput = () => {
           direction="column"
         >
           <h3>Please fill in the following information</h3>
+
+          <Grid item>
+            <FriendsSelect />
+          </Grid>
+
           <Grid item>
             <InputLabel>Event Name:</InputLabel>
             <TextField name="event_name" type="text" />
@@ -63,10 +68,6 @@ const EventInput = () => {
           <Grid item>
             <InputLabel>Voting Deadline:</InputLabel>
             <TextField name="vote_deadline" type="date" />
-          </Grid>
-
-          <Grid item>
-            <FriendsSelect />
           </Grid>
 
           <div style={{ color: 'red' }}>{dateError}</div>

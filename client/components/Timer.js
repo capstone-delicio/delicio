@@ -37,13 +37,13 @@ function Timer() {
   }
 
   const timerComponents = []
-  Object.keys(timeLeft).forEach((interval) => {
+  Object.keys(timeLeft).forEach((interval, idx) => {
     if (!timeLeft[interval]) {
       return
     }
 
     timerComponents.push(
-      <span>
+      <span key={idx}>
         {timeLeft[interval]} {interval}{' '}
       </span>
     )
@@ -54,7 +54,7 @@ function Timer() {
 
   return (
     <div>
-      <h4>Countdown Ends on {newDate}</h4>
+      <h4>Make your vote by {newDate}</h4>
       {timerComponents.length ? timerComponents : handleSubmit()}
     </div>
   )
