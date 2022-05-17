@@ -1,7 +1,5 @@
-import { Event } from '@material-ui/icons'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchEvent } from '../store'
 
 function Timer() {
   const dispatch = useDispatch()

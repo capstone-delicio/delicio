@@ -28,7 +28,7 @@ const EventInput = () => {
       dispatch(
         addEvent(organizerId, event_name, event_date, event_time, vote_deadline)
       )
-      history.push('/timer') //questions
+      history.push('/questions')
     }
     if (vote_deadline > event_date) {
       setDateError('Deadline must be before event date')
