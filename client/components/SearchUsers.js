@@ -65,6 +65,7 @@ function SearchUsers() {
   const [selected, setSelected] = useState({});
   const [isFound, setIsFound] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
 
   // dispatch
   const dispatch = useDispatch();
@@ -119,6 +120,7 @@ function SearchUsers() {
 
     setSelectedUser(suggestion.first + " " + suggestion.last);
     setIsFound(true);
+    setIsAdded(false);
   };
 
   const onClearButton = (e) => {
@@ -126,6 +128,8 @@ function SearchUsers() {
     setSelected({});
     setIsFound(false);
     setIsCopied(false);
+    setSelectedUser("");
+    setIsFound(false);
   };
 
   const handleCopy = (e) => {
@@ -139,8 +143,9 @@ function SearchUsers() {
   const handleAddUser = (e) => {
     e.preventDefault;
     dispatch(_addFriend(loggedInUser.id, selected.id));
+    setIsAdded(true);
     setSelected({});
-    setIsFound(false);
+    setIsFound(true);
     setIsCopied(false);
     setSelectedUser("");
   };
@@ -148,10 +153,11 @@ function SearchUsers() {
   function AddUserButton() {
     return (
       <Box m={2}>
-        <Button
-          variant="contained"
-          onClick={handleAddUser}
-        >{`Add ${selected.first} ${selected.last} as a Friend`}</Button>
+        <Button variant="contained" onClick={handleAddUser}>
+          {isAdded
+            ? "Added!"
+            : `Add ${selected.first} ${selected.last} as a Friend`}
+        </Button>
       </Box>
     );
   }
@@ -181,7 +187,7 @@ function SearchUsers() {
     <div>
       <Box m={2}>
         <Button variant="contained" onClick={onClearButton}>
-          Reset
+          Start a new search
         </Button>
       </Box>
       <Autosuggest
@@ -193,7 +199,8 @@ function SearchUsers() {
         onSuggestionSelected={onSuggestionSelected}
         inputProps={inputProps}
       />
-      <div>{selected.first ? AddUserButton() : InviteFriend()}</div>
+      <div>{isFound ? AddUserButton() : null}</div>
+      {InviteFriend()}
     </div>
   );
 }
