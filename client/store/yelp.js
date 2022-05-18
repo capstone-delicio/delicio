@@ -46,76 +46,20 @@ export const _getRests = (params) => async (dispatch) => {
   // expect params to be an object
   const { location, limit, price, cuisine } = params;
 
-  const autocompleteParams = {
-    text: cuisine,
-    latitude: "",
-    longitude: "",
-    locale: "en_US",
-  };
-
-  // run cuisine thru autocomplete Yelp API
-  // hello testing
-  const auto_url = `https://api.yelp.com/v3/autocomplete`;
-
-  let catArr = [];
-
   try {
-    const { data } = await axios.get(proxyUrl + auto_url, {
-      headers: auth,
-      params: autocompleteParams,
-    });
-    catArr = [...data.categories];
-  } catch (err) {
-    return { Error: err.stack };
-  }
-
-  // take the results of category array and put into Yelp business search api
-  let categories = cuisine;
-  console.log("categories before map:", categories);
-  console.log("catArr", catArr);
-  if (catArr.length) {
-    categories = catArr
-      .map((cat) => {
-        return cat.alias;
-      })
-      .join(",");
-    categories += `,${cuisine}`;
-  }
-
-  console.log("categories after map:", categories);
-
-  // return a list of restaurants that fullfil the params
-  const busSearchParams = {
-    term: "restaurants",
-    location,
-    categories,
-    limit,
-    price,
-  };
-
-  const bizSearch_url = `https://api.yelp.com/v3/businesses/search`;
-  try {
-    const { data } = await axios.get(proxyUrl + bizSearch_url, {
-      headers: auth,
-      params: busSearchParams,
-    });
-    // return data;
-
-    dispatch(getRests(data.businesses));
+    const { data } = await axios.get("/yelp/bizsearch", { params: params });
+    dispatch(getRests(data));
   } catch (err) {
     return { Error: err.stack };
   }
 };
 
 export const _getSingleRest = (id) => async (dispatch) => {
-  const bizDetail_url = `https://api.yelp.com/v3/businesses/${id}`;
   try {
-    const { data } = await axios.get(proxyUrl + bizDetail_url, {
-      headers: auth,
-    });
+    const { data } = await axios.get(`/yelp/${id}`);
     dispatch(getSingleRest(data));
   } catch (err) {
-    console.error(err);
+    return { Error: err.stack };
   }
 };
 

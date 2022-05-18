@@ -8,7 +8,7 @@ module.exports = router;
 //ROUTE: api/events
 router.get("/", requireToken, async (req, res, next) => {
   try {
-    console.log("event");
+    // console.log("event");
     const events = await Event.findAll();
     res.json(events);
   } catch (err) {

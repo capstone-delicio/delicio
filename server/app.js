@@ -16,7 +16,7 @@ app.use(express.json());
 // auth and api and yelp routes
 app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
-app.use("/yelp", require("../yelp"));
+app.use("/yelp", require("./yelp"));
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))
