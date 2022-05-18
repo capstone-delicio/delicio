@@ -5,8 +5,9 @@ var JSSoup = require("jssoup").default;
 // const alias = "the-perch-chicago";
 
 // Async function which scrapes the data
-export default async function scrapeData(id, alias) {
-  const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+const scraper = async function scrapeData(id, alias) {
+  // const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+  const proxyUrl = "";
   const url = `https://www.yelp.com/biz_photos/${alias}?tab=food`;
   try {
     // Fetch HTML of the page we want to scrape
@@ -49,4 +50,6 @@ export default async function scrapeData(id, alias) {
   } catch (err) {
     console.error(err);
   }
-}
+};
+
+module.exports = scraper;

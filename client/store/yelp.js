@@ -1,5 +1,5 @@
 import axios from "axios";
-import scrapeData from "./scraper";
+import scrapeData from "../../server/yelp/scraper";
 
 // Action Types
 const GET_RESTS = "GET_RESTS";
@@ -18,11 +18,6 @@ const getSingleRest = (id) => ({
 });
 
 // Constants
-const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-const auth = {
-  Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-};
-
 const getRestPhotos = (pics) => ({
   type: GET_REST_PHOTOS,
   pics,
@@ -30,15 +25,24 @@ const getRestPhotos = (pics) => ({
 
 // Thunks
 export const _getRestPhotos = (id, alias) => async (dispatch) => {
-  const data = await scrapeData(id, alias);
-  // pick a random 3 photos
-  function getMultipleRandom(arr, num) {
-    const shuffled = [...arr].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, num);
-  }
-  if (data) {
-    const subsetPics = getMultipleRandom(data, 3);
-    dispatch(getRestPhotos(subsetPics));
+  console.log("inside thunk phots");
+  try {
+    const { data } = await axios.get("/yelp/photos", {
+      params: { id, alias },
+    });
+
+    // pick a random 3 photos
+    function getMultipleRandom(arr, num) {
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, num);
+    }
+
+    if (data) {
+      const subsetPics = getMultipleRandom(data, 3);
+      dispatch(getRestPhotos(subsetPics));
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 

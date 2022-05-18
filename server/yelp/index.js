@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const scraper = require("./scraper");
 
 const auth = {
   Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
@@ -72,17 +73,29 @@ const getRests = async (queryParams) => {
   }
 };
 
-// /api/yelp/bizsearch
+router.get("/", (req, res) => {
+  res.json({ success: "hello yelp" });
+});
+
+// /yelp/bizsearch
 router.get("/bizsearch", async (req, res) => {
   // console.log("inside route", req.query);
   const data = await getRests(req.query);
   res.json(data);
 });
 
-// /api/yelp/id
+// /api/yelp/photos
+router.get("/photos", async (req, res) => {
+  // call scraper
+  // console.log("inside route", req.query);
+  const data = await scraper(req.query.id, req.query.alias);
+  res.json(data);
+  // res.json({ success: "hello yelp photos" });
+});
+
+// /yelp/id
 router.get("/:id", async (req, res) => {
   const rest_id = req.params.id;
-  console.log(rest_id);
   const data = await getRest(rest_id);
   res.json(data);
 });
