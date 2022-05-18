@@ -41,7 +41,7 @@ const Questions = () => {
 
   useEffect(() => {
     // now go thru restaurant list and scrape for pics
-    if (isMounted.current) {
+    if (isMounted.current && yelp.rests.length > 0) {
       yelp.rests.forEach((rest) => {
         dispatch(_getRestPhotos(rest.id, rest.alias));
       });
