@@ -35,3 +35,14 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const event = await Event.findByPk(req.params.id)
+    // res.json(await event.update(req.body))
+    console.log("event", event)
+    console.log("req.body",req.body)
+  } catch (err) {
+    next(err);
+  }
+});

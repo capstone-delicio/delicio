@@ -13,6 +13,7 @@ import SearchUsers from "./components/SearchUsers";
 import SingleRestaurant from "./components/SingleRestaurant";
 import Timer from "./components/Timer";
 import Events from "./components/Events";
+import FinalEventUpdate from "./components/FinalEventUpdate"
 
 /**
  * COMPONENT
@@ -37,6 +38,7 @@ class Routes extends Component {
 
             <Route path="/card" component={SwipePage} />
             <Route path="/eventinput" component={EventInput} />
+            <Route path="/finaleventupdate" component={FinalEventUpdate} />
 
             <Route path="/search-friends" component={SearchUsers} />
 
