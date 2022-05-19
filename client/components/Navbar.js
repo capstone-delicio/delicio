@@ -40,8 +40,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                 </Link>
 
                 <Link
-                  // to="/events"
-                  to = "/finaleventupdate"
+                  to="/events"
+
                   style={{ textDecoration: "none", color: "white" }}
                 >
                   Events

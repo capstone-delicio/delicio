@@ -1,4 +1,5 @@
 const router = require("express").Router();
+
 const {
   models: { User, Event },
 } = require("../db");
@@ -39,9 +40,13 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id)
-    // res.json(await event.update(req.body))
-    console.log("event", event)
-    console.log("req.body",req.body)
+    const result = await Event.update(
+      { event_date: req.body.event_date,
+        event_time: req.body.event_time},
+
+      { where: { id: req.params.id } }
+    )
+    res.json(result)
   } catch (err) {
     next(err);
   }
