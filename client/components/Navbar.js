@@ -41,7 +41,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 
                 <Link
                   to="/events"
+
                   style={{ textDecoration: 'none', color: 'white' }}
+
                 >
                   Events
                 </Link>

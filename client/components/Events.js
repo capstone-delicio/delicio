@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { _getUserEvents } from "../store/eventPicks";
+import EventCard from "./EventCard";
 
 const Events = () => {
-  const event = useSelector((state) => state.event);
+  const eventPicksStore = useSelector((state) => state.eventPicks);
+  const user = useSelector((state) => {
+    return state.auth;
+  });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(_getUserEvents(user.id));
+  }, []);
+
+  // return a list of events
+  const eventCards = () => {
+    return eventPicksStore.userEvents.map((event) => <EventCard key={event} />);
+  };
+
+  return <div>{eventCards()}</div>;
 
   // tally all the votes for photos
   // return the restaurant with the most votes
-
-  return console.log(event);
   // <div>
-
   //     {event.event.map(
   //       (event) => (event.event_name,
   //       event.event_date,
@@ -19,3 +34,8 @@ const Events = () => {
 };
 
 export default Events;
+
+// get all events associated with logged in user
+// load child event component as card
+
+// event picks with the same eventId
