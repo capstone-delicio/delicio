@@ -13,7 +13,8 @@ router.get("/user", async (req, res, next) => {
     const eventPicks = await Event_picks.findAll({
       // need userId, eventId
       include: { model: Event },
-      where: { userId: 1 },
+      // make sure when you create thunk send in id
+      where: { userId: req.query.id },
       attributes: ["eventId", "userId"],
     });
     res.json(eventPicks);
