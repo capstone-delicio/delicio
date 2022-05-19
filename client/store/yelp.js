@@ -24,23 +24,16 @@ const getRestPhotos = (pics) => ({
 });
 
 // Thunks
-export const _getRestPhotos = (id, alias) => async (dispatch) => {
-  console.log("inside thunk phots");
+export const _getRestPhotos = (rests) => async (dispatch) => {
+  const restsObj = rests.map((rest) => {
+    return { alias: rest.alias, id: rest.id };
+  });
   try {
     const { data } = await axios.get("/yelp/photos", {
-      params: { id, alias },
+      params: { rests: restsObj },
     });
 
-    // pick a random 3 photos
-    function getMultipleRandom(arr, num) {
-      const shuffled = [...arr].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, num);
-    }
-
-    if (data) {
-      const subsetPics = getMultipleRandom(data, 3);
-      dispatch(getRestPhotos(subsetPics));
-    }
+    dispatch(getRestPhotos(data));
   } catch (err) {
     console.log(err);
   }
