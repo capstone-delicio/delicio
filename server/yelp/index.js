@@ -90,30 +90,30 @@ router.get("/photos", async (req, res, next) => {
   // call scraper, req.query.rests is an array [rest1.id, rest1,alias, etc]
   // console.log("inside route", req.query.rests);
   const data = await scraper(req.query.rests);
-  // res.json(data);
+  res.json(data);
   // res.json({ success: "hello yelp photos" });
 });
 
-router.get("/test", cors(), async (req, res, next) => {
-  // const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-  const endpoints = [
-    "",
-    "https://www.yelp.com/biz_photos/bárbaro-taquería-chicago?tab=food",
-    "https://www.yelp.com/biz_photos/lonesome-rose-chicago?tab=food",
-  ];
-  // const allData = await Promise.all(
-  //   endpoints.map((endpoint) => axios.get(endpoint))
-  // );
-  // axios.spread((...allData) => {
-  //   console.log({ allData });
-  // });
-  console.log(endpoints[1]);
-  const { data } = await axios.get(endpoints[1]);
+// router.get("/test", cors(), async (req, res, next) => {
+//   // const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+//   const endpoints = [
+//     "",
+//     "https://www.yelp.com/biz_photos/bárbaro-taquería-chicago?tab=food",
+//     "https://www.yelp.com/biz_photos/lonesome-rose-chicago?tab=food",
+//   ];
+//   // const allData = await Promise.all(
+//   //   endpoints.map((endpoint) => axios.get(endpoint))
+//   // );
+//   // axios.spread((...allData) => {
+//   //   console.log({ allData });
+//   // });
+//   console.log(endpoints[1]);
+//   const { data } = await axios.get(endpoints[1]);
 
-  console.log(data);
-  // res.json(data);
-  // res.json({ success: "hello yelp test" });
-});
+//   console.log(data);
+//   // res.json(data);
+//   // res.json({ success: "hello yelp test" });
+// });
 
 // /yelp/id
 router.get("/:id", async (req, res, next) => {

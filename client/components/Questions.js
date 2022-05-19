@@ -47,7 +47,9 @@ const Questions = () => {
       //   console.log(idx);
       //   dispatch(_getRestPhotos(rest.id, rest.alias));
       // });
-      const restsAlias = yelp.rests.map((rest) => rest.alias);
+      const restsAlias = yelp.rests.map((rest) => {
+        return { alias: rest.alias, id: rest.id };
+      });
 
       // pass in array of restaurants
       dispatch(_getRestPhotos(restsAlias));
