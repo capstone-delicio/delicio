@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
 import Loading from "./Loading";
 
+
 import {
   TextField,
   Grid,
@@ -36,16 +37,21 @@ const Questions = () => {
     const cuisine = e.target.cuisine.value;
 
     setStateLimit(limit);
-    // loading page
+
     dispatch(_getRests({ location, limit, price, cuisine }));
   };
 
   useEffect(() => {
     // now go thru restaurant list and scrape for pics
-    if (isMounted.current && yelp.rests.length > 0) {
-      yelp.rests.forEach((rest) => {
-        dispatch(_getRestPhotos(rest.id, rest.alias));
+
+    if (isMounted.current) {
+      const restsAlias = yelp.rests.map((rest) => {
+        return { alias: rest.alias, id: rest.id };
       });
+
+      // pass in array of restaurants
+      dispatch(_getRestPhotos(restsAlias));
+
       // history.push("/card");
     } else {
       isMounted.current = true;
@@ -54,11 +60,11 @@ const Questions = () => {
 
   // wait until photos array has all photos before pushing to /card
   useEffect(() => {
-    const expectedNumPhotos = Number(stateLimit) * 3;
-    if (yelp.restPhotos.length === expectedNumPhotos) {
-      // loading page disappears
+//     const expectedNumPhotos = Number(stateLimit) * 3;
+//     if (yelp.restPhotos.length === expectedNumPhotos) {
+
       history.push("/card");
-    }
+//     }
   }, [yelp.restPhotos]);
 
   return (
