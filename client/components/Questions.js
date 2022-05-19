@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { _getRestPhotos, _getRests } from '../store/yelp'
+import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { _getRestPhotos, _getRests } from "../store/yelp";
 
 import {
   TextField,
@@ -10,54 +10,61 @@ import {
   InputLabel,
   MenuItem,
   Button,
-} from '@material-ui/core'
+} from "@material-ui/core";
 
 const Questions = () => {
-  const [price, setPrice] = useState('')
-  const [stateLimit, setStateLimit] = useState(1)
+  const [price, setPrice] = useState("");
+  const [stateLimit, setStateLimit] = useState(1);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // state.yelp = what is inside combined reducer
-  const yelp = useSelector((state) => state.yelp)
-  const isMounted = useRef(false)
-  let history = useHistory()
+  const yelp = useSelector((state) => state.yelp);
+  const isMounted = useRef(false);
+  let history = useHistory();
 
   const handleChange = (event) => {
-    setPrice(event.target.value)
-  }
+    setPrice(event.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const location = e.target.location.value
+    e.preventDefault();
+    const location = e.target.location.value;
 
-    const limit = e.target.limit.value
-    const price = e.target.price.value
-    const cuisine = e.target.cuisine.value
+    const limit = e.target.limit.value;
+    const price = e.target.price.value;
+    const cuisine = e.target.cuisine.value;
 
-    setStateLimit(limit)
+    setStateLimit(limit);
 
-    dispatch(_getRests({ location, limit, price, cuisine }))
-  }
+    dispatch(_getRests({ location, limit, price, cuisine }));
+  };
 
   useEffect(() => {
     // now go thru restaurant list and scrape for pics
+
     if (isMounted.current) {
-      yelp.rests.forEach((rest) => {
-        dispatch(_getRestPhotos(rest.id, rest.alias))
-      })
+      // yelp.rests.forEach((rest, idx) => {
+      //   console.log(idx);
+      //   dispatch(_getRestPhotos(rest.id, rest.alias));
+      // });
+      const restsAlias = yelp.rests.map((rest) => rest.alias);
+
+      // pass in array of restaurants
+      dispatch(_getRestPhotos(restsAlias));
+
       // history.push("/card");
     } else {
-      isMounted.current = true
+      isMounted.current = true;
     }
-  }, [yelp.rests])
+  }, [yelp.rests]);
 
   // wait until photos array has all photos before pushing to /card
   useEffect(() => {
-    const expectedNumPhotos = Number(stateLimit) * 3
+    const expectedNumPhotos = Number(stateLimit) * 3;
     if (yelp.restPhotos.length === expectedNumPhotos) {
-      history.push('/card')
+      history.push("/card");
     }
-  }, [yelp.restPhotos])
+  }, [yelp.restPhotos]);
 
   return (
     <div id="questions">
@@ -114,10 +121,10 @@ const Questions = () => {
         </Grid>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Questions
+export default Questions;
 // import React, { useState } from "react";
 // import {
 //   Typography,

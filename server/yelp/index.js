@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const scraper = require("./scraper");
+const cors = require("cors");
 
 const auth = {
   Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
@@ -73,28 +74,49 @@ const getRests = async (queryParams) => {
   }
 };
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.json({ success: "hello yelp" });
 });
 
 // /yelp/bizsearch
-router.get("/bizsearch", async (req, res) => {
+router.get("/bizsearch", async (req, res, next) => {
   // console.log("inside route", req.query);
   const data = await getRests(req.query);
   res.json(data);
 });
 
 // /api/yelp/photos
-router.get("/photos", async (req, res) => {
-  // call scraper
-  // console.log("inside route", req.query);
-  const data = await scraper(req.query.id, req.query.alias);
-  res.json(data);
+router.get("/photos", async (req, res, next) => {
+  // call scraper, req.query.rests is an array [rest1.id, rest1,alias, etc]
+  // console.log("inside route", req.query.rests);
+  const data = await scraper(req.query.rests);
+  // res.json(data);
   // res.json({ success: "hello yelp photos" });
 });
 
+router.get("/test", cors(), async (req, res, next) => {
+  // const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+  const endpoints = [
+    "",
+    "https://www.yelp.com/biz_photos/bárbaro-taquería-chicago?tab=food",
+    "https://www.yelp.com/biz_photos/lonesome-rose-chicago?tab=food",
+  ];
+  // const allData = await Promise.all(
+  //   endpoints.map((endpoint) => axios.get(endpoint))
+  // );
+  // axios.spread((...allData) => {
+  //   console.log({ allData });
+  // });
+  console.log(endpoints[1]);
+  const { data } = await axios.get(endpoints[1]);
+
+  console.log(data);
+  // res.json(data);
+  // res.json({ success: "hello yelp test" });
+});
+
 // /yelp/id
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const rest_id = req.params.id;
   const data = await getRest(rest_id);
   res.json(data);
