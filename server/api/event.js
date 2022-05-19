@@ -16,11 +16,19 @@ router.get("/", requireToken, async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const event = await Event.findByPk(req.params.id);
+    res.json(event);
+  } catch (err) {
+    next(err);
+  }
+});
+
 //ADD EVENT
 //ROUTE: api/events
 router.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
     let newEvent = await Event.create(req.body);
     res.json(newEvent);
   } catch (err) {
