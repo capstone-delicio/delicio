@@ -40,7 +40,7 @@ const getRests = async (queryParams) => {
     });
     catArr = [...data.categories];
   } catch (err) {
-    next(err);
+    console.log(err);
   }
 
   let categories = cuisine;
@@ -70,7 +70,7 @@ const getRests = async (queryParams) => {
 
     return data.businesses;
   } catch (err) {
-    next(err);
+    console.log(err);
   }
 };
 

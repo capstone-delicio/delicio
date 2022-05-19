@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
+import Loading from "./Loading";
+
 
 import {
   TextField,
@@ -43,10 +45,6 @@ const Questions = () => {
     // now go thru restaurant list and scrape for pics
 
     if (isMounted.current) {
-      // yelp.rests.forEach((rest, idx) => {
-      //   console.log(idx);
-      //   dispatch(_getRestPhotos(rest.id, rest.alias));
-      // });
       const restsAlias = yelp.rests.map((rest) => {
         return { alias: rest.alias, id: rest.id };
       });
@@ -62,10 +60,11 @@ const Questions = () => {
 
   // wait until photos array has all photos before pushing to /card
   useEffect(() => {
-    const expectedNumPhotos = Number(stateLimit) * 3;
-    if (yelp.restPhotos.length === expectedNumPhotos) {
+//     const expectedNumPhotos = Number(stateLimit) * 3;
+//     if (yelp.restPhotos.length === expectedNumPhotos) {
+
       history.push("/card");
-    }
+//     }
   }, [yelp.restPhotos]);
 
   return (
@@ -116,10 +115,10 @@ const Questions = () => {
           </Grid>
           <Grid />
           <Grid />
-
-          <Button variant="contained" color="primary" type="submit">
+          <Loading />
+          {/* <Button variant="contained" color="primary" type="submit">
             Next
-          </Button>
+          </Button> */}
         </Grid>
       </form>
     </div>
