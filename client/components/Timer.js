@@ -32,12 +32,12 @@ function Timer() {
     }, 1000);
   });
 
-  const handleSubmit = () => {
+  let handleSubmit = () => {
     console.log("timercomp", timerComponents.length);
     dispatch(_updateSubmit(event.event.id));
   };
 
-  const timerComponents = [];
+  let timerComponents = [];
   Object.keys(timeLeft).forEach((interval, idx) => {
     if (!timeLeft[interval]) {
       return;

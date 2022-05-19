@@ -17,7 +17,7 @@ const EventInput = () => {
     return state.auth;
   });
 
-  const handleSubmit = (e) => {
+  let handleSubmit = (e) => {
     e.preventDefault();
     const organizerId = user.id;
     const event_name = e.target.event_name.value;

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
+import Loading from "./Loading";
 
 import {
   TextField,
@@ -108,10 +109,10 @@ const Questions = () => {
           </Grid>
           <Grid />
           <Grid />
-
-          <Button variant="contained" color="primary" type="submit">
+          <Loading />
+          {/* <Button variant="contained" color="primary" type="submit">
             Next
-          </Button>
+          </Button> */}
         </Grid>
       </form>
     </div>
