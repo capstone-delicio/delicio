@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const sequelize = require("sequelize");
+
 const {
   models: { Event_picks, Event },
 } = require("../db");
@@ -18,6 +20,18 @@ router.get("/user", async (req, res, next) => {
       attributes: ["eventId", "userId"],
     });
     res.json(eventPicks);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:id", async (req, res, next) => {
+  try {
+    const event = await Event_picks.count({
+      where: { eventId: req.params.id, isLiked: true },
+      group: ["restaurantAlias"],
+    });
+    res.json(event);
   } catch (err) {
     next(err);
   }
