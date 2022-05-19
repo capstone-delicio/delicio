@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { _getRestPhotos, _getRests } from "../store/yelp";
 import Loading from "./Loading";
 
-
 import {
   TextField,
   Grid,
@@ -17,6 +16,7 @@ import {
 const Questions = () => {
   const [price, setPrice] = useState("");
   const [stateLimit, setStateLimit] = useState(1);
+  const [receivedPhotos, setReceivedPhotos] = useState(null);
 
   const dispatch = useDispatch();
   // state.yelp = what is inside combined reducer
@@ -37,6 +37,7 @@ const Questions = () => {
     const cuisine = e.target.cuisine.value;
 
     setStateLimit(limit);
+    setReceivedPhotos(false);
 
     dispatch(_getRests({ location, limit, price, cuisine }));
   };
@@ -60,11 +61,11 @@ const Questions = () => {
 
   // wait until photos array has all photos before pushing to /card
   useEffect(() => {
-//     const expectedNumPhotos = Number(stateLimit) * 3;
-//     if (yelp.restPhotos.length === expectedNumPhotos) {
-
+    // const expectedNumPhotos = Number(stateLimit) * 3;
+    if (yelp.restPhotos.length > 0) {
+      setReceivedPhotos(true);
       history.push("/card");
-//     }
+    }
   }, [yelp.restPhotos]);
 
   return (
@@ -115,7 +116,9 @@ const Questions = () => {
           </Grid>
           <Grid />
           <Grid />
-          <Loading />
+
+          {receivedPhotos ? null : <Loading data={receivedPhotos} />}
+
           {/* <Button variant="contained" color="primary" type="submit">
             Next
           </Button> */}
