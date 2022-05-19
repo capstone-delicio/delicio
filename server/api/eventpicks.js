@@ -10,13 +10,14 @@ module.exports = router;
 // GET /api/eventpicks
 // get all selections or event picks associated with user
 router.get("/user", async (req, res, next) => {
+  // console.log("in user route", req.query.id);
   try {
     // res.send("hi");
     const eventPicks = await Event_picks.findAll({
       // need userId, eventId
+      where: { userId: req.query.id },
       include: { model: Event },
       // make sure when you create thunk send in id
-      where: { userId: req.query.id },
       attributes: ["eventId", "userId"],
     });
     res.json(eventPicks);
