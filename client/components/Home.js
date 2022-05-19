@@ -19,15 +19,13 @@ const Home = () => {
         justifyContent="center"
         direction="column"
       >
+        <br />
         <h3>Welcome {firstName}!</h3>
-        <h3>Do you want to?</h3>
-        <Button variant="contained" color="primary" href="/questions">
-          Find Restaurants
-        </Button>
+        <h3>Let's plan a event with your friends</h3>
         <br />
         <br />
         <Button variant="contained" color="primary" href="/eventinput">
-          Plan with Friends
+          Plan
         </Button>
       </Grid>
     </div>

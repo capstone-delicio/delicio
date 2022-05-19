@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../store";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Box from "@material-ui/core/Box";
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Box from '@material-ui/core/Box'
 
 // const useStyles = makeStyles((theme) => ({
 //   menuButton: {
@@ -28,13 +28,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                 {/* The navbar will show these links after you log in */}
                 <Link
                   to="/home"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
                 >
                   Home
                 </Link>
                 <Link
                   to="/edituser"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
                 >
                   Users Profile
                 </Link>
@@ -42,14 +42,15 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                 <Link
                   to="/events"
 
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
+
                 >
                   Events
                 </Link>
 
                 <a
                   href="#"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
                   onClick={handleClick}
                 >
                   Logout
@@ -60,13 +61,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                 {/* The navbar will show these links before you log in */}
                 <Link
                   to="/login"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
                 >
                   Sign Up
                 </Link>
@@ -78,7 +79,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       </div>
     </Toolbar>
   </AppBar>
-);
+)
 
 /**
  * CONTAINER
@@ -86,15 +87,15 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-  };
-};
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout());
+      dispatch(logout())
     },
-  };
-};
+  }
+}
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(mapState, mapDispatch)(Navbar)
