@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import {
   Box,
@@ -10,12 +10,12 @@ import {
   CardContent,
   Button,
   Typography,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 const EventCard = (props) => {
   const [event, setEvent] = useState({});
   const [organizer, setOrganizer] = useState({});
-  const [openSubmits, setOpenSubmits] = useState(0);
+  const [openSubmits, setOpenSubmits] = useState(null);
   const [statusMessage, setStatusMessage] = useState(false);
   const [showDetailsButton, setShowDetailsButton] = useState(false);
   const [showConfirmButton, setShowConfirmButton] = useState(false);
@@ -30,60 +30,74 @@ const EventCard = (props) => {
   // number of openSubmits > 0 means open votes
 
   useEffect(() => {
-    // grab event associated with this card
-    async function fetchEvent() {
-      let { data } = await axios.get(`/api/events/${props.eventId}`);
+    chainFetches();
+  }, []);
+
+  async function chainFetches() {
+    try {
+      const eventData = await fetchEvent();
+      await fetchOrganizer(eventData.organizerId);
+      await fetchOpenSubmits(eventData);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  async function fetchEvent() {
+    try {
+      const { data } = await axios.get(`/api/events/${props.eventId}`);
       setEvent(data);
+      return data;
+    } catch (err) {
+      console.log(err.message);
     }
-    fetchEvent();
-  }, [props.eventId]);
+  }
 
-  useEffect(() => {
-    if (isMounted.current) {
-      // get organizer for the event
-      async function fetchOrganizer() {
-        const { data } = await axios.get(`/api/users/${event.organizerId}`);
-        setOrganizer(data);
-      }
-      fetchOrganizer();
-    } else {
-      isMounted.current = true;
+  async function fetchOrganizer(id) {
+    try {
+      const { data } = await axios.get(`/api/users/${id}`);
+      setOrganizer(data);
+    } catch (err) {
+      console.log(err.message);
     }
-  }, [event]);
+  }
 
-  useEffect(() => {
-    async function fetchOpenSubmits() {
-      const { data } = await axios.get(
-        `/api/eventpicks/submits/${props.eventId}`
-      );
+  async function fetchOpenSubmits(event) {
+    try {
+      const { data } = await axios.get(`/api/eventpicks/submits/${event.id}`);
       setOpenSubmits(data);
+    } catch (err) {
+      console.log(err.message);
     }
-    fetchOpenSubmits();
-  }, [props.eventId]);
+  }
 
   useEffect(() => {
-    if (openSubmits > 0) {
-      setStatusMessage("Votes Pending");
-    } else {
-      if (event.isScheduled) {
-        setStatusMessage("Details Finalized!");
-        setShowDetailsButton(true);
+    function statusMessageFunc() {
+      console.log('opensubmits', openSubmits);
+      if (openSubmits > 0) {
+        setStatusMessage('Votes Pending');
       } else {
-        if (event.organizerId === user.id) {
-          setShowConfirmButton(true);
+        if (event.isScheduled) {
+          setStatusMessage('Details Finalized!');
+          setShowDetailsButton(true);
+        } else {
+          if (event.organizerId === user.id) {
+            setShowConfirmButton(true);
+          }
+          setStatusMessage(`Waiting to finalize`);
         }
-        setStatusMessage(`Waiting to finalize`);
       }
     }
-  }, [event]);
+    statusMessageFunc();
+  }, [openSubmits]);
 
   function handleClickDetail() {
-    history.push("/singlerestaurant");
+    history.push('/singlerestaurant');
   }
 
   // need to change push---------
   function handleClickConfirm() {
-    history.push("/home");
+    history.push('/home');
   }
 
   // card
