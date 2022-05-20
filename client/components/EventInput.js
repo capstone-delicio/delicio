@@ -66,7 +66,7 @@ const EventInput = () => {
           alignItems="center"
           justifyContent="center"
           direction="column">
-          <h3>Please fill in the following information</h3>
+          <h3>Fill in the following information</h3>
 
           <Grid item>
             <FriendsSelect />
