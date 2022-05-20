@@ -73,7 +73,6 @@ const EventCard = (props) => {
 
   useEffect(() => {
     function statusMessageFunc() {
-      console.log('opensubmits', openSubmits);
       if (openSubmits > 0) {
         setStatusMessage('Votes Pending');
       } else {
@@ -97,7 +96,7 @@ const EventCard = (props) => {
 
   // need to change push---------
   function handleClickConfirm() {
-    history.push('/home');
+    history.push('/finaleventupdate');
   }
 
   // card
@@ -137,12 +136,6 @@ const EventCard = (props) => {
       ) : null}
     </React.Fragment>
   );
-
-  //   const user = useSelector((state) => {
-  //     return state.auth;
-  //   });
-
-  //   clickable component
 
   return (
     <Box sx={{ minWidth: 275 }}>
