@@ -53,6 +53,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                   className="bi bi-person-circle"
                   viewBox="0 0 16 16"
                 >
+
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                   <path
                     fillRule="evenodd"
@@ -60,6 +61,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                   />
                 </svg>
               </Link>
+
 
               <Link
                 to="/events"
