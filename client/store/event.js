@@ -6,7 +6,8 @@ const TOKEN = "token";
  * ACTION TYPES
  */
 const CREATE_EVENT = "CREATE_EVENT";
-const UPDATE_EVENT = "UPDATE_EVENT"
+const UPDATE_EVENT = "UPDATE_EVENT";
+const GET_EVENT = "GET_EVENT";
 
 /**
  * ACTION CREATORS
@@ -17,9 +18,17 @@ const createEvent = (event) => {
     event,
   };
 };
+
 const updateEvent = (event) => {
   return {
     type: UPDATE_EVENT,
+    event,
+  };
+};
+
+const getEvent = (event) => {
+  return {
+    type: GET_EVENT,
     event,
   };
 };
@@ -50,19 +59,33 @@ export const addEvent =
     }
   };
 
-  export const updateEventThunk =
-  ({eventId, organizerId, event_date, event_time}) =>
+export const updateEventThunk =
+  ({ eventId, organizerId, event_date, event_time }) =>
   async (dispatch) => {
-    console.log("event", eventId)
+    console.log("event", eventId);
     try {
-      const { data } = await axios.put(`/api/events/${eventId}`, {organizerId, event_date, event_time})
-      dispatch(updateEvent(data))
+      const { data } = await axios.put(`/api/events/${eventId}`, {
+        organizerId,
+        event_date,
+        event_time,
+      });
+      dispatch(updateEvent(data));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
+
+export const getEventThunk = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/events/${id}`);
+    dispatch(getEvent(data));
+  } catch (error) {
+    console.log(error);
   }
+};
 
 const initialState = {
+  singleEvent: {},
   event: [],
 };
 /**
@@ -72,8 +95,10 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case CREATE_EVENT:
       return { ...state, event: action.event };
-      case UPDATE_EVENT:
-        return { ...state, event: action.event }
+    case UPDATE_EVENT:
+      return { ...state, event: action.event };
+    case GET_EVENT:
+      return { ...state, singleEvent: action.event };
     default:
       return state;
   }

@@ -16,11 +16,20 @@ const Events = () => {
   }, []);
 
   // return a list of events
-  const eventCards = () => {
-    return eventPicksStore.userEvents.map((event) => <EventCard key={event} />);
-  };
+  //   const eventCards = () => {
+  //     return eventPicksStore.userEvents.map((event) => {
+  //       return <EventCard key={event} eventId={event.id} />;
+  //     });
+  //   };
 
-  return <div>{eventCards()}</div>;
+  return (
+    <div>
+      {eventPicksStore.userEvents.map((event) => {
+        console.log(event);
+        return <EventCard key={event} eventId={event} />;
+      })}
+    </div>
+  );
 
   // tally all the votes for photos
   // return the restaurant with the most votes
