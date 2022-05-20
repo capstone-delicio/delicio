@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 import { Grid, Button } from '@material-ui/core'
 import moment from 'moment'
 import Confetti from 'react-confetti'
+// import Confetti from 'react-dom-confetti'
 
 const EndSwipeStory = () => {
   const event = useSelector((state) => {
     return state.event
   })
-  console.log(event.event)
 
   let isoDate = event.event.vote_deadline
   let newDate = moment.utc(isoDate).format('MMM Do, YYYY')
