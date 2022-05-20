@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -16,10 +17,15 @@ const EventCard = (props) => {
   const [organizer, setOrganizer] = useState({});
   const [openSubmits, setOpenSubmits] = useState(0);
   const [statusMessage, setStatusMessage] = useState(false);
-  const [showButton, setShowButton] = useState(false);
+  const [showDetailsButton, setShowDetailsButton] = useState(false);
+  const [showConfirmButton, setShowConfirmButton] = useState(false);
 
   const isMounted = useRef(false);
-  const dispatch = useDispatch();
+  let history = useHistory();
+
+  const user = useSelector((state) => {
+    return state.auth;
+  });
 
   // number of openSubmits > 0 means open votes
 
@@ -30,7 +36,7 @@ const EventCard = (props) => {
       setEvent(data);
     }
     fetchEvent();
-  }, []);
+  }, [props.eventId]);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -60,13 +66,25 @@ const EventCard = (props) => {
       setStatusMessage("Votes Pending");
     } else {
       if (event.isScheduled) {
-        setStatusMessage("Click to see event restaurant details");
-        setShowButton(true);
+        setStatusMessage("Details Finalized!");
+        setShowDetailsButton(true);
       } else {
+        if (event.organizerId === user.id) {
+          setShowConfirmButton(true);
+        }
         setStatusMessage(`Waiting to finalize`);
       }
     }
   }, [event]);
+
+  function handleClickDetail() {
+    history.push("/singlerestaurant");
+  }
+
+  // need to change push---------
+  function handleClickConfirm() {
+    history.push("/home");
+  }
 
   // card
   const card = (
@@ -89,9 +107,18 @@ const EventCard = (props) => {
           <br />
         </Typography>
       </CardContent>
-      {showButton ? (
+      {showDetailsButton ? (
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button variant="outlined" size="small" onClick={handleClickDetail}>
+            Details
+          </Button>
+        </CardActions>
+      ) : null}
+      {showConfirmButton ? (
+        <CardActions>
+          <Button variant="outlined" size="small" onClick={handleClickConfirm}>
+            Confirm
+          </Button>
         </CardActions>
       ) : null}
     </React.Fragment>
