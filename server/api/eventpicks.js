@@ -26,11 +26,26 @@ router.get("/user", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+// tally isLiked by Restaurant by Event
+// GET /api/eventpicks/votes/:id
+router.get("/votes/:id", async (req, res, next) => {
   try {
     const event = await Event_picks.count({
       where: { eventId: req.params.id, isLiked: true },
       group: ["restaurantAlias"],
+    });
+    res.json(event);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// tally isSubmitted by Event
+// GET /api/eventpicks/submits/:id
+router.get("/submits/:id", async (req, res, next) => {
+  try {
+    const event = await Event_picks.count({
+      where: { eventId: req.params.id, isSubmitted: false },
     });
     res.json(event);
   } catch (err) {

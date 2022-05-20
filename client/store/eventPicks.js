@@ -99,7 +99,7 @@ export const _updateSubmit = (eventId) => async (dispatch) => {
 
 export const _countEventPicks = (eventId) => async (dispatch) => {
   try {
-    const countArr = await axios.get(`/api/eventpicks/${eventId}`);
+    const countArr = await axios.get(`/api/eventpicks/votes/${eventId}`);
     dispatch(countEventPicks(countArr));
   } catch (err) {
     console.error(err);

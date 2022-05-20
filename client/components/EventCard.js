@@ -14,35 +14,57 @@ import {
 const EventCard = (props) => {
   const [event, setEvent] = useState({});
   const [organizer, setOrganizer] = useState({});
+  const [openSubmits, setOpenSubmits] = useState(0);
+  const [statusMessage, setStatusMessage] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   const isMounted = useRef(false);
   const dispatch = useDispatch();
 
+  // number of openSubmits > 0 means open votes
+
   useEffect(() => {
+    // grab event associated with this card
     async function fetchEvent() {
       let { data } = await axios.get(`/api/events/${props.eventId}`);
       setEvent(data);
     }
     fetchEvent();
-
-    // dispatch(getEventThunk(props.eventId));
-    // console.log("inside UseEffect", eventStore.singleEvent);
-    // grab eventId
-    // eventname
-    // eventdate
-    // eventtime
-    // status SOME MSG HERE
   }, []);
 
   useEffect(() => {
     if (isMounted.current) {
+      // get organizer for the event
       async function fetchOrganizer() {
-        let { data } = await axios.get(`/api/users/${event.organizerId}`);
+        const { data } = await axios.get(`/api/users/${event.organizerId}`);
         setOrganizer(data);
       }
       fetchOrganizer();
     } else {
       isMounted.current = true;
+    }
+  }, [event]);
+
+  useEffect(() => {
+    async function fetchOpenSubmits() {
+      const { data } = await axios.get(
+        `/api/eventpicks/submits/${props.eventId}`
+      );
+      setOpenSubmits(data);
+    }
+    fetchOpenSubmits();
+  }, [props.eventId]);
+
+  useEffect(() => {
+    if (openSubmits > 0) {
+      setStatusMessage("Votes Pending");
+    } else {
+      if (event.isScheduled) {
+        setStatusMessage("Click to see event restaurant details");
+        setShowButton(true);
+      } else {
+        setStatusMessage(`Waiting to finalize`);
+      }
     }
   }, [event]);
 
@@ -63,13 +85,15 @@ const EventCard = (props) => {
           {`Event Time: ${event.event_time}`}
         </Typography>
         <Typography variant="body2">
-          Status:
+          Status: {statusMessage}
           <br />
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+      {showButton ? (
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      ) : null}
     </React.Fragment>
   );
 
