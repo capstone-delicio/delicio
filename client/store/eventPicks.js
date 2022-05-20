@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
-const TOKEN = "token";
+const TOKEN = 'token';
 
 // ACTION TYPES
-const ADD_EVENTPICKS = "ADD_EVENTPICKS";
-const UPDATE_EVENTPICKS = "UPDATE_EVENTPICKS";
-const UPDATE_SUBMIT = "UPDATE_SUBMIT";
-const COUNT_EVENTPICKS = "COUNT_EVENTPICKS";
-const USER_EVENTS = "USER_EVENTS";
+const ADD_EVENTPICKS = 'ADD_EVENTPICKS';
+const UPDATE_EVENTPICKS = 'UPDATE_EVENTPICKS';
+const UPDATE_SUBMIT = 'UPDATE_SUBMIT';
+const COUNT_EVENTPICKS = 'COUNT_EVENTPICKS';
+const USER_EVENTS = 'USER_EVENTS';
 
 // ACTION CREATORS
 const addEventPicks = (event) => ({
@@ -43,7 +43,7 @@ export const _addEventPicks =
     restaurantId,
     restaurantAlias,
     restaurant_picUrl,
-    picDescription
+    picDescription,
   ) =>
   async (dispatch) => {
     try {
@@ -56,7 +56,7 @@ export const _addEventPicks =
           restaurantAlias,
           restaurant_picUrl,
           picDescription,
-        }
+        },
         // {
         //   headers: {
         //     authorization: token,
@@ -71,7 +71,7 @@ export const _addEventPicks =
 
 export const _updateEventPicks =
   (eventId, restaurant_picUrl, userId) => async (dispatch) => {
-    console.log("inside thunk", eventId, restaurant_picUrl, userId);
+    console.log('inside thunk', eventId, restaurant_picUrl, userId);
     try {
       const updatePicks = await axios.put(`/api/eventpicks/update`, {
         eventId,
@@ -99,7 +99,7 @@ export const _updateSubmit = (eventId) => async (dispatch) => {
 
 export const _countEventPicks = (eventId) => async (dispatch) => {
   try {
-    const countArr = await axios.get(`/api/eventpicks/votes/${eventId}`);
+    const countArr = await axios.get(`/api/eventpicks/${eventId}`);
     dispatch(countEventPicks(countArr));
   } catch (err) {
     console.error(err);

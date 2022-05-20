@@ -30,7 +30,7 @@ const EventInput = () => {
       )
       history.push('/questions')
     }
-    if (vote_deadline > event_date) {
+    if (vote_deadline >= event_date) {
       setDateError('Deadline must be before event date')
     }
 
