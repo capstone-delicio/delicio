@@ -12,9 +12,12 @@ const FinalEventUpdate = () =>{
   const { id } = useParams()
   let history = useHistory()
   const event = useSelector((state) => state.event)
+  const user = useSelector((state) => state.auth)
   const dispatch = useDispatch()
 
   const [formState, setFormState] = useState({
+    id: user.id,
+    first_name: user.first_name,
     eventId: event.event.id,
     organizerId : event.event.organizerId,
     event_date : event.event.event_date,
@@ -41,7 +44,8 @@ const FinalEventUpdate = () =>{
               justifyContent="center"
               direction="column"
             >
-              <h2 className="event-info">Update Event Date</h2>
+              <h3>Hey, {user.first_name}!</h3>
+              <h3>Let's update your event !</h3>
               <Grid className="form-group">
               <InputLabel>Event Date:</InputLabel>
                 <TextField
@@ -49,7 +53,8 @@ const FinalEventUpdate = () =>{
                   className="form-control form-control-lg"
 
                   name="event_date"
-                  defaultValue={event.event_date}
+                  defaultValue ={event.event.event_date}
+
                   onChange={(e) => onChangeHandler(e)}
                 />
               </Grid>
@@ -60,7 +65,7 @@ const FinalEventUpdate = () =>{
                   className="form-control form-control-lg"
 
                   name="event_time"
-                  defaultValue={event.event_time}
+                  defaultValue={event.event.event_time}
                   onChange={(e) => onChangeHandler(e)}
                 />
               </Grid>
