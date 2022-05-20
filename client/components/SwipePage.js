@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TinderCard from 'react-tinder-card'
 import Timer from './Timer'
-import Button from '@material-ui/core/Button'
+import { Grid, Button } from '@material-ui/core'
 import { _addEventPicks, _updateEventPicks } from '../store/eventPicks'
 
 const SwipePage = () => {
@@ -70,29 +70,37 @@ const SwipePage = () => {
 
   return (
     <div className="swipe-container">
-      <Timer />
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+      >
+        <Timer />
 
-      <h1>Restaurant Selections</h1>
-      <div className="card-container">
-        {yelp.restPhotos.map((photo, idx) => (
-          <TinderCard
-            className="swipe"
-            key={idx}
-            onSwipe={(dir) => swiped(dir, photo.imgSrc)}
-            onCardLeftScreen={() => outOfFrame(photo.imgDesc)}
-          >
-            <div
-              style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
-              className="card"
+        <h1>Restaurant Selections</h1>
+        <div className="card-container">
+          {yelp.restPhotos.map((photo, idx) => (
+            <TinderCard
+              className="swipe"
+              key={idx}
+              onSwipe={(dir) => swiped(dir, photo.imgSrc)}
+              onCardLeftScreen={() => outOfFrame(photo.imgDesc)}
             >
-              {/* <h3>{photo.imgDesc}</h3> */}
-            </div>
-          </TinderCard>
-        ))}
-      </div>
-      <Button variant="contained" color="primary" href="/endswipestory">
-        Next
-      </Button>
+              <div
+                style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
+                className="card"
+              >
+                {/* <h3>{photo.imgDesc}</h3> */}
+              </div>
+            </TinderCard>
+          ))}
+        </div>
+        <br />
+        <Button variant="contained" color="primary" href="/endswipestory">
+          Next
+        </Button>
+      </Grid>
     </div>
   )
 }
