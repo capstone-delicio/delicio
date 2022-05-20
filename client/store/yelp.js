@@ -41,7 +41,7 @@ export const _getRestPhotos = (rests) => async (dispatch) => {
 
 export const _getRests = (params) => async (dispatch) => {
   // expect params to be an object
-  const { location, limit, price, cuisine } = params;
+  // const { location, limit, price, cuisine } = params;
 
   try {
     const { data } = await axios.get("/yelp/bizsearch", { params: params });

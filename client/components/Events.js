@@ -25,7 +25,7 @@ const Events = () => {
   return (
     <div>
       {eventPicksStore.userEvents.map((event) => {
-        console.log(event);
+        // console.log(event);
         return <EventCard key={event} eventId={event} />;
       })}
     </div>
