@@ -21,10 +21,10 @@ export const _getAllUsers = () => async (dispatch) => {
   dispatch(getAllUsers(data));
 };
 
-export const _getSingleUser = (id = async (dispatch) => {
+export const _getSingleUser = (id) => async (dispatch) => {
   const { data } = await axios.get(`/api/users/${id}`);
   dispatch(getSingleUser(data));
-});
+};
 
 const initialState = {
   users: [],
