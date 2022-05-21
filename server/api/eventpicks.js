@@ -8,6 +8,28 @@ const {
 module.exports = router;
 
 // GET /api/eventpicks
+
+// get eventPicks by userId by eventId
+// GET /api/eventpicks/user/:id   id=eventId
+router.get('/user/:id', async (req, res, next) => {
+  try {
+    const userId = req.query.userId;
+    const eventId = req.params.id;
+    const eventPicks = await Event_picks.findAll({
+      where: { userId, eventId },
+      attributes: [
+        ['restaurantId', 'id'],
+        ['restaurantAlias', 'alias'],
+        ['restaurant_picUrl', 'imgSrc'],
+        ['picDescription', 'imgDesc'],
+      ],
+    });
+    res.json(eventPicks);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // get all selections or event picks associated with user
 router.get('/user', async (req, res, next) => {
   // console.log("in user route", req.query.id);
@@ -33,6 +55,20 @@ router.get('/votes/:id', async (req, res, next) => {
     const event = await Event_picks.count({
       where: { eventId: req.params.id, isLiked: true },
       group: ['restaurantId'],
+    });
+    res.json(event);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/eventpicks/user/votes/:id  id=eventId
+router.get('/user/votes/:id', async (req, res, next) => {
+  const userId = req.query.userId;
+
+  try {
+    const event = await Event_picks.count({
+      where: { userId, eventId: req.params.id, isSubmitted: false },
     });
     res.json(event);
   } catch (err) {

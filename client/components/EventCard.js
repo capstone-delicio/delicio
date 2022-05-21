@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { _countEventPicks } from '../store/eventPicks';
-import { _getSingleRest } from '../store/yelp';
+import { _getSingleRest, _getDbRestPhotos } from '../store/yelp';
 import { getEventThunk } from '../store/event';
 
 import {
@@ -19,9 +19,11 @@ const EventCard = (props) => {
   const [event, setEvent] = useState({});
   const [organizer, setOrganizer] = useState({});
   const [openSubmits, setOpenSubmits] = useState(null);
+  const [userOpenSubmits, setUserOpenSubmits] = useState(null);
   const [statusMessage, setStatusMessage] = useState(false);
   const [showDetailsButton, setShowDetailsButton] = useState(false);
   const [showConfirmButton, setShowConfirmButton] = useState(false);
+  const [showVoteButton, setShowVoteButton] = useState(false);
 
   const dispatch = useDispatch();
   const eventPicksStore = useSelector((state) => state.eventPicks);
@@ -42,6 +44,7 @@ const EventCard = (props) => {
       const eventData = await fetchEvent();
       await fetchOrganizer(eventData.organizerId);
       await fetchOpenSubmits(eventData);
+      await fetchUserOpenSubmits(eventData);
     } catch (err) {
       console.log(err.message);
     }
@@ -75,6 +78,21 @@ const EventCard = (props) => {
     }
   }
 
+  async function fetchUserOpenSubmits(event) {
+    const userId = user.id;
+    try {
+      const { data } = await axios.get(
+        `/api/eventpicks/user/votes/${event.id} `,
+        {
+          params: { userId },
+        },
+      );
+      setUserOpenSubmits(data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
   async function fetchVotes(id) {
     try {
       const { data } = await axios.get(`/api/eventpicks/votes/${id}`);
@@ -92,7 +110,14 @@ const EventCard = (props) => {
   useEffect(() => {
     function statusMessageFunc() {
       if (openSubmits > 0) {
-        setStatusMessage('Votes Pending');
+        if (userOpenSubmits > 0) {
+          setStatusMessage(`${user.first_name} Please Vote`);
+          setShowVoteButton(true);
+
+          // dispatch _getDbRestPhotos
+        } else {
+          setStatusMessage('Votes Pending');
+        }
       } else {
         if (event.isScheduled) {
           setStatusMessage('Details Finalized!');
@@ -106,7 +131,7 @@ const EventCard = (props) => {
       }
     }
     statusMessageFunc();
-  }, [openSubmits]);
+  }, [openSubmits, userOpenSubmits]);
 
   function isoDateFormat(isoDate) {
     const date = new Date(isoDate);
@@ -139,6 +164,11 @@ const EventCard = (props) => {
     fetchVotes(event.id);
     dispatch(getEventThunk(event.id));
     history.push('/finaleventupdate');
+  }
+
+  function handleClickVote() {
+    dispatch(_getDbRestPhotos(event.id, user.id));
+    history.push('/card');
   }
 
   // card
@@ -178,6 +208,13 @@ const EventCard = (props) => {
         <CardActions>
           <Button variant="outlined" size="small" onClick={handleClickConfirm}>
             Confirm
+          </Button>
+        </CardActions>
+      ) : null}
+      {showVoteButton ? (
+        <CardActions>
+          <Button variant="outlined" size="small" onClick={handleClickVote}>
+            Vote
           </Button>
         </CardActions>
       ) : null}
