@@ -1,28 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import TinderCard from 'react-tinder-card';
 import Timer from './Timer';
-import { Grid, Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { _addEventPicks, _updateEventPicks } from '../store/eventPicks';
 
 const SwipePage = () => {
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const yelp = useSelector((state) => state.yelp);
-  //  yelp.restPhotos for photo array
   const event = useSelector((state) => state.event);
-
-  const friends = useSelector((state) => state.friends);
-
   const user = useSelector((state) => {
     return state.auth;
   });
-
-  const [counter, setCounter] = useState(0);
-
-  // useEffect(() => {
-  //   console.log('eventId on mount', event.event.id);
-  // });
 
   const swiped = (direction, restaurant_picUrl) => {
     if (direction === 'right') {
@@ -37,11 +29,11 @@ const SwipePage = () => {
     }
   };
 
-  let outOfFrame = () => {
-    // setSwipedArr((swipedArr[idx].s = true));
-    // setCounter(counter++);
-    // console.log('counterstate', counter);
-  };
+  function outOfFrame(idx) {
+    if (idx === 0) {
+      history.push('/endswipestory');
+    }
+  }
 
   return (
     <div className="swipe-container">
@@ -50,29 +42,25 @@ const SwipePage = () => {
         alignItems="center"
         justifyContent="center"
         direction="column">
-        <Timer />
+        {/* we can revisit later -- throws errors BUGGY */}
+        {/* <Timer /> */}
 
         <h4>Swipe Right to like</h4>
         <h4>Swipe Left to dislike</h4>
+
         <div className="card-container">
           {yelp.restPhotos.map((photo, idx) => (
             <TinderCard
               className="swipe"
               key={idx}
               onSwipe={(dir) => swiped(dir, photo.imgSrc)}
-              onCardLeftScreen={() => outOfFrame()}>
+              onCardLeftScreen={() => outOfFrame(idx)}>
               <div
                 style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
-                className="card">
-                {/* <h3>{photo.imgDesc}</h3> */}
-              </div>
+                className="card"></div>
             </TinderCard>
           ))}
         </div>
-        <br />
-        <Button variant="contained" color="primary" href="/endswipestory">
-          Next
-        </Button>
       </Grid>
     </div>
   );
