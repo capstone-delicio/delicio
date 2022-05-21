@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { _countEventPicks } from '../store/eventPicks';
+import { _getSingleRest } from '../store/yelp';
+import { getEventThunk } from '../store/event';
 
 import {
   Box,
@@ -80,7 +82,8 @@ const EventCard = (props) => {
       let restWinner = data.reduce(function (prev, current) {
         return prev.count > current.count ? prev : current;
       });
-      console.log(restWinner);
+      // put restaurant winner in yelp store as rest
+      dispatch(_getSingleRest(restWinner.restaurantId));
     } catch (err) {
       console.log(err.message);
     }
@@ -98,20 +101,36 @@ const EventCard = (props) => {
           if (event.organizerId === user.id) {
             setShowConfirmButton(true);
           }
-          setStatusMessage(`Waiting to finalize`);
+          setStatusMessage(`Waiting for ${organizer.first_name} to finalize`);
         }
       }
     }
     statusMessageFunc();
   }, [openSubmits]);
 
+  function isoDateFormat(isoDate) {
+    const date = new Date(isoDate);
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let dt = date.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return year + '-' + month + '-' + dt;
+  }
+
   function handleClickDetail() {
     history.push('/singlerestaurant');
   }
 
   function handleClickConfirm() {
-    // put event in redux store, final restaurant winner in store
     fetchVotes(event.id);
+    dispatch(getEventThunk(event.id));
     history.push('/finaleventupdate');
   }
 
@@ -124,14 +143,17 @@ const EventCard = (props) => {
           <br />
         </Typography>
         <Typography sx={{ mb: 1.5 }}>
-          Organized By: {`${organizer.first_name} ${organizer.last_name}`}
+          Organized By : {`${organizer.first_name} ${organizer.last_name}`}
         </Typography>
         <Typography variant="body2">
           {`Event Date: ${event.event_date}`}
           <br />
           {`Event Time: ${event.event_time}`}
+          <br />
+          {`Voting Ends On: ${isoDateFormat(event.vote_deadline)}`}
         </Typography>
-        <Typography variant="body2">
+
+        <Typography sx={{ mb: 1.5 }}>
           Status: {statusMessage}
           <br />
         </Typography>
