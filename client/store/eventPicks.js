@@ -70,13 +70,14 @@ export const _addEventPicks =
   };
 
 export const _updateEventPicks =
-  (eventId, restaurant_picUrl, userId) => async (dispatch) => {
+  (eventId, restaurant_picUrl, userId, isLiked) => async (dispatch) => {
     console.log('inside thunk', eventId, restaurant_picUrl, userId);
     try {
       const updatePicks = await axios.put(`/api/eventpicks/update`, {
         eventId,
         restaurant_picUrl,
         userId,
+        isLiked,
       });
 
       dispatch(updateEventPicks(updatePicks));

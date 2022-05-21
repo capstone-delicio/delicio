@@ -22,19 +22,20 @@ const SwipePage = () => {
 
   const swiped = (direction, restaurant_picUrl) => {
     if (direction === 'right') {
-      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id));
+      dispatch(
+        _updateEventPicks(event.event.id, restaurant_picUrl, user.id, true),
+      );
+    }
+    if (direction === 'left') {
+      dispatch(
+        _updateEventPicks(event.event.id, restaurant_picUrl, user.id, false),
+      );
     }
   };
 
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!');
   };
-
-  const handleOnClick = () => {
-    e.preventDefault();
-    // sets isSubmit to be true
-  };
-
 
   return (
     <div className="swipe-container">

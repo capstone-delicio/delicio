@@ -42,11 +42,28 @@ const EventCard = (props) => {
   async function chainFetches() {
     try {
       const eventData = await fetchEvent();
+
+      checkDeadline(eventData);
+
+      // update isSubmit is true for that event
       await fetchOrganizer(eventData.organizerId);
       await fetchOpenSubmits(eventData);
       await fetchUserOpenSubmits(eventData);
     } catch (err) {
       console.log(err.message);
+    }
+  }
+
+  function checkDeadline(event) {
+    const deadline = event.vote_deadline;
+    let today = new Date();
+    today = today.toISOString();
+
+    console.log('today', today);
+    console.log('deadline', deadline);
+
+    if (deadline < today) {
+      console.log('deadline passed');
     }
   }
 
@@ -169,7 +186,7 @@ const EventCard = (props) => {
   function handleClickVote() {
     dispatch(_getDbRestPhotos(event.id, user.id));
     dispatch(getEventThunk(event.id));
-    // history.push('/card');
+    history.push('/card');
   }
 
   // card
