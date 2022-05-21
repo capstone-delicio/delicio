@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { _countEventPicks } from '../store/eventPicks';
+import { _countEventPicks, _updateSubmit } from '../store/eventPicks';
 import { _getSingleRest, _getDbRestPhotos } from '../store/yelp';
 import { getEventThunk } from '../store/event';
 
@@ -42,11 +42,22 @@ const EventCard = (props) => {
   async function chainFetches() {
     try {
       const eventData = await fetchEvent();
+      checkDeadline(eventData);
       await fetchOrganizer(eventData.organizerId);
       await fetchOpenSubmits(eventData);
       await fetchUserOpenSubmits(eventData);
     } catch (err) {
       console.log(err.message);
+    }
+  }
+
+  function checkDeadline(event) {
+    const deadline = event.vote_deadline;
+    let today = new Date();
+    today = today.toISOString();
+
+    if (deadline < today) {
+      dispatch(_updateSubmit(event.id));
     }
   }
 
@@ -167,9 +178,9 @@ const EventCard = (props) => {
   }
 
   function handleClickVote() {
-    dispatch(_getDbRestPhotos(event.id, user.id));
     dispatch(getEventThunk(event.id));
-    // history.push('/card');
+    dispatch(_getDbRestPhotos(event.id, user.id));
+    history.push('/card');
   }
 
   // card

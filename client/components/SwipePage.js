@@ -18,23 +18,30 @@ const SwipePage = () => {
     return state.auth;
   });
 
-  // set photos swiped right to isLiked
+  const [counter, setCounter] = useState(0);
+
+  // useEffect(() => {
+  //   console.log('eventId on mount', event.event.id);
+  // });
 
   const swiped = (direction, restaurant_picUrl) => {
     if (direction === 'right') {
-      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id));
+      dispatch(
+        _updateEventPicks(event.event.id, restaurant_picUrl, user.id, true),
+      );
+    }
+    if (direction === 'left') {
+      dispatch(
+        _updateEventPicks(event.event.id, restaurant_picUrl, user.id, false),
+      );
     }
   };
 
-  const outOfFrame = (name) => {
-    console.log(name + ' left the screen!');
+  let outOfFrame = () => {
+    // setSwipedArr((swipedArr[idx].s = true));
+    // setCounter(counter++);
+    // console.log('counterstate', counter);
   };
-
-  const handleOnClick = () => {
-    e.preventDefault();
-    // sets isSubmit to be true
-  };
-
 
   return (
     <div className="swipe-container">
@@ -45,14 +52,15 @@ const SwipePage = () => {
         direction="column">
         <Timer />
 
-        <h1>Restaurant Selections</h1>
+        <h4>Swipe Right to like</h4>
+        <h4>Swipe Left to dislike</h4>
         <div className="card-container">
           {yelp.restPhotos.map((photo, idx) => (
             <TinderCard
               className="swipe"
               key={idx}
               onSwipe={(dir) => swiped(dir, photo.imgSrc)}
-              onCardLeftScreen={() => outOfFrame(photo.imgDesc)}>
+              onCardLeftScreen={() => outOfFrame()}>
               <div
                 style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
                 className="card">
