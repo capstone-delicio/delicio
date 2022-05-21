@@ -61,7 +61,7 @@ export const _getSingleRest = (id) => async (dispatch) => {
 
 export const _getDbRestPhotos = (eventId, userId) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/user/${eventId}`, {
+    const { data } = await axios.get(`/api/eventpicks/user/${eventId}`, {
       params: { userId },
     });
     dispatch(getRestPhotos(data));
