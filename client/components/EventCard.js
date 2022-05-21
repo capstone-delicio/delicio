@@ -168,6 +168,7 @@ const EventCard = (props) => {
 
   function handleClickVote() {
     dispatch(_getDbRestPhotos(event.id, user.id));
+    dispatch(getEventThunk(event.id));
     // history.push('/card');
   }
 
