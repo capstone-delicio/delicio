@@ -17,6 +17,8 @@ router.get("/", requireToken, async (req, res, next) => {
   }
 });
 
+// getting single event by id
+// /api/events/:id
 router.get("/:id", async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id);
@@ -39,14 +41,13 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const event = await Event.findByPk(req.params.id)
+    const event = await Event.findByPk(req.params.id);
     const result = await Event.update(
 
       { event_date: req.body.event_date,
         event_time: req.body.event_time,
         isScheduled: true
       },
-
       { where: {
         id: req.params.id
       },
@@ -54,6 +55,7 @@ router.put("/:id", async (req, res, next) => {
      }
     )
     res.json(result)
+
   } catch (err) {
     next(err);
   }
