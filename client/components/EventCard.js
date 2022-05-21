@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { _countEventPicks } from '../store/eventPicks';
 
 import {
   Box,
@@ -20,14 +21,15 @@ const EventCard = (props) => {
   const [showDetailsButton, setShowDetailsButton] = useState(false);
   const [showConfirmButton, setShowConfirmButton] = useState(false);
 
-  const isMounted = useRef(false);
+  const dispatch = useDispatch();
+  const eventPicksStore = useSelector((state) => state.eventPicks);
+
+  // const isMounted = useRef(false);
   let history = useHistory();
 
   const user = useSelector((state) => {
     return state.auth;
   });
-
-  // number of openSubmits > 0 means open votes
 
   useEffect(() => {
     chainFetches();
@@ -71,6 +73,19 @@ const EventCard = (props) => {
     }
   }
 
+  async function fetchVotes(id) {
+    try {
+      const { data } = await axios.get(`/api/eventpicks/votes/${id}`);
+      // tally votes
+      let restWinner = data.reduce(function (prev, current) {
+        return prev.count > current.count ? prev : current;
+      });
+      console.log(restWinner);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
   useEffect(() => {
     function statusMessageFunc() {
       if (openSubmits > 0) {
@@ -94,8 +109,9 @@ const EventCard = (props) => {
     history.push('/singlerestaurant');
   }
 
-  // need to change push---------
   function handleClickConfirm() {
+    // put event in redux store, final restaurant winner in store
+    fetchVotes(event.id);
     history.push('/finaleventupdate');
   }
 

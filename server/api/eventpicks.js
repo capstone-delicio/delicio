@@ -1,15 +1,15 @@
-const router = require("express").Router();
-const sequelize = require("sequelize");
+const router = require('express').Router();
+const sequelize = require('sequelize');
 
 const {
   models: { Event_picks, Event },
-} = require("../db");
+} = require('../db');
 // const { requireToken, isAdmin } = require("./gateKeeper");
 module.exports = router;
 
 // GET /api/eventpicks
 // get all selections or event picks associated with user
-router.get("/user", async (req, res, next) => {
+router.get('/user', async (req, res, next) => {
   // console.log("in user route", req.query.id);
   try {
     // res.send("hi");
@@ -18,7 +18,7 @@ router.get("/user", async (req, res, next) => {
       where: { userId: req.query.id },
       include: { model: Event },
       // make sure when you create thunk send in id
-      attributes: ["eventId", "userId"],
+      attributes: ['eventId', 'userId'],
     });
     res.json(eventPicks);
   } catch (err) {
@@ -28,11 +28,11 @@ router.get("/user", async (req, res, next) => {
 
 // tally isLiked by Restaurant by Event
 // GET /api/eventpicks/votes/:id
-router.get("/votes/:id", async (req, res, next) => {
+router.get('/votes/:id', async (req, res, next) => {
   try {
     const event = await Event_picks.count({
       where: { eventId: req.params.id, isLiked: true },
-      group: ["restaurantAlias"],
+      group: ['restaurantId'],
     });
     res.json(event);
   } catch (err) {
@@ -42,7 +42,7 @@ router.get("/votes/:id", async (req, res, next) => {
 
 // tally isSubmitted by Event
 // GET /api/eventpicks/submits/:id
-router.get("/submits/:id", async (req, res, next) => {
+router.get('/submits/:id', async (req, res, next) => {
   try {
     const event = await Event_picks.count({
       where: { eventId: req.params.id, isSubmitted: false },
@@ -55,7 +55,7 @@ router.get("/submits/:id", async (req, res, next) => {
 
 // POST /api/eventpicks
 // adding event picks when invited to an event
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     let eventPicks = await Event_picks.create(req.body);
     res.json(eventPicks);
@@ -66,7 +66,7 @@ router.post("/", async (req, res, next) => {
 
 // PUT /api/eventpicks/:id
 // only allow updates to users' events
-router.put("/update", async (req, res, next) => {
+router.put('/update', async (req, res, next) => {
   // console.log("inside server", req.body);
   try {
     let response = await Event_picks.update(
@@ -79,7 +79,7 @@ router.put("/update", async (req, res, next) => {
         },
         // returns entire record
         returning: true,
-      }
+      },
     );
     // returning just the json, excludes the arr
     res.json(response[1][0]);
@@ -89,7 +89,7 @@ router.put("/update", async (req, res, next) => {
 });
 
 // allow updates to event submit
-router.put("/submit", async (req, res, next) => {
+router.put('/submit', async (req, res, next) => {
   try {
     let response = await Event_picks.update(
       { isSubmitted: true },
@@ -98,7 +98,7 @@ router.put("/submit", async (req, res, next) => {
           eventId: req.body.eventId,
         },
         returning: true,
-      }
+      },
     );
     res.json(response[1][0]);
   } catch (err) {
