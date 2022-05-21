@@ -20,6 +20,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//ROUTE: api/users/:id
+router.get("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.params.id },
+      attributes: ["id", "first_name", "last_name", "prof_picUrl"],
+    });
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put("/:id", async (req, res, next) => {
   try {
     let user = await User.findByPk(req.params.id);
