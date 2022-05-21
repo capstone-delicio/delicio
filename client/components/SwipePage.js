@@ -11,7 +11,9 @@ const SwipePage = () => {
   const yelp = useSelector((state) => state.yelp);
   //  yelp.restPhotos for photo array
   const event = useSelector((state) => state.event);
-  // const friends = useSelector((state) => state.friends)
+
+  const friends = useSelector((state) => state.friends);
+
   const user = useSelector((state) => {
     return state.auth;
   });
@@ -33,40 +35,6 @@ const SwipePage = () => {
     // sets isSubmit to be true
   };
 
-  // useEffect(() => {
-  //   let eventId = event.event.id
-  //   const attendees = [
-  //     ...friends.setSelectedFriends,
-  //     { name: `${user.first_name} ${user.last_name}`, id: user.id },
-  //   ]
-
-  //   console.log('attendees', attendees)
-
-  //   attendees.forEach((friend) => {
-  //     // console.log(friend.id);
-  //     let userId = friend.id
-
-  //     yelp.restPhotos.map((photo) => {
-  //       // return console.log("restPhotosId", photo.id);
-  //       let restaurantId = photo.id
-  //       let restaurantAlias = photo.alias
-  //       let restaurant_picUrl = photo.imgSrc
-  //       let picDescription = photo.imgDesc
-  //       dispatch(
-  //         _addEventPicks(
-  //           eventId,
-  //           userId,
-  //           restaurantId,
-  //           restaurantAlias,
-  //           restaurant_picUrl,
-  //           picDescription
-  //         )
-  //       )
-  //     })
-  //   })
-  // }, [])
-
-  // }
 
   return (
     <div className="swipe-container">
