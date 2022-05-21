@@ -1,70 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import TinderCard from 'react-tinder-card'
-import Timer from './Timer'
-import { Grid, Button } from '@material-ui/core'
-import { _addEventPicks, _updateEventPicks } from '../store/eventPicks'
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import TinderCard from 'react-tinder-card';
+import Timer from './Timer';
+import { Grid, Button } from '@material-ui/core';
+import { _addEventPicks, _updateEventPicks } from '../store/eventPicks';
 
 const SwipePage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const yelp = useSelector((state) => state.yelp)
+  const yelp = useSelector((state) => state.yelp);
   //  yelp.restPhotos for photo array
-  const event = useSelector((state) => state.event)
-  const friends = useSelector((state) => state.friends)
+  const event = useSelector((state) => state.event);
+  // const friends = useSelector((state) => state.friends)
   const user = useSelector((state) => {
-    return state.auth
-  })
+    return state.auth;
+  });
 
   // set photos swiped right to isLiked
 
   const swiped = (direction, restaurant_picUrl) => {
     if (direction === 'right') {
-      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id))
+      dispatch(_updateEventPicks(event.event.id, restaurant_picUrl, user.id));
     }
-  }
+  };
 
   const outOfFrame = (name) => {
-    console.log(name + ' left the screen!')
-  }
+    console.log(name + ' left the screen!');
+  };
 
   const handleOnClick = () => {
-    e.preventDefault()
+    e.preventDefault();
     // sets isSubmit to be true
-  }
+  };
 
-  useEffect(() => {
-    let eventId = event.event.id
-    const attendees = [
-      ...friends.setSelectedFriends,
-      { name: `${user.first_name} ${user.last_name}`, id: user.id },
-    ]
+  // useEffect(() => {
+  //   let eventId = event.event.id
+  //   const attendees = [
+  //     ...friends.setSelectedFriends,
+  //     { name: `${user.first_name} ${user.last_name}`, id: user.id },
+  //   ]
 
-    console.log('attendees', attendees)
+  //   console.log('attendees', attendees)
 
-    attendees.forEach((friend) => {
-      // console.log(friend.id);
-      let userId = friend.id
+  //   attendees.forEach((friend) => {
+  //     // console.log(friend.id);
+  //     let userId = friend.id
 
-      yelp.restPhotos.map((photo) => {
-        // return console.log("restPhotosId", photo.id);
-        let restaurantId = photo.id
-        let restaurantAlias = photo.alias
-        let restaurant_picUrl = photo.imgSrc
-        let picDescription = photo.imgDesc
-        dispatch(
-          _addEventPicks(
-            eventId,
-            userId,
-            restaurantId,
-            restaurantAlias,
-            restaurant_picUrl,
-            picDescription
-          )
-        )
-      })
-    })
-  }, [])
+  //     yelp.restPhotos.map((photo) => {
+  //       // return console.log("restPhotosId", photo.id);
+  //       let restaurantId = photo.id
+  //       let restaurantAlias = photo.alias
+  //       let restaurant_picUrl = photo.imgSrc
+  //       let picDescription = photo.imgDesc
+  //       dispatch(
+  //         _addEventPicks(
+  //           eventId,
+  //           userId,
+  //           restaurantId,
+  //           restaurantAlias,
+  //           restaurant_picUrl,
+  //           picDescription
+  //         )
+  //       )
+  //     })
+  //   })
+  // }, [])
 
   // }
 
@@ -74,8 +74,7 @@ const SwipePage = () => {
         container
         alignItems="center"
         justifyContent="center"
-        direction="column"
-      >
+        direction="column">
         <Timer />
 
         <h1>Restaurant Selections</h1>
@@ -85,12 +84,10 @@ const SwipePage = () => {
               className="swipe"
               key={idx}
               onSwipe={(dir) => swiped(dir, photo.imgSrc)}
-              onCardLeftScreen={() => outOfFrame(photo.imgDesc)}
-            >
+              onCardLeftScreen={() => outOfFrame(photo.imgDesc)}>
               <div
                 style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
-                className="card"
-              >
+                className="card">
                 {/* <h3>{photo.imgDesc}</h3> */}
               </div>
             </TinderCard>
@@ -102,6 +99,6 @@ const SwipePage = () => {
         </Button>
       </Grid>
     </div>
-  )
-}
-export default SwipePage
+  );
+};
+export default SwipePage;
