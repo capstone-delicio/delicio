@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import history from '../history';
@@ -6,20 +6,31 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
+import yelp, { _getRestPhotos, _getRests, _getSingleRest } from '../store/yelp'
 import { updateEventThunk } from '../store';
 
 const FinalEventUpdate = () => {
   const { id } = useParams();
   let history = useHistory();
-  const event = useSelector((state) => state.event);
+  const event = useSelector((state) => state.singleEvent);
+  const user = useSelector((state) => state.auth)
+  const yelp = useSelector((state) => state.yelp)
   const dispatch = useDispatch();
 
+
   const [formState, setFormState] = useState({
-    eventId: event.event.id,
-    organizerId: event.event.organizerId,
-    event_date: event.event.event_date,
-    event_time: event.event.event_time,
+    id: user.id,
+    first_name: user.first_name,
+    eventId: event.singleEvent.id,
+    organizerId: event.singleEvent.organizerId,
+    event_date: event.singleEvent.event_date,
+    event_time: event.singleEvent.event_time,
   });
+
+  // useEffect(() => {
+  //   dispatch(_getSingleRest(yelp.rest.id))
+  // }, [])
+
   const onChangeHandler = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
@@ -40,14 +51,19 @@ const FinalEventUpdate = () => {
               alignItems="center"
               justifyContent="center"
               direction="column">
-              <h2 className="event-info">Update Event Date</h2>
+                <h2>Winner Restaurant</h2>
+                <h2>{yelp.rest.name}</h2>
+                <h2>Price: {yelp.rest.price}</h2>
+                <img src={yelp.rest.image_url} />
+              <h2 className="event-info">Hey, {user.first_name}!</h2>
+              <h3>Let's update your event !</h3>
               <Grid className="form-group">
                 <InputLabel>Event Date:</InputLabel>
                 <TextField
                   type="date"
                   className="form-control form-control-lg"
                   name="event_date"
-                  defaultValue={event.event_date}
+                  defaultValue={event.singleEvent.event_date}
                   onChange={(e) => onChangeHandler(e)}
                 />
               </Grid>
@@ -57,7 +73,7 @@ const FinalEventUpdate = () => {
                   type="time"
                   className="form-control form-control-lg"
                   name="event_time"
-                  defaultValue={event.event_time}
+                  defaultValue={event.singleEvent.event_time}
                   onChange={(e) => onChangeHandler(e)}
                 />
               </Grid>
