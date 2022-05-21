@@ -43,12 +43,22 @@ router.put("/:id", async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id);
     const result = await Event.update(
-      { event_date: req.body.event_date, event_time: req.body.event_time },
 
-      { where: { id: req.params.id } }
-    );
-    res.json(result);
+      { event_date: req.body.event_date,
+        event_time: req.body.event_time,
+        isScheduled: true
+      },
+      { where: {
+        id: req.params.id
+      },
+      returning: true,
+     }
+    )
+    res.json(result)
+
   } catch (err) {
     next(err);
   }
 });
+
+
