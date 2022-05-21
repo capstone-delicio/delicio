@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
-const TOKEN = "token";
+const TOKEN = 'token';
 
 /**
  * ACTION TYPES
  */
-const CREATE_EVENT = "CREATE_EVENT";
-const UPDATE_EVENT = "UPDATE_EVENT";
-const GET_EVENT = "GET_EVENT";
+const CREATE_EVENT = 'CREATE_EVENT';
+const UPDATE_EVENT = 'UPDATE_EVENT';
+const GET_EVENT = 'GET_EVENT';
 
 /**
  * ACTION CREATORS
@@ -49,9 +49,9 @@ export const addEvent =
             headers: {
               authorization: token,
             },
-          }
+          },
         );
-        console.log("data", data);
+        console.log('data', data);
         dispatch(createEvent(data));
       }
     } catch (error) {
@@ -62,7 +62,7 @@ export const addEvent =
 export const updateEventThunk =
   ({ eventId, organizerId, event_date, event_time }) =>
   async (dispatch) => {
-    console.log("event", eventId);
+    console.log('event', eventId);
     try {
       const { data } = await axios.put(`/api/events/${eventId}`, {
         organizerId,
@@ -98,7 +98,7 @@ export default function (state = initialState, action) {
     case UPDATE_EVENT:
       return { ...state, event: action.event };
     case GET_EVENT:
-      return { ...state, singleEvent: action.event };
+      return { ...state, event: action.event };
     default:
       return state;
   }
