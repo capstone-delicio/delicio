@@ -161,7 +161,10 @@ const EventCard = (props) => {
   }
 
   function voteDeadline() {
-    if (statusMessage === 'Votes Pending') {
+    if (
+      statusMessage === 'Votes Pending' ||
+      statusMessage === `${user.first_name} Please Vote`
+    ) {
       return `Voting Ends On: ${isoDateFormat(event.vote_deadline)}`;
     }
   }
