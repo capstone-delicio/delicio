@@ -85,7 +85,6 @@ export const getEventThunk = (id) => async (dispatch) => {
 };
 
 const initialState = {
-  singleEvent: {},
   event: [],
 };
 /**
