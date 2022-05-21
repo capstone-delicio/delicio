@@ -124,6 +124,12 @@ const EventCard = (props) => {
     return year + '-' + month + '-' + dt;
   }
 
+  function voteDeadline() {
+    if (statusMessage === 'Votes Pending') {
+      return `Voting Ends On: ${isoDateFormat(event.vote_deadline)}`;
+    }
+  }
+
   function handleClickDetail() {
     history.push('/singlerestaurant');
   }
@@ -142,15 +148,17 @@ const EventCard = (props) => {
           {event.event_name}
           <br />
         </Typography>
+
         <Typography sx={{ mb: 1.5 }}>
           Organized By : {`${organizer.first_name} ${organizer.last_name}`}
         </Typography>
+
         <Typography variant="body2">
           {`Event Date: ${event.event_date}`}
           <br />
           {`Event Time: ${event.event_time}`}
           <br />
-          {`Voting Ends On: ${isoDateFormat(event.vote_deadline)}`}
+          {voteDeadline()}
         </Typography>
 
         <Typography sx={{ mb: 1.5 }}>
