@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { _getRestPhotos, _getRests } from "../store/yelp";
-import Loading from "./Loading";
+import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { _getRestPhotos, _getRests } from '../store/yelp';
+import Loading from './Loading';
 
 import {
   TextField,
@@ -11,16 +11,24 @@ import {
   InputLabel,
   MenuItem,
   Button,
-} from "@material-ui/core";
+} from '@material-ui/core';
+import { _addEventPicks } from '../store/eventPicks';
 
 const Questions = () => {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState('');
   const [stateLimit, setStateLimit] = useState(1);
   const [receivedPhotos, setReceivedPhotos] = useState(null);
 
   const dispatch = useDispatch();
   // state.yelp = what is inside combined reducer
+
+  const event = useSelector((state) => state.event);
+  const friends = useSelector((state) => state.friends);
   const yelp = useSelector((state) => state.yelp);
+  const user = useSelector((state) => {
+    return state.auth;
+  });
+
   const isMounted = useRef(false);
   let history = useHistory();
 
@@ -64,9 +72,45 @@ const Questions = () => {
     // const expectedNumPhotos = Number(stateLimit) * 3;
     if (yelp.restPhotos.length > 0) {
       setReceivedPhotos(true);
-      history.push("/card");
+
+      addEventPicksDb();
+
+      history.push('/card');
     }
   }, [yelp.restPhotos]);
+
+  function addEventPicksDb() {
+    let eventId = event.event.id;
+    const attendees = [
+      ...friends.setSelectedFriends,
+      { name: `${user.first_name} ${user.last_name}`, id: user.id },
+    ];
+
+    console.log('attendees', attendees);
+
+    attendees.forEach((friend) => {
+      // console.log(friend.id);
+      let userId = friend.id;
+
+      yelp.restPhotos.map((photo) => {
+        // return console.log("restPhotosId", photo.id);
+        let restaurantId = photo.id;
+        let restaurantAlias = photo.alias;
+        let restaurant_picUrl = photo.imgSrc;
+        let picDescription = photo.imgDesc;
+        dispatch(
+          _addEventPicks(
+            eventId,
+            userId,
+            restaurantId,
+            restaurantAlias,
+            restaurant_picUrl,
+            picDescription,
+          ),
+        );
+      });
+    });
+  }
 
   return (
     <div id="questions">
@@ -75,8 +119,7 @@ const Questions = () => {
           container
           alignItems="center"
           justifyContent="center"
-          direction="column"
-        >
+          direction="column">
           <Grid item>
             <TextField
               name="location"
@@ -106,8 +149,7 @@ const Questions = () => {
               name="price"
               value={price}
               label="Price"
-              onChange={handleChange}
-            >
+              onChange={handleChange}>
               <MenuItem value={1}>$</MenuItem>
               <MenuItem value={2}>$$</MenuItem>
               <MenuItem value={3}>$$$</MenuItem>

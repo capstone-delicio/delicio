@@ -1,10 +1,10 @@
-import axios from "axios";
-import scrapeData from "../../server/yelp/scraper";
+import axios from 'axios';
+import scrapeData from '../../server/yelp/scraper';
 
 // Action Types
-const GET_RESTS = "GET_RESTS";
-const GET_SINGLE_REST = "GET_SINGLE_REST";
-const GET_REST_PHOTOS = "GET_REST_PHOTOS";
+const GET_RESTS = 'GET_RESTS';
+const GET_SINGLE_REST = 'GET_SINGLE_REST';
+const GET_REST_PHOTOS = 'GET_REST_PHOTOS';
 
 // Action Creators
 const getRests = (params) => ({
@@ -17,7 +17,6 @@ const getSingleRest = (id) => ({
   rest: id,
 });
 
-// Constants
 const getRestPhotos = (pics) => ({
   type: GET_REST_PHOTOS,
   pics,
@@ -29,7 +28,7 @@ export const _getRestPhotos = (rests) => async (dispatch) => {
     return { alias: rest.alias, id: rest.id };
   });
   try {
-    const { data } = await axios.get("/yelp/photos", {
+    const { data } = await axios.get('/yelp/photos', {
       params: { rests: restsObj },
     });
 
@@ -44,7 +43,7 @@ export const _getRests = (params) => async (dispatch) => {
   // const { location, limit, price, cuisine } = params;
 
   try {
-    const { data } = await axios.get("/yelp/bizsearch", { params: params });
+    const { data } = await axios.get('/yelp/bizsearch', { params: params });
     dispatch(getRests(data));
   } catch (err) {
     return { Error: err.stack };
@@ -56,6 +55,17 @@ export const _getSingleRest = (id) => async (dispatch) => {
     const { data } = await axios.get(`/yelp/${id}`);
     dispatch(getSingleRest(data));
   } catch (err) {
+    return { Error: err.stack };
+  }
+};
+
+export const _getDbRestPhotos = (eventId, userId) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/user/${eventId}`, {
+      params: { userId },
+    });
+    dispatch(getRestPhotos(data));
+  } catch (error) {
     return { Error: err.stack };
   }
 };
