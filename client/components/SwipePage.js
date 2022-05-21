@@ -18,7 +18,11 @@ const SwipePage = () => {
     return state.auth;
   });
 
-  // set photos swiped right to isLiked
+  const [counter, setCounter] = useState(0);
+
+  // useEffect(() => {
+  //   console.log('eventId on mount', event.event.id);
+  // });
 
   const swiped = (direction, restaurant_picUrl) => {
     if (direction === 'right') {
@@ -33,8 +37,10 @@ const SwipePage = () => {
     }
   };
 
-  const outOfFrame = (name) => {
-    console.log(name + ' left the screen!');
+  let outOfFrame = () => {
+    // setSwipedArr((swipedArr[idx].s = true));
+    // setCounter(counter++);
+    // console.log('counterstate', counter);
   };
 
   return (
@@ -54,7 +60,7 @@ const SwipePage = () => {
               className="swipe"
               key={idx}
               onSwipe={(dir) => swiped(dir, photo.imgSrc)}
-              onCardLeftScreen={() => outOfFrame(photo.imgDesc)}>
+              onCardLeftScreen={() => outOfFrame()}>
               <div
                 style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
                 className="card">

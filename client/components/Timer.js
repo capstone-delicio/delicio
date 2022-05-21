@@ -27,7 +27,7 @@ function Timer() {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
   });
@@ -55,11 +55,7 @@ function Timer() {
   return (
     <div>
       <h4>Make your vote by {newDate}</h4>
-      {timerComponents.length ? (
-        timerComponents
-      ) : (
-        <h3>Voting Deadline Has Passed</h3>
-      )}
+      {timerComponents.length ? timerComponents : null}
     </div>
   );
 }
