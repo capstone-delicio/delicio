@@ -106,7 +106,7 @@ router.put('/update', async (req, res, next) => {
   // console.log("inside server", req.body);
   try {
     let response = await Event_picks.update(
-      { isLiked: true, isSubmitted: true },
+      { isLiked: req.body.isLiked, isSubmitted: true },
       {
         where: {
           eventId: req.body.eventId,
