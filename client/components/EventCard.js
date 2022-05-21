@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { _countEventPicks } from '../store/eventPicks';
+import { _countEventPicks, _updateSubmit } from '../store/eventPicks';
 import { _getSingleRest, _getDbRestPhotos } from '../store/yelp';
 import { getEventThunk } from '../store/event';
 
@@ -42,10 +42,7 @@ const EventCard = (props) => {
   async function chainFetches() {
     try {
       const eventData = await fetchEvent();
-
       checkDeadline(eventData);
-
-      // update isSubmit is true for that event
       await fetchOrganizer(eventData.organizerId);
       await fetchOpenSubmits(eventData);
       await fetchUserOpenSubmits(eventData);
@@ -59,11 +56,8 @@ const EventCard = (props) => {
     let today = new Date();
     today = today.toISOString();
 
-    console.log('today', today);
-    console.log('deadline', deadline);
-
     if (deadline < today) {
-      console.log('deadline passed');
+      dispatch(_updateSubmit(event.id));
     }
   }
 

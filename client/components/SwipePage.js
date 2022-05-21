@@ -46,7 +46,8 @@ const SwipePage = () => {
         direction="column">
         <Timer />
 
-        <h1>Restaurant Selections</h1>
+        <h4>Swipe Right to like</h4>
+        <h4>Swipe Left to dislike</h4>
         <div className="card-container">
           {yelp.restPhotos.map((photo, idx) => (
             <TinderCard

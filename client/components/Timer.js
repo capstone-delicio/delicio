@@ -29,12 +29,11 @@ function Timer() {
   useEffect(() => {
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 10000);
+    }, 1000);
   });
 
   let handleSubmit = () => {
     console.log('timercomp', timerComponents.length);
-    dispatch(_updateSubmit(event.event.id));
   };
 
   let timerComponents = [];
@@ -56,7 +55,11 @@ function Timer() {
   return (
     <div>
       <h4>Make your vote by {newDate}</h4>
-      {timerComponents.length ? timerComponents : handleSubmit()}
+      {timerComponents.length ? (
+        timerComponents
+      ) : (
+        <h3>Voting Deadline Has Passed</h3>
+      )}
     </div>
   );
 }
