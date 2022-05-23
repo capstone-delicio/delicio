@@ -66,7 +66,9 @@ const EventInput = () => {
             container
             alignItems="center"
             justifyContent="center"
-            direction="column">
+            direction="column"
+            overflow="scroll"
+            height="100%">
             <h3>Fill in the following information</h3>
             <Grid item>
               <FriendsSelect />
