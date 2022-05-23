@@ -1,13 +1,13 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 const {
   models: { User, Event },
-} = require("../db");
-const { requireToken, isAdmin } = require("./gateKeeper");
+} = require('../db');
+const { requireToken, isAdmin } = require('./gateKeeper');
 module.exports = router;
 
 //ROUTE: api/events
-router.get("/", requireToken, async (req, res, next) => {
+router.get('/', requireToken, async (req, res, next) => {
   try {
     // console.log("event");
     const events = await Event.findAll();
@@ -19,7 +19,7 @@ router.get("/", requireToken, async (req, res, next) => {
 
 // getting single event by id
 // /api/events/:id
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id);
     res.json(event);
@@ -30,7 +30,7 @@ router.get("/:id", async (req, res, next) => {
 
 //ADD EVENT
 //ROUTE: api/events
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     let newEvent = await Event.create(req.body);
     res.json(newEvent);
@@ -39,26 +39,26 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id);
     const result = await Event.update(
-
-      { event_date: req.body.event_date,
+      {
+        event_date: req.body.event_date,
         event_time: req.body.event_time,
-        isScheduled: true
+        isScheduled: true,
+        restaurantId: req.body.restaurantId,
+        restaurantAlias: req.body.restaurantAlias,
       },
-      { where: {
-        id: req.params.id
+      {
+        where: {
+          id: req.params.id,
+        },
+        returning: true,
       },
-      returning: true,
-     }
-    )
-    res.json(result)
-
+    );
+    res.json(result);
   } catch (err) {
     next(err);
   }
 });
-
-

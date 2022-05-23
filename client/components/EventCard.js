@@ -171,6 +171,7 @@ const EventCard = (props) => {
 
   function handleClickDetail() {
     dispatch(getEventThunk(event.id));
+    dispatch(_getSingleRest(event.restaurantId));
     history.push('/singlerestaurant');
   }
 

@@ -1,5 +1,5 @@
-const axios = require("axios");
-var JSSoup = require("jssoup").default;
+const axios = require('axios');
+var JSSoup = require('jssoup').default;
 
 // URL of the page we want to scrape
 // const alias = "the-perch-chicago";
@@ -18,37 +18,37 @@ const scraper = async function scrapeData(rests) {
 
   try {
     const response = await Promise.all(
-      endpoints.map((endpoint) => axios.get(endpoint))
+      endpoints.map((endpoint) => axios.get(endpoint)),
     ).then(
       axios.spread((...allData) => {
         return allData;
-      })
+      }),
     );
 
     // Load HTML we fetched in the previous line
     const imgArr = response.map((res, idx) => {
       const soup = new JSSoup(res.data);
-      const imgElements = soup.findAll("img");
+      const imgElements = soup.findAll('img');
 
       const foodImages = imgElements.filter((el) => {
         // filter for only images with food descriptions
         let hasFoodDescription = false;
         if (el.attrs.alt) {
-          const imgDescArr = el.attrs.alt.split(" ");
-          const idx = imgDescArr.indexOf("States");
-          const idx2 = imgDescArr.indexOf("States.");
+          const imgDescArr = el.attrs.alt.split(' ');
+          const idx = imgDescArr.indexOf('States');
+          const idx2 = imgDescArr.indexOf('States.');
           if (idx === imgDescArr.length - 1 || idx2 === imgDescArr.length - 1) {
             hasFoodDescription = false;
           } else {
             // set the alt attribute to only equal food description
             hasFoodDescription = true;
             const index = idx !== -1 ? idx : idx2;
-            el.attrs.alt = imgDescArr.slice(index + 1).join(" ");
+            el.attrs.alt = imgDescArr.slice(index + 1).join(' ');
           }
         }
 
         return (
-          el.attrs.class === "photo-box-img" &&
+          el.attrs.class === 'photo-box-img' &&
           el.attrs.height > 200 &&
           hasFoodDescription
         );
@@ -57,7 +57,7 @@ const scraper = async function scrapeData(rests) {
       const id = restsArr[idx].id;
       const alias = restsArr[idx].alias;
 
-      console.log("inside scraper food img len", foodImages.length);
+      console.log('inside scraper food img len', foodImages.length);
 
       const imgSrc = foodImages.map((el) => {
         return { imgDesc: el.attrs.alt, imgSrc: el.attrs.src, id, alias };
