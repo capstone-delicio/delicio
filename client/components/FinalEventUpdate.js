@@ -6,18 +6,20 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
-import yelp, { _getRestPhotos, _getRests, _getSingleRest } from '../store/yelp'
+import yelp, { _getRestPhotos, _getRests, _getSingleRest } from '../store/yelp';
 import { updateEventThunk } from '../store';
 
 const FinalEventUpdate = () => {
   // const { id } = useParams();
   let history = useHistory();
   const event = useSelector((state) => state.event);
-  const user = useSelector((state) => state.auth)
-  const yelp = useSelector((state) => state.yelp)
+  const user = useSelector((state) => state.auth);
+  const yelp = useSelector((state) => state.yelp);
   const dispatch = useDispatch();
 
-  const[displayDate,setDisplayDate] = useState(null)
+  const [displayDate, setDisplayDate] = useState(null);
+  const [displayTime, setDisplayTime] = useState(null);
+
   const [formState, setFormState] = useState({
     id: user.id,
     first_name: user.first_name,
@@ -28,18 +30,14 @@ const FinalEventUpdate = () => {
   });
 
   useEffect(() => {
-    // dispatch(_getSingleRest(yelp.rest.id))
-    console.log('event',event.event)
-    setDisplayDate(
-      event.event.event_date
-    )
-    setFormState({
-      eventId: event.event.id,
-      organizerId: event.event.organizerId,
-      event_date: event.event.event_date,
-      event_time: event.event.event_time,
-  })
-  }, [event.event])
+    setDisplayDate(null);
+    setDisplayTime(null);
+  }, []);
+
+  useEffect(() => {
+    setDisplayDate(event.event.event_date);
+    setDisplayTime(event.event.event_time);
+  }, [event.event]);
 
   const onChangeHandler = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -50,61 +48,69 @@ const FinalEventUpdate = () => {
     dispatch(updateEventThunk(formState));
     history.push('/');
   };
-// const dateTest = event.event.event_date
-// console.log("dateTest", dateTest)
-// console.log(typeof dateTest)
+  // const dateTest = event.event.event_date
+  // console.log("dateTest", dateTest)
+  // console.log(typeof dateTest)
   return (
-
     <div>
-    {event.event ?
-      // <h1>{typeof formState.event_date}</h1>
+      {event.event ? (
+        // <h1>{typeof formState.event_date}</h1>
 
-      <div className="container">
-        <div className="updateEvent">
-          <form onSubmit={(e) => SubmitHandler(e)} name="events">
-            <Grid
-              container
-              alignItems="center"
-              justifyContent="center"
-              direction="column">
+        <div className="container">
+          <div className="updateEvent">
+            <form onSubmit={(e) => SubmitHandler(e)} name="events">
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="center"
+                direction="column">
                 <h2>Winner Restaurant</h2>
                 <h2>{yelp.rest.name}</h2>
                 <h2>Price: {yelp.rest.price}</h2>
                 <img src={yelp.rest.image_url} />
-              <h2 className="event-info">Hey, {user.first_name}!</h2>
-              <h3>Let's update your event {displayDate}!</h3>
-              <Grid className="form-group">
-                <InputLabel>Event Date:</InputLabel>
-                <TextField
-                  type="date"
-                  className="form-control form-control-lg"
-                  name="event_date"
-                  defaultValue={displayDate? displayDate: null}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-              </Grid>
-              <Grid className="form-group">
-                <InputLabel>Event Time:</InputLabel>
-                <TextField
-                  type="time"
-                  className="form-control form-control-lg"
-                  name="event_time"
-                  defaultValue={event.event.event_time}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-              </Grid>
+                <h2 className="event-info">Hey, {user.first_name}!</h2>
+                <h3>Let's update your event {displayDate}!</h3>
+                <Grid className="form-group">
+                  <InputLabel>Event Date:</InputLabel>
+                  {displayDate === event.event.event_date ? (
+                    <TextField
+                      type="date"
+                      className="form-control form-control-lg"
+                      name="event_date"
+                      defaultValue={displayDate}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                  ) : (
+                    displayDate
+                  )}
+                </Grid>
+                <Grid className="form-group">
+                  <InputLabel>Event Time:</InputLabel>
+                  {displayTime === event.event.event_time ? (
+                    <TextField
+                      type="time"
+                      className="form-control form-control-lg"
+                      name="event_time"
+                      defaultValue={event.event.event_time}
+                      onChange={(e) => onChangeHandler(e)}
+                    />
+                  ) : null}
+                </Grid>
 
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                onChange={(e) => SubmitHandler(e)}>
-                Update Event
-              </Button>
-            </Grid>
-          </form>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  onChange={(e) => SubmitHandler(e)}>
+                  Update Event
+                </Button>
+              </Grid>
+            </form>
+          </div>
         </div>
-      </div>:<h1>loading</h1>}
+      ) : (
+        <h1>loading</h1>
+      )}
     </div>
   );
 };
