@@ -25,13 +25,6 @@ const SingleRestaurant = (props) => {
           </h5>
           <h4>Price: {yelp.rest.price}</h4>
           <img src={yelp.rest.image_url} />
-          <Button
-            target="_blank"
-            href={encodeURI(
-              `https://www.yelp.com/biz/${eventStore.event.restaurantAlias}`,
-            )}>
-            Google
-          </Button>
         </div>
       ) : (
         <div>Loading...</div>
