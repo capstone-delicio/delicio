@@ -60,11 +60,13 @@ export const addEvent =
   };
 
 export const updateEventThunk =
-  ({ eventId, organizerId, event_date, event_time }) =>
+  ({ eventId, organizerId, event_date, event_time, restaurantId, restaurantAlias }) =>
   async (dispatch) => {
     console.log('event', eventId);
     try {
       const { data } = await axios.put(`/api/events/${eventId}`, {
+        restaurantAlias,
+        restaurantId,
         organizerId,
         event_date,
         event_time,

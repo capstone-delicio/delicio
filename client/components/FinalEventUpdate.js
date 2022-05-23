@@ -27,6 +27,8 @@ const FinalEventUpdate = () => {
     organizerId: event.event.organizerId,
     event_date: event.event.event_date,
     event_time: event.event.event_time,
+    restaurantId: yelp.rest.id,
+    restaurantAlias: yelp.rest.alias
   });
 
   useEffect(() => {
@@ -35,13 +37,19 @@ const FinalEventUpdate = () => {
   }, [event.event]);
 
   const onChangeHandler = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+    setFormState({ ...formState,
+      [e.target.name]: e.target.value,
+      eventId: event.event.id,
+      organizerId: event.event.organizerId,
+      restaurantId: yelp.rest.id,
+      restaurantAlias: yelp.rest.alias
+    });
   };
   const SubmitHandler = async (e) => {
     e.preventDefault();
     console.log('formState', formState);
     dispatch(updateEventThunk(formState));
-    history.push('/');
+    history.push('/events');
   };
   // const dateTest = event.event.event_date
   // console.log("dateTest", dateTest)

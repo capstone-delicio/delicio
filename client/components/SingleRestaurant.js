@@ -9,9 +9,9 @@ const SingleRestaurant = (props) => {
   const dispatch = useDispatch()
   const yelp = useSelector((state) => state.yelp)
 
-  useEffect(() => {
-    dispatch(_getSingleRest('okaqMJEoHfHblpKz9Q-CMA'))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(_getSingleRest('okaqMJEoHfHblpKz9Q-CMA'))
+  // }, [])
 
   return (
     <div>

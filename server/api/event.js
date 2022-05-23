@@ -46,7 +46,9 @@ router.put("/:id", async (req, res, next) => {
 
       { event_date: req.body.event_date,
         event_time: req.body.event_time,
-        isScheduled: true
+        isScheduled: true,
+        restaurantId: req.body.restaurantId,
+        restaurantAlias:req.body.restaurantAlias
       },
       { where: {
         id: req.params.id
