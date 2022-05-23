@@ -66,48 +66,40 @@ const EventInput = () => {
             container
             alignItems="center"
             justifyContent="center"
-            direction="column"
-            overflow="scroll"
-            height="100%">
+            direction="column">
             <h3>Fill in the following information</h3>
+
             <Grid item>
               <FriendsSelect />
             </Grid>
 
             <Grid item>
               <InputLabel>Event Name:</InputLabel>
+
               <TextField name="event_name" type="text" />
             </Grid>
-
             <br />
             <Grid item>
               <InputLabel>Event Date:</InputLabel>
-              <TextField
-                name="event_date"
-                type="date"
-                placeholder="MM-DD-YYYY"
-              />
+              <TextField name="event_date" label="YYYY-MM-DD" />
             </Grid>
             <br />
+
             <Grid item>
               <InputLabel>Event Time:</InputLabel>
-              <TextField name="event_time" type="time" placeholder="HH-MM" />
+              <TextField name="event_time" label=" HH:MM am" />
             </Grid>
             <br />
+
             <Grid item>
               <InputLabel>Voting Deadline:</InputLabel>
-              <TextField
-                name="vote_deadline"
-                type="datetime-local"
-                placeholder="MM-DD-YYYY, HH:MM"
-              />
+              <TextField name="vote_deadline" label="YYYY-MM-DD" />
             </Grid>
-            <Grid item>
-              <div style={{ color: 'red' }}>{dateError}</div>
-              <Button variant="contained" color="primary" type="submit">
-                Submit
-              </Button>
-            </Grid>
+            <div style={{ color: 'red' }}>{dateError}</div>
+            <Button variant="contained" color="primary" type="submit">
+              Submit
+            </Button>
+
             <br />
           </Grid>
         </form>
