@@ -5,9 +5,9 @@ import history from '../history';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import FriendsSelect from './FriendsSelect';
-import TimePicker from 'react-bootstrap-time-picker';
 
 const EventInput = () => {
   const [dateError, setDateError] = useState('');
@@ -60,48 +60,58 @@ const EventInput = () => {
 
   return (
     <div>
-      <form id="eventInputForm" onSubmit={handleSubmit} name="eventInput">
-        <Grid
-          container
-          alignItems="center"
-          justifyContent="center"
-          direction="column">
-          <h3>Fill in the following information</h3>
+      <Container>
+        <form id="eventInputForm" onSubmit={handleSubmit} name="eventInput">
+          <Grid
+            container
+            alignItems="center"
+            justifyContent="center"
+            direction="column">
+            <h3>Fill in the following information</h3>
 
-          <Grid item>
-            <FriendsSelect />
+            <Grid item>
+              <FriendsSelect />
+            </Grid>
+
+            <Grid item>
+              <InputLabel>Event Name:</InputLabel>
+              <TextField name="event_name" type="text" />
+            </Grid>
+            <br />
+            <Grid item>
+              <InputLabel>Event Date:</InputLabel>
+              <TextField name="event_date" type="date" />
+            </Grid>
+            <br />
+
+            <Grid item>
+              <InputLabel>Event Time:</InputLabel>
+              <TextField name="event_time" type="time" />
+            </Grid>
+            <br />
+
+            <Grid item>
+              <InputLabel>Voting Deadline:</InputLabel>
+              <TextField name="vote_deadline" type="date" />
+            </Grid>
+            <div style={{ color: 'red' }}>{dateError}</div>
+            <Button
+              style={{
+                borderRadius: 35,
+                backgroundColor: '#758bfd',
+                padding: '18px 36px',
+                fontSize: '18px',
+                color: 'white',
+              }}
+              variant="contained"
+              type="submit">
+              Submit
+            </Button>
+
+            <br />
           </Grid>
-
-          <Grid item>
-            <InputLabel>Event Name:</InputLabel>
-
-            <TextField name="event_name" type="text" />
-          </Grid>
-          <br />
-          <Grid item>
-            <InputLabel>Event Date:</InputLabel>
-            <TextField name="event_date" label="YYYY-MM-DD" />
-          </Grid>
-          <br />
-
-          <Grid item>
-            <InputLabel>Event Time:</InputLabel>
-            <TextField name="event_time" label=" HH:MM am" />
-          </Grid>
-          <br />
-
-          <Grid item>
-            <InputLabel>Voting Deadline:</InputLabel>
-            <TextField name="vote_deadline" label="YYYY-MM-DD" />
-          </Grid>
-
-          <div style={{ color: 'red' }}>{dateError}</div>
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
-          <br />
-        </Grid>
-      </form>
+        </form>
+      </Container>
     </div>
   );
 };
