@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Checkbox from "@material-ui/core/Checkbox";
-import InputLabel from "@material-ui/core/InputLabel";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
-import { _getFriends, _setSelectedFriends } from "../store";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Checkbox from '@material-ui/core/Checkbox';
+import InputLabel from '@material-ui/core/InputLabel';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import { _getFriends, _setSelectedFriends } from '../store';
+import { useHistory } from 'react-router-dom';
 
 // Styling -------------------------
 const useStyles = makeStyles((theme) => ({
@@ -19,15 +19,15 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
   },
   indeterminateColor: {
-    color: "#f50057",
+    color: '#f50057',
   },
   selectAllText: {
     fontWeight: 500,
   },
   selectedAll: {
-    backgroundColor: "rgba(0, 0, 0, 0.08)",
-    "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.08)",
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)',
     },
   },
 }));
@@ -43,14 +43,14 @@ const MenuProps = {
   },
   getContentAnchorEl: null,
   anchorOrigin: {
-    vertical: "bottom",
-    horizontal: "center",
+    vertical: 'bottom',
+    horizontal: 'center',
   },
   transformOrigin: {
-    vertical: "top",
-    horizontal: "center",
+    vertical: 'top',
+    horizontal: 'center',
   },
-  variant: "menu",
+  variant: 'menu',
 };
 
 // Friends Select Dropdown Component -----------------------
@@ -84,7 +84,7 @@ function FriendsSelect() {
   const friendsArr = friendStore.friends;
 
   const friends = friendsArr.map((friend) => {
-    return { name: friend.first_name + " " + friend.last_name, id: friend.id };
+    return { name: friend.first_name + ' ' + friend.last_name, id: friend.id };
   });
 
   const classes = useStyles();
@@ -97,11 +97,11 @@ function FriendsSelect() {
   const handleChange = (event) => {
     const value = event.target.value;
 
-    if (value[value.length - 1] === "all") {
+    if (value[value.length - 1] === 'all') {
       setSelected(
         selected.length === friends.length
           ? []
-          : friends.map((friend) => friend.name)
+          : friends.map((friend) => friend.name),
       );
       return;
     }
@@ -111,7 +111,7 @@ function FriendsSelect() {
 
   const handleFindFriends = (e) => {
     e.preventDefault();
-    history.push("/search-friends");
+    history.push('/search-friends');
   };
 
   return (
@@ -125,15 +125,13 @@ function FriendsSelect() {
           multiple
           value={selected}
           onChange={handleChange}
-          renderValue={(selected) => selected.join(", ")}
-          MenuProps={MenuProps}
-        >
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}>
           <MenuItem
             value="all"
             classes={{
-              root: isAllSelected ? classes.selectedAll : "",
-            }}
-          >
+              root: isAllSelected ? classes.selectedAll : '',
+            }}>
             <ListItemIcon>
               <Checkbox
                 classes={{ indeterminate: classes.indeterminateColor }}
