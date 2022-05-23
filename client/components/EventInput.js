@@ -75,28 +75,36 @@ const EventInput = () => {
 
             <Grid item>
               <InputLabel>Event Name:</InputLabel>
-
               <TextField name="event_name" type="text" />
             </Grid>
             <br />
             <Grid item>
               <InputLabel>Event Date:</InputLabel>
-              <TextField name="event_date" label="YYYY-MM-DD" />
+              <TextField name="event_date" type="date" />
             </Grid>
             <br />
 
             <Grid item>
               <InputLabel>Event Time:</InputLabel>
-              <TextField name="event_time" label=" HH:MM am" />
+              <TextField name="event_time" type="time" />
             </Grid>
             <br />
 
             <Grid item>
               <InputLabel>Voting Deadline:</InputLabel>
-              <TextField name="vote_deadline" label="YYYY-MM-DD" />
+              <TextField name="vote_deadline" type="date" />
             </Grid>
             <div style={{ color: 'red' }}>{dateError}</div>
-            <Button variant="contained" color="primary" type="submit">
+            <Button
+              style={{
+                borderRadius: 35,
+                backgroundColor: '#758bfd',
+                padding: '18px 36px',
+                fontSize: '18px',
+                color: 'white',
+              }}
+              variant="contained"
+              type="submit">
               Submit
             </Button>
 
