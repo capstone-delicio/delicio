@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import React, { useState, useEffect, useRef } from 'react';
 import yelp, { _getRestPhotos, _getRests, _getSingleRest } from '../store/yelp';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SingleRestaurant = (props) => {
   const dispatch = useDispatch();
@@ -24,7 +25,13 @@ const SingleRestaurant = (props) => {
           </h5>
           <h4>Price: {yelp.rest.price}</h4>
           <img src={yelp.rest.image_url} />
-          <h4>Populer Dish: {yelp.rest.photos}</h4>
+          <Button
+            target="_blank"
+            href={encodeURI(
+              `https://www.yelp.com/biz/${eventStore.event.restaurantAlias}`,
+            )}>
+            Google
+          </Button>
         </div>
       ) : (
         <div>Loading...</div>

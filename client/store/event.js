@@ -60,7 +60,14 @@ export const addEvent =
   };
 
 export const updateEventThunk =
-  ({ eventId, organizerId, event_date, event_time, restaurantId, restaurantAlias }) =>
+  ({
+    eventId,
+    organizerId,
+    event_date,
+    event_time,
+    restaurantId,
+    restaurantAlias,
+  }) =>
   async (dispatch) => {
     console.log('event', eventId);
     try {
@@ -97,7 +104,7 @@ export default function (state = initialState, action) {
     case CREATE_EVENT:
       return { ...state, event: action.event };
     case UPDATE_EVENT:
-      return { ...state, event: action.event };
+      return { event: action.event };
     case GET_EVENT:
       return { ...state, event: action.event };
     default:
