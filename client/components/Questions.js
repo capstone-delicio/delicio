@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { _getRestPhotos, _getRests } from '../store/yelp';
 import Loading from './Loading';
-
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import {
   TextField,
   Grid,
@@ -11,12 +12,27 @@ import {
   InputLabel,
   MenuItem,
   Button,
+  Tooltip,
 } from '@material-ui/core';
 import { _addEventPicks } from '../store/eventPicks';
 
 const Questions = () => {
-  const [price, setPrice] = useState('');
   const [stateLimit, setStateLimit] = useState(1);
+  const IncNum = () => {
+    if (stateLimit < 30) setStateLimit(stateLimit + 1);
+    else {
+      alert('max limit reached');
+    }
+  };
+  const DecNum = () => {
+    if (stateLimit > 1) setStateLimit(stateLimit - 1);
+    else {
+      setStateLimit(1);
+      alert('min limit reached');
+    }
+  };
+  const [price, setPrice] = useState('');
+  // const [stateLimit, setStateLimit] = useState(1);
   const [receivedPhotos, setReceivedPhotos] = useState(null);
 
   const dispatch = useDispatch();
@@ -40,7 +56,8 @@ const Questions = () => {
     e.preventDefault();
     const location = e.target.location.value;
 
-    const limit = e.target.limit.value;
+    // const limit = e.target.limit.value;
+    const limit = stateLimit;
     const price = e.target.price.value;
     const cuisine = e.target.cuisine.value;
 
@@ -131,14 +148,22 @@ const Questions = () => {
           <Grid item>
             <TextField name="cuisine" label="Cuisine Preference?" type="text" />
           </Grid>
-
-          <Grid item>
-            <TextField
-              name="limit"
-              label="# of restaurant selections?"
-              type="text"
-            />
-          </Grid>
+          <br />
+          <InputLabel># of Restaurant Selections?</InputLabel>
+          <br />
+          <h4>{stateLimit}</h4>
+          <div className="btn_div">
+            <Tooltip title="Minus">
+              <Button onClick={DecNum}>
+                <RemoveIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Add">
+              <Button onClick={IncNum}>
+                <AddIcon />
+              </Button>
+            </Tooltip>
+          </div>
 
           <Grid>
             {/* <InputLabel id="price">Price</InputLabel> */}
@@ -171,6 +196,15 @@ const Questions = () => {
 };
 
 export default Questions;
+
+// <Grid item>
+//   <TextField
+//     name="limit"
+//     label="# of restaurant selections?"
+//     type="text"
+//   />
+// </Grid>
+
 // import React, { useState } from "react";
 // import {
 //   Typography,

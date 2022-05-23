@@ -68,11 +68,12 @@ const FinalEventUpdate = () => {
                 justifyContent="center"
                 direction="column">
                 <h2 className="event-info">Hey, {user.first_name}!</h2>
+
                 <h3>{`Let's finalize your ${event.event.event_name}!`}</h3>
                 <h2>Winning Restaurant</h2>
                 <h2>{yelp.rest.name}</h2>
                 <h4>Price: {yelp.rest.price}</h4>
-                <img src={yelp.rest.image_url} />
+                 <img width="400" height="400" src={yelp.rest.image_url} />
                 <Button
                   target="_blank"
                   href={encodeURI(
@@ -114,6 +115,7 @@ const FinalEventUpdate = () => {
                   onChange={(e) => SubmitHandler(e)}>
                   Finalize Event
                 </Button>
+
               </Grid>
             </form>
           </div>
