@@ -60,7 +60,7 @@ const FinalEventUpdate = () => {
                 justifyContent="center"
                 direction="column">
                 <h2 className="event-info">Hey, {user.first_name}!</h2>
-                <h3>{`Let's update your ${event.event.event_name}!`}</h3>
+                <h3>{`Let's finalize your ${event.event.event_name}!`}</h3>
                 <h2>Winning Restaurant</h2>
                 <h2>{yelp.rest.name}</h2>
                 <h4>Price: {yelp.rest.price}</h4>
@@ -97,7 +97,7 @@ const FinalEventUpdate = () => {
                   color="primary"
                   type="submit"
                   onChange={(e) => SubmitHandler(e)}>
-                  Update Event
+                  Finalize Event
                 </Button>
               </Grid>
             </form>
