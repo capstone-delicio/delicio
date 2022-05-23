@@ -15,7 +15,8 @@ const EndSwipeStory = () => {
 
   return (
     <div>
-      <Confetti />
+      <Confetti recycle={false} />
+
       <Grid
         container
         alignItems="center"
