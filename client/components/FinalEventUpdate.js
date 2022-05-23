@@ -35,8 +35,16 @@ const FinalEventUpdate = () => {
   }, [event.event]);
 
   const onChangeHandler = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+      eventId: event.event.id,
+      organizerId: event.event.organizerId,
+      restaurantId: yelp.rest.id,
+      restaurantAlias: yelp.rest.alias,
+    });
   };
+
   const SubmitHandler = async (e) => {
     e.preventDefault();
     console.log('formState', formState);
@@ -65,6 +73,13 @@ const FinalEventUpdate = () => {
                 <h2>{yelp.rest.name}</h2>
                 <h4>Price: {yelp.rest.price}</h4>
                 <img src={yelp.rest.image_url} />
+                <Button
+                  target="_blank"
+                  href={encodeURI(
+                    `https://www.yelp.com/biz/${yelp.rest.alias}`,
+                  )}>
+                  Take me to Yelp for more details!
+                </Button>
                 <Grid className="form-group">
                   <InputLabel>Event Date:</InputLabel>
                   {displayDate === event.event.event_date ? (
