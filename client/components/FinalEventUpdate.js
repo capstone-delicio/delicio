@@ -30,11 +30,6 @@ const FinalEventUpdate = () => {
   });
 
   useEffect(() => {
-    setDisplayDate(null);
-    setDisplayTime(null);
-  }, []);
-
-  useEffect(() => {
     setDisplayDate(event.event.event_date);
     setDisplayTime(event.event.event_time);
   }, [event.event]);
@@ -91,7 +86,7 @@ const FinalEventUpdate = () => {
                       type="time"
                       className="form-control form-control-lg"
                       name="event_time"
-                      defaultValue={event.event.event_time}
+                      defaultValue={displayTime}
                       onChange={(e) => onChangeHandler(e)}
                     />
                   ) : null}
