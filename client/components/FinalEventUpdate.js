@@ -59,12 +59,12 @@ const FinalEventUpdate = () => {
                 alignItems="center"
                 justifyContent="center"
                 direction="column">
-                <h2>Winner Restaurant</h2>
-                <h2>{yelp.rest.name}</h2>
-                <h2>Price: {yelp.rest.price}</h2>
-                <img src={yelp.rest.image_url} />
                 <h2 className="event-info">Hey, {user.first_name}!</h2>
                 <h3>{`Let's update your ${event.event.event_name}!`}</h3>
+                <h2>Winning Restaurant</h2>
+                <h2>{yelp.rest.name}</h2>
+                <h4>Price: {yelp.rest.price}</h4>
+                <img src={yelp.rest.image_url} />
                 <Grid className="form-group">
                   <InputLabel>Event Date:</InputLabel>
                   {displayDate === event.event.event_date ? (
