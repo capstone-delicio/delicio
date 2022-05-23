@@ -25,17 +25,19 @@ form div {
 }
 
 .card-container {
-  width: 370px;
-  /* max-width: 260px; */
-  height: 600px;
+  width: 80vw;
+  height: 80vw;
+  max-width: 400px;
+  max-height: 400px;
 }
 
 .card {
   position: relative;
   background-color: #fff;
-  width: 370px;
-  /* max-width: 370px; */
-  height: 600px;
+  height: 80vw;
+  width: 80vw;
+  max-width: 400px;
+  max-height: 400px;
   /* box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3); */
   border-radius: 30px;
   background-size: cover;
@@ -236,13 +238,7 @@ body {
   margin-right: 0;
 }
 
-.third {
-  border-color: #3498db;
-  color: #fff;
-  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-}
-.third:hover {
-  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+.border {
+  border-radius: 75px;
+  border: 2px solid green;
 }
