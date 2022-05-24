@@ -10,12 +10,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <Toolbar>
       <div>
         <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
-          <img src="../images/logo-white.png" height="90" />
+          <img src="../images/logo-white.png" height="60" />
         </Link>
       </div>
       <div>
         <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
-          <h3>DELICIO</h3>
+          <h4>DELICIO</h4>
         </Link>
       </div>
 

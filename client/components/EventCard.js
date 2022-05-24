@@ -13,9 +13,47 @@ import {
   CardContent,
   Button,
   Typography,
+  responsiveFontSizes,
 } from '@material-ui/core';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import theme from '../theme';
 
 const EventCard = (props) => {
+  let theme = {
+    overrides: {
+      MuiCard: {
+        root: {
+          '&.EventCard': {
+            transition: '0.3s',
+            maxWidth: '90vh',
+            // maxHeight: '20vh auto',
+            // height: '20vh',
+            padding: 15,
+            margin: '20px auto',
+            boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
+            '&:hover': {
+              boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
+            },
+          },
+          '& .MuiTypography--heading': {
+            fontWeight: 'bold',
+            lineHeight: 2,
+            letterSpacing: 0.5,
+            // textTransform: 'uppercase',
+            display: 'block',
+          },
+          '& .MuiTypography--subheading': {
+            lineHeight: 1.5,
+          },
+          '& .DetailsButton': {
+            marginLeft: 'auto',
+            // padding: 8,
+          },
+        },
+      },
+    },
+  };
+
   const [event, setEvent] = useState({});
   const [organizer, setOrganizer] = useState({});
   const [openSubmits, setOpenSubmits] = useState(null);
@@ -191,56 +229,76 @@ const EventCard = (props) => {
   const card = (
     <React.Fragment>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography
+          variant="h5"
+          component="div"
+          color="secondary"
+          className={'MuiTypography--heading'}>
           {event.event_name}
-          <br />
         </Typography>
 
-        <Typography sx={{ mb: 1.5 }}>
+        <Typography sx={{ mb: 1.5 }} className={'MuiTypography--subheading'}>
           Organized By : {`${organizer.first_name} ${organizer.last_name}`}
         </Typography>
 
-        <Typography variant="body2">
+        <Typography className={'MuiTypography--subheading'}>
           {`Event Date: ${event.event_date}`}
           <br />
           {`Event Time: ${event.event_time}`}
           <br />
           {voteDeadline()}
-        </Typography>
-
-        <Typography sx={{ mb: 1.5 }}>
-          Status: {statusMessage}
           <br />
         </Typography>
+
+        <Typography className={'MuiTypography--subheading'} variant="subtitle1">
+          Status: {statusMessage}
+        </Typography>
+        {showDetailsButton ? (
+          <CardActions>
+            <Button
+              variant="outlined"
+              className={'DetailsButton'}
+              color="secondary"
+              size="small"
+              onClick={handleClickDetail}>
+              Details
+            </Button>
+          </CardActions>
+        ) : null}
+        {showConfirmButton ? (
+          <CardActions>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClickConfirm}>
+              Confirm
+            </Button>
+          </CardActions>
+        ) : null}
+        {showVoteButton ? (
+          <CardActions>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClickVote}>
+              Vote
+            </Button>
+          </CardActions>
+        ) : null}
       </CardContent>
-      {showDetailsButton ? (
-        <CardActions>
-          <Button variant="outlined" size="small" onClick={handleClickDetail}>
-            Details
-          </Button>
-        </CardActions>
-      ) : null}
-      {showConfirmButton ? (
-        <CardActions>
-          <Button variant="outlined" size="small" onClick={handleClickConfirm}>
-            Confirm
-          </Button>
-        </CardActions>
-      ) : null}
-      {showVoteButton ? (
-        <CardActions>
-          <Button variant="outlined" size="small" onClick={handleClickVote}>
-            Vote
-          </Button>
-        </CardActions>
-      ) : null}
     </React.Fragment>
   );
 
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined">{card}</Card>
-    </Box>
+    <ThemeProvider theme={theme}>
+      {/* <Box sx={{ minWidth: 275 }}> */}
+      <Card className={'EventCard'} variant="outlined">
+        {card}
+      </Card>
+      {/* </Box> */}
+    </ThemeProvider>
   );
 };
 
