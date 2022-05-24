@@ -59,6 +59,28 @@ form div {
   margin: 10px;
   color: #fff;
 }
+
+/* cant tell difference */
+/* @media only screen and (min-width: 1024px) {
+  html {
+  font-size: 100%;
+  }
+};
+@media only screen and (min-width: 1280px) {
+  html {
+  font-size: 125%;
+  }
+};
+@media only screen and (min-width: 1536px) {
+  html {
+  font-size: 150%;
+  }
+};
+@media only screen and (min-width: 1920px) {
+  html {
+  font-size: 187.5%;
+  }
+}; */
 /* * {
   box-sizing: border-box;
 }

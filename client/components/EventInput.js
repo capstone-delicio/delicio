@@ -8,8 +8,18 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import FriendsSelect from './FriendsSelect';
+import { Paper } from '@material-ui/core';
 
 const EventInput = () => {
+  // const paperStyle = {
+  //   padding: 20,
+  //   height: '55vh',
+  //   width: '80vh',
+  //   margin: '20px auto',
+  //   textAlign: 'center',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // };
   const [dateError, setDateError] = useState('');
 
   const dispatch = useDispatch();
@@ -98,10 +108,11 @@ const EventInput = () => {
             <Button
               style={{
                 borderRadius: 35,
-                backgroundColor: '#758bfd',
+                // backgroundColor: '#758bfd',
+                backgroundColor: 'secondary',
                 padding: '18px 36px',
                 fontSize: '18px',
-                color: 'white',
+                // color: 'white',
               }}
               variant="contained"
               type="submit">
