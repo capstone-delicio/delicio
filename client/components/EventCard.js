@@ -13,7 +13,6 @@ import {
   CardContent,
   Button,
   Typography,
-  responsiveFontSizes,
 } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import theme from '../theme';
@@ -39,13 +38,13 @@ const EventCard = (props) => {
             fontWeight: 'bold',
             lineHeight: 2,
             letterSpacing: 0.5,
-            // textTransform: 'uppercase',
+            textTransform: 'capitalize',
             display: 'block',
           },
           '& .MuiTypography--subheading': {
             lineHeight: 1.5,
           },
-          '& .DetailsButton': {
+          '& .Button': {
             marginLeft: 'auto',
             // padding: 8,
           },
@@ -247,7 +246,6 @@ const EventCard = (props) => {
           {`Event Time: ${event.event_time}`}
           <br />
           {voteDeadline()}
-          <br />
         </Typography>
 
         <Typography className={'MuiTypography--subheading'} variant="subtitle1">
@@ -257,7 +255,7 @@ const EventCard = (props) => {
           <CardActions>
             <Button
               variant="outlined"
-              className={'DetailsButton'}
+              className={'Button'}
               color="secondary"
               size="small"
               onClick={handleClickDetail}>
@@ -269,6 +267,7 @@ const EventCard = (props) => {
           <CardActions>
             <Button
               variant="outlined"
+              className={'Button'}
               color="secondary"
               size="small"
               onClick={handleClickConfirm}>
@@ -280,6 +279,7 @@ const EventCard = (props) => {
           <CardActions>
             <Button
               variant="outlined"
+              className={'Button'}
               color="secondary"
               size="small"
               onClick={handleClickVote}>

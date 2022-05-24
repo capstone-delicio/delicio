@@ -8,18 +8,18 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import FriendsSelect from './FriendsSelect';
-import { Paper } from '@material-ui/core';
+import { makeStyles, Paper } from '@material-ui/core';
+import theme from '../theme';
 
 const EventInput = () => {
-  // const paperStyle = {
-  //   padding: 20,
-  //   height: '55vh',
-  //   width: '80vh',
-  //   margin: '20px auto',
-  //   textAlign: 'center',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // };
+  const useStyle = makeStyles((theme) => ({
+    padding: {
+      padding: theme.spacing(3),
+    },
+  }));
+
+  const classes = useStyle();
+
   const [dateError, setDateError] = useState('');
 
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const EventInput = () => {
 
   return (
     <div>
-      <Container>
+      <Container className={classes.padding}>
         <form id="eventInputForm" onSubmit={handleSubmit} name="eventInput">
           <Grid
             container
