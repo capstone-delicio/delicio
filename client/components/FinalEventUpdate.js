@@ -32,28 +32,34 @@ const FinalEventUpdate = () => {
   useEffect(() => {
     setDisplayDate(event.event.event_date);
     setDisplayTime(event.event.event_time);
-  }, [event.event]);
-
-  const onChangeHandler = (e) => {
     setFormState({
       ...formState,
-      [e.target.name]: e.target.value,
+      event_date: event.event.event_date,
+      event_time: event.event.event_time,
       eventId: event.event.id,
       organizerId: event.event.organizerId,
+    });
+  }, [event.event]);
+
+  useEffect(() => {
+    setFormState({
+      ...formState,
       restaurantId: yelp.rest.id,
       restaurantAlias: yelp.rest.alias,
     });
+  }, [yelp.rest]);
+
+  const onChangeHandler = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    console.log('formState', formState);
+    // console.log('formState', formState);
     dispatch(updateEventThunk(formState));
-    history.push('/');
+    history.push('/events');
   };
-  // const dateTest = event.event.event_date
-  // console.log("dateTest", dateTest)
-  // console.log(typeof dateTest)
+
   return (
     <div>
       {event.event ? (
@@ -73,7 +79,7 @@ const FinalEventUpdate = () => {
                 <h2>Winning Restaurant</h2>
                 <h2>{yelp.rest.name}</h2>
                 <h4>Price: {yelp.rest.price}</h4>
-                 <img width="400" height="400" src={yelp.rest.image_url} />
+                <img width="400" height="400" src={yelp.rest.image_url} />
                 <Button
                   target="_blank"
                   href={encodeURI(
@@ -115,7 +121,6 @@ const FinalEventUpdate = () => {
                   onChange={(e) => SubmitHandler(e)}>
                   Finalize Event
                 </Button>
-
               </Grid>
             </form>
           </div>
