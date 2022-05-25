@@ -110,19 +110,7 @@ const EventInput = () => {
                 <TextField name="vote_deadline" type="date" />
               </Grid>
               <div style={{ color: 'red' }}>{dateError}</div>
-              <Button
-                style={
-                  {
-                    // borderRadius: 35,
-                    // backgroundColor: '#758bfd',
-                    // backgroundColor: 'secondary',
-                    // padding: '18px 36px',
-                    // fontSize: '18px',
-                    // color: 'white',
-                  }
-                }
-                variant="contained"
-                type="submit">
+              <Button color="primary" variant="contained" type="submit">
                 Submit
               </Button>
 
