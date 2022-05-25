@@ -11,7 +11,7 @@ Delicio is a a fun new app available on both mobile and computer web browser to 
 ## ScreenShots
 
 ![Mobile](./public/images/signOnPage.png)
-![HomePage](./public/images/home.gif)
+![HomePage](./public/images/home.png)
 
 ## Technologies Used
 
