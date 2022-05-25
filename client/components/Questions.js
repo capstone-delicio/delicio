@@ -151,13 +151,14 @@ const Questions = () => {
           <br />
           <InputLabel># of Restaurant Selections?</InputLabel>
           <br />
-          <h4>{stateLimit}</h4>
+
           <div className="btn_div">
             <Tooltip title="Minus">
               <Button onClick={DecNum}>
                 <RemoveIcon />
               </Button>
             </Tooltip>
+            {stateLimit}
             <Tooltip title="Add">
               <Button onClick={IncNum}>
                 <AddIcon />
