@@ -19,7 +19,7 @@ Delicio is a a fun new app to help you and your friends answer the age old quest
 
 ## Meet the Team
 
-- [Jessica Chen](https://github.com/yajessicachen)
-- [Rachel Or](https://github.com/rachelor7)
-- [Vida Feng](https://github.com/vidafeng)
-- [Renee Du](https://github.com/doozyu)
+- Jessica Chen [Github](https://github.com/yajessicachen) [Linkedin] (https://www.linkedin.com/in/yajessicachen/)
+- Rachel Or [Github](https://github.com/rachelor7) [Linkedin] (https://www.linkedin.com/in/or-rachel/)
+- Vida Feng [Github](https://github.com/vidafeng) [Linkedin] (https://www.linkedin.com/in/vidafeng/)
+- Renee Du [Github](https://github.com/doozyu) [Linkedin] (https://www.linkedin.com/in/renee-du-35b28a237/)
