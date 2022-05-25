@@ -1,8 +1,8 @@
 # Delicio
 
-Live Demo: https://capstone-delicio.herokuapp.com/
-
 ![Logo](./public/images/logo72.png)
+
+Live Demo: https://capstone-delicio.herokuapp.com/
 
 ## Description
 
@@ -28,7 +28,7 @@ Delicio is a a fun new app available on both mobile and computer web browser to 
 
 ## Meet the Team
 
-- Jessica Chen [Github](https://github.com/yajessicachen) [Linkedin](https://www.linkedin.com/in/yajessicachen/)
-- Rachel Or [Github](https://github.com/rachelor7) [Linkedin](https://www.linkedin.com/in/or-rachel/)
-- Vida Feng [Github](https://github.com/vidafeng) [Linkedin](https://www.linkedin.com/in/vidafeng/)
-- Renee Du [Github](https://github.com/doozyu)[Linkedin](https://www.linkedin.com/in/renee-du-35b28a237/)
+- Jessica Chen [Github](https://github.com/yajessicachen) | [Linkedin](https://www.linkedin.com/in/yajessicachen/)
+- Rachel Or [Github](https://github.com/rachelor7) | [Linkedin](https://www.linkedin.com/in/or-rachel/)
+- Vida Feng [Github](https://github.com/vidafeng) | [Linkedin](https://www.linkedin.com/in/vidafeng/)
+- Renee Du [Github](https://github.com/doozyu) | [Linkedin](https://www.linkedin.com/in/renee-du-35b28a237/)
