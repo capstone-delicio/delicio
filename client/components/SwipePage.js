@@ -3,10 +3,19 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import TinderCard from 'react-tinder-card';
 import Timer from './Timer';
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import { _addEventPicks, _updateEventPicks } from '../store/eventPicks';
 
 const SwipePage = () => {
+  const paperStyle = {
+    padding: 20,
+    height: '55vh',
+    width: 440,
+    margin: '20px auto',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -38,30 +47,30 @@ const SwipePage = () => {
   return (
     <div className="swipe-container">
       <Grid
-      // container
-      // alignItems="center"
-      // justifyContent="center"
-      // direction="column"
-      >
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column">
         {/* we can revisit later -- throws errors BUGGY */}
         {/* <Timer /> */}
 
         <h4>Swipe Right to like</h4>
         <h4>Swipe Left to dislike</h4>
-
-        <div className="card-container">
-          {yelp.restPhotos.map((photo, idx) => (
-            <TinderCard
-              className="swipe"
-              key={idx}
-              onSwipe={(dir) => swiped(dir, photo.imgSrc)}
-              onCardLeftScreen={() => outOfFrame(idx)}>
-              <div
-                style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
-                className="card"></div>
-            </TinderCard>
-          ))}
-        </div>
+        <Paper elevation={10} style={paperStyle}>
+          <div className="card-container">
+            {yelp.restPhotos.map((photo, idx) => (
+              <TinderCard
+                className="swipe"
+                key={idx}
+                onSwipe={(dir) => swiped(dir, photo.imgSrc)}
+                onCardLeftScreen={() => outOfFrame(idx)}>
+                <div
+                  style={{ backgroundImage: 'url(' + photo.imgSrc + ')' }}
+                  className="card"></div>
+              </TinderCard>
+            ))}
+          </div>
+        </Paper>
       </Grid>
     </div>
   );
