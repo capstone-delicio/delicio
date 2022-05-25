@@ -38,10 +38,11 @@ const SwipePage = () => {
   return (
     <div className="swipe-container">
       <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
-        direction="column">
+      // container
+      // alignItems="center"
+      // justifyContent="center"
+      // direction="column"
+      >
         {/* we can revisit later -- throws errors BUGGY */}
         {/* <Timer /> */}
 

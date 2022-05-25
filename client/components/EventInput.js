@@ -8,13 +8,16 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import FriendsSelect from './FriendsSelect';
-import { makeStyles, Paper } from '@material-ui/core';
+import { makeStyles, Paper, Card, CardHeader } from '@material-ui/core';
 import theme from '../theme';
 
 const EventInput = () => {
   const useStyle = makeStyles((theme) => ({
     padding: {
       padding: theme.spacing(3),
+    },
+    header: {
+      textAlign: 'center',
     },
   }));
 
@@ -71,57 +74,62 @@ const EventInput = () => {
   return (
     <div>
       <Container className={classes.padding}>
-        <form id="eventInputForm" onSubmit={handleSubmit} name="eventInput">
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-            direction="column">
-            <h3>Fill in the following information</h3>
+        <Card>
+          <CardHeader
+            className={classes.header}
+            title="Fill in the following information"></CardHeader>
+          <form id="eventInputForm" onSubmit={handleSubmit} name="eventInput">
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              direction="column">
+              <Grid item>
+                <FriendsSelect />
+              </Grid>
 
-            <Grid item>
-              <FriendsSelect />
-            </Grid>
+              <Grid item>
+                <InputLabel>Event Name:</InputLabel>
+                <TextField name="event_name" type="text" />
+              </Grid>
+              <br />
+              <Grid item>
+                <InputLabel>Event Date:</InputLabel>
+                <TextField name="event_date" type="date" />
+              </Grid>
+              <br />
 
-            <Grid item>
-              <InputLabel>Event Name:</InputLabel>
-              <TextField name="event_name" type="text" />
-            </Grid>
-            <br />
-            <Grid item>
-              <InputLabel>Event Date:</InputLabel>
-              <TextField name="event_date" type="date" />
-            </Grid>
-            <br />
+              <Grid item>
+                <InputLabel>Event Time:</InputLabel>
+                <TextField name="event_time" type="time" />
+              </Grid>
+              <br />
 
-            <Grid item>
-              <InputLabel>Event Time:</InputLabel>
-              <TextField name="event_time" type="time" />
-            </Grid>
-            <br />
+              <Grid item>
+                <InputLabel>Voting Deadline:</InputLabel>
+                <TextField name="vote_deadline" type="date" />
+              </Grid>
+              <div style={{ color: 'red' }}>{dateError}</div>
+              <Button
+                style={
+                  {
+                    // borderRadius: 35,
+                    // backgroundColor: '#758bfd',
+                    // backgroundColor: 'secondary',
+                    // padding: '18px 36px',
+                    // fontSize: '18px',
+                    // color: 'white',
+                  }
+                }
+                variant="contained"
+                type="submit">
+                Submit
+              </Button>
 
-            <Grid item>
-              <InputLabel>Voting Deadline:</InputLabel>
-              <TextField name="vote_deadline" type="date" />
+              <br />
             </Grid>
-            <div style={{ color: 'red' }}>{dateError}</div>
-            <Button
-              style={{
-                borderRadius: 35,
-                // backgroundColor: '#758bfd',
-                backgroundColor: 'secondary',
-                padding: '18px 36px',
-                fontSize: '18px',
-                // color: 'white',
-              }}
-              variant="contained"
-              type="submit">
-              Submit
-            </Button>
-
-            <br />
-          </Grid>
-        </form>
+          </form>
+        </Card>
       </Container>
     </div>
   );

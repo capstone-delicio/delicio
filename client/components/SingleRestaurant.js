@@ -66,7 +66,7 @@ const SingleRestaurant = (props) => {
               <Typography variant={'h6'}>
                 {`Details for ${eventStore.event.event_name}`}
               </Typography>
-              <Divider className={classes.divider} light />
+              <Divider className={classes.divider} />
               <Typography
                 className={classes.heading}
                 variant={'h5'}

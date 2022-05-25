@@ -60,6 +60,10 @@ form div {
   color: #fff;
 }
 
+.btn_div {
+  font-size: 18px;
+}
+
 /* * {
   box-sizing: border-box;
 }
