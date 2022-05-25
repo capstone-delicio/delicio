@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { _getAllUsers, _addFriend, _getFriends } from "../store";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { _getAllUsers, _addFriend, _getFriends } from '../store';
 
-import Autosuggest from "react-autosuggest";
-import AutosuggestHighlightMatch from "autosuggest-highlight/match";
-import AutosuggestHighlightParse from "autosuggest-highlight/parse";
+import Autosuggest from 'react-autosuggest';
+import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
+import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 
-import { Button, Box } from "@material-ui/core";
+import { Button, Box, Grid, FormGroup, Container } from '@material-ui/core';
 
 function escapeRegexCharacters(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 // need to pass in people array
 function getSuggestions(value, people) {
   const escapedValue = escapeRegexCharacters(value.trim());
 
-  if (escapedValue === "") {
+  if (escapedValue === '') {
     return [];
   }
 
-  const regex = new RegExp("\\b" + escapedValue, "i");
+  const regex = new RegExp('\\b' + escapedValue, 'i');
 
   return people.filter((person) => regex.test(getSuggestionValue(person)));
 }
@@ -37,14 +37,14 @@ function renderSuggestion(suggestion, { query }) {
 
   const searchBoxStyle = {
     backgroundImage: `url(${suggestion.picUrl})`,
-    backgroundSize: "50px",
+    backgroundSize: '50px',
   };
 
   return (
-    <span className={"suggestion-content"} style={searchBoxStyle}>
+    <span className={'suggestion-content'} style={searchBoxStyle}>
       <span className="name">
         {parts.map((part, index) => {
-          const className = part.highlight ? "highlight" : null;
+          const className = part.highlight ? 'highlight' : null;
 
           return (
             <span className={className} key={index}>
@@ -60,9 +60,9 @@ function renderSuggestion(suggestion, { query }) {
 //Component -----------------------------------
 function SearchUsers() {
   // local states
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [selectedUser, setSelectedUser] = useState("");
+  const [selectedUser, setSelectedUser] = useState('');
   const [selected, setSelected] = useState({});
   const [isFound, setIsFound] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -110,7 +110,7 @@ function SearchUsers() {
 
   const onSuggestionsClearRequested = () => {
     setSuggestions([]);
-    setValue("");
+    setValue('');
   };
 
   const onSuggestionSelected = (e, { suggestion, method }) => {
@@ -121,7 +121,7 @@ function SearchUsers() {
       ...suggestion,
     }));
 
-    setSelectedUser(suggestion.first + " " + suggestion.last);
+    setSelectedUser(suggestion.first + ' ' + suggestion.last);
     setIsFound(true);
     setIsAdded(false);
   };
@@ -131,7 +131,7 @@ function SearchUsers() {
     setSelected({});
     setIsFound(false);
     setIsCopied(false);
-    setSelectedUser("");
+    setSelectedUser('');
     setIsFound(false);
   };
 
@@ -139,7 +139,7 @@ function SearchUsers() {
     e.preventDefault;
     setIsCopied(true);
     return navigator.clipboard.writeText(
-      "https://capstone-delicio.herokuapp.com/"
+      'https://capstone-delicio.herokuapp.com/',
     );
   };
 
@@ -150,75 +150,89 @@ function SearchUsers() {
     setSelected({});
     setIsFound(true);
     setIsCopied(false);
-    setSelectedUser("");
+    setSelectedUser('');
   };
 
   const handleGoBack = (e) => {
     e.preventDefault;
-    history.push("/eventinput");
+    history.push('/eventinput');
   };
 
   function AddUserButton() {
     return (
-      <Box m={2}>
-        <Button variant="contained" onClick={handleAddUser}>
-          {isAdded
-            ? "Added!"
-            : `Add ${selected.first} ${selected.last} as a Friend`}
-        </Button>
-      </Box>
+      <Button
+        variant="contained"
+        fullWidth
+        color="secondary"
+        onClick={handleAddUser}>
+        {isAdded
+          ? 'Added!'
+          : `Add ${selected.first} ${selected.last} as a Friend`}
+      </Button>
     );
   }
 
   function InviteFriend() {
     return (
-      <div>
-        <p>
-          Can't find your friend? <br />
-          Invite them to Delicio with this link:
-        </p>
-        <Button variant="contained" onClick={handleCopy}>
-          {isCopied ? "Copied!" : "https://capstone-delicio.herokuapp.com/"}
+      <Grid item xs={12}>
+        <Box component="span" sx={{ display: 'block', whiteSpace: 'normal' }}>
+          Can't find your friend? Invite them to Delicio with this link:
+        </Box>
+
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={handleCopy}
+          color="primary">
+          {isCopied ? 'Copied!' : 'https://capstone-delicio.herokuapp.com/'}
         </Button>
-      </div>
+      </Grid>
     );
   }
 
   function BackToEvent() {
     return (
-      <Button variant="outlined" onClick={handleGoBack}>
+      <Button fullWidth variant="outlined" onClick={handleGoBack}>
         Back to Event Planning
       </Button>
     );
   }
 
   const inputProps = {
-    placeholder: "Find friends...",
+    placeholder: 'Find friends...',
     value: value ? value : selectedUser,
     onChange: onChange,
   };
 
   // need to add onSuggestionSelected below
   return (
-    <div>
-      <Box m={2}>
-        <Button variant="contained" onClick={onClearButton}>
-          Start a new search
-        </Button>
-      </Box>
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        onSuggestionSelected={onSuggestionSelected}
-        inputProps={inputProps}
-      />
-      <div>{isFound ? AddUserButton() : null}</div>
-      {InviteFriend()}
-      <Box m={2}>{BackToEvent()}</Box>
-    </div>
+    <Container maxWidth="xs" style={{ marginTop: '20px' }}>
+      <Button variant="contained" onClick={onClearButton} fullWidth>
+        Start a new friends search
+      </Button>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            onSuggestionSelected={onSuggestionSelected}
+            inputProps={inputProps}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          {isFound ? AddUserButton() : null}
+        </Grid>
+        <Grid item xs={12}>
+          {InviteFriend()}
+        </Grid>
+        <Grid item xs={12}>
+          {BackToEvent()}
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 export default SearchUsers;
