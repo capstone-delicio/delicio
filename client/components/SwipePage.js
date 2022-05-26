@@ -3,19 +3,34 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import TinderCard from 'react-tinder-card';
 import Timer from './Timer';
-import { Grid, Paper } from '@material-ui/core';
 import { _addEventPicks, _updateEventPicks } from '../store/eventPicks';
+import {
+  Grid,
+  Paper,
+  makeStyles,
+  Box,
+  Stepper,
+  Step,
+  StepLabel,
+} from '@material-ui/core';
 
 const SwipePage = () => {
-  const paperStyle = {
-    padding: 20,
-    height: '55vh',
-    width: 440,
-    margin: '20px auto',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
+  const useStyle = makeStyles((theme) => ({
+    paperStyle: {
+      padding: 20,
+      height: '55vh',
+      width: 440,
+      margin: '20px auto',
+      textAlign: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  }));
+
+  const classes = useStyle();
+
+  const steps = ['Event Information', 'Restaurant Preferences', 'Swipe'];
+
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -46,6 +61,15 @@ const SwipePage = () => {
 
   return (
     <div className="swipe-container">
+      <Box sx={{ width: '100%' }}>
+        <Stepper activeStep={2} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
       <Grid
         container
         alignItems="center"
@@ -56,7 +80,7 @@ const SwipePage = () => {
 
         <h4>Swipe Right to like</h4>
         <h4>Swipe Left to dislike</h4>
-        <Paper elevation={10} style={paperStyle}>
+        <Paper elevation={10} className={classes.paperStyle}>
           <div className="card-container">
             {yelp.restPhotos.map((photo, idx) => (
               <TinderCard

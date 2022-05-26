@@ -17,7 +17,7 @@ const Signup = () => {
   const useStyles = makeStyles((theme) => ({
     paperStyle: {
       padding: 20,
-      height: 675,
+      height: 700,
       width: 350,
       margin: '20px auto',
       textAlign: 'center',
@@ -83,25 +83,51 @@ const Signup = () => {
               </Typography>
             </Grid>
             <Grid item>
-              <TextField name="first_name" label="First Name" type="text" />
+              <TextField
+                name="first_name"
+                label="First Name"
+                type="text"
+                autoComplete="first-name"
+              />
             </Grid>
             <Grid item>
-              <TextField name="last_name" label="Last Name" type="text" />
+              <TextField
+                name="last_name"
+                label="Last Name"
+                type="text"
+                autoComplete="last-name"
+              />
             </Grid>
             <Grid item>
-              <TextField name="phone_number" label="Phone Number" type="text" />
+              <TextField
+                name="phone_number"
+                label="Phone Number"
+                type="text"
+                autoComplete="phone"
+              />
             </Grid>
             <Grid item>
-              <TextField name="email" label="Email" type="text" />
+              <TextField
+                name="email"
+                label="Email"
+                type="text"
+                autoComplete="email"
+              />
             </Grid>
             <Grid item>
-              <TextField name="password" label="Password" type="password" />
+              <TextField
+                name="password"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
             </Grid>
             <Grid item>
               <TextField
                 name="confirmPassword"
                 label="Confirm Password"
                 type="password"
+                autoComplete="confirm-password"
               />
             </Grid>
             <Button

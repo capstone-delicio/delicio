@@ -69,10 +69,20 @@ const Login = () => {
               </Typography>
             </Grid>
             <Grid item>
-              <TextField name="email" label="Email" type="text" />
+              <TextField
+                name="email"
+                label="Email"
+                type="text"
+                autoComplete="email"
+              />
             </Grid>
             <Grid item>
-              <TextField name="password" label="Password" type="password" />
+              <TextField
+                name="password"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
             </Grid>
             <Button
               className={classes.spacing}
