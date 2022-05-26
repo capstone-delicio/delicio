@@ -5,17 +5,14 @@ import axios from 'axios';
 import { _countEventPicks, _updateSubmit } from '../store/eventPicks';
 import { _getSingleRest, _getDbRestPhotos } from '../store/yelp';
 import { getEventThunk } from '../store/event';
-
+import { ThemeProvider } from '@material-ui/core/styles';
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
   Button,
   Typography,
 } from '@material-ui/core';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import theme from '../theme';
 
 const EventCard = (props) => {
   let theme = {
@@ -25,8 +22,6 @@ const EventCard = (props) => {
           '&.EventCard': {
             transition: '0.3s',
             maxWidth: '90vh',
-            // maxHeight: '20vh auto',
-            // height: '20vh',
             padding: 15,
             margin: '20px auto',
             boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
@@ -46,7 +41,6 @@ const EventCard = (props) => {
           },
           '& .Button': {
             marginLeft: 'auto',
-            // padding: 8,
           },
         },
       },

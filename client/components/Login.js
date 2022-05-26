@@ -2,27 +2,37 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authenticate } from '../store';
-import { Grid, TextField, Button, Paper, Avatar } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {
+  Grid,
+  TextField,
+  Button,
+  Paper,
+  Avatar,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 
 // import Grid from '@material-ui/core/Grid';
 // import TextField from '@material-ui/core/TextField';
 // import Button from '@material-ui/core/Button';
 
 const Login = () => {
-  const paperStyle = {
-    padding: 20,
-    height: '55vh',
-    width: 300,
-    margin: '20px auto',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
+  const useStyles = makeStyles((theme) => ({
+    paperStyle: {
+      padding: 20,
+      maxHeight: 650,
+      width: 300,
+      margin: '20px auto',
+      textAlign: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    avatar: { backgroundColor: '#64c0b7' },
+    spacing: { margin: theme.spacing(2) },
+  }));
 
-  const avatarStyle = { backgroundColor: 'blue' };
-
-  const btnStyle = { margin: '8px 0' };
+  const classes = useStyles();
 
   const dispatch = useDispatch();
 
@@ -40,19 +50,23 @@ const Login = () => {
 
   return (
     <div id="logins">
-      <form id="loginForm" onSubmit={handleSubmit} name="login">
-        {/* <Grid> */}
-        <Grid
-          container
-          alignItems="center"
-          justifyContent="center"
-          direction="column">
-          <Paper elevation={10} style={paperStyle}>
-            <Grid align="center">
-              <Avatar style={avatarStyle}>
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column">
+        <form id="loginForm" onSubmit={handleSubmit} name="login">
+          <Paper elevation={10} className={classes.paperStyle}>
+            <Grid item align="center">
+              <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
-              <h2>Sign In</h2>
+              <Typography
+                component="h1"
+                variant="h5"
+                className={classes.spacing}>
+                Sign In
+              </Typography>
             </Grid>
             <Grid item>
               <TextField name="email" label="Email" type="text" />
@@ -61,7 +75,7 @@ const Login = () => {
               <TextField name="password" label="Password" type="password" />
             </Grid>
             <Button
-              style={btnStyle}
+              className={classes.spacing}
               variant="contained"
               color="primary"
               type="submit">
@@ -76,9 +90,8 @@ const Login = () => {
               <div style={{ color: 'red' }}> {error.response.data} </div>
             )}
           </Paper>
-        </Grid>
-        {/* </Grid> */}
-      </form>
+        </form>
+      </Grid>
     </div>
   );
 };
