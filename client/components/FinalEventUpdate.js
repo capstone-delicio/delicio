@@ -76,11 +76,15 @@ const FinalEventUpdate = () => {
                 <h2 className="event-info">Hey, {user.first_name}!</h2>
 
                 <h3>{`Let's finalize your ${event.event.event_name}!`}</h3>
+                <br />
                 <h2>Winning Restaurant</h2>
                 <h2>{yelp.rest.name}</h2>
                 <h4>Price: {yelp.rest.price}</h4>
-                <img width="400" height="400" src={yelp.rest.image_url} />
+                <img width="350" height="350" src={yelp.rest.image_url} />
+                <br />
                 <Button
+                  variant="outlined"
+                  color="secondary"
                   target="_blank"
                   href={encodeURI(
                     `https://www.yelp.com/biz/${yelp.rest.alias}`,

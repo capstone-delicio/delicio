@@ -23,8 +23,10 @@ const Home = () => {
           direction="column">
           <br />
           <h1>Welcome {firstName}!</h1>
-          <h3>𝙇𝙀𝙏 '𝙎 𝙋𝙇𝘼𝙉 𝘼 𝙁𝙊𝙊𝘿 𝘿𝘼𝙏𝙀 𝙒𝙄𝙏𝙃 𝙔𝙊𝙐𝙍 𝙁𝙍𝙄𝙀𝙉𝘿𝙎 !</h3>
           <br />
+          <br />
+          <h3>𝙇𝙀𝙏 '𝙎 𝙋𝙇𝘼𝙉 𝘼 𝙁𝙊𝙊𝘿 𝘿𝘼𝙏𝙀 𝙒𝙄𝙏𝙃 𝙔𝙊𝙐𝙍 𝙁𝙍𝙄𝙀𝙉𝘿𝙎 !</h3>
+
           <br />
           <Button variant="contained" color="secondary" href="/eventinput">
             Click Me to Plan an Event

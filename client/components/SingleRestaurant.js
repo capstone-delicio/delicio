@@ -13,6 +13,7 @@ import {
   Typography,
   Divider,
   CardMedia,
+  CardActions,
 } from '@material-ui/core';
 import theme from '../theme';
 
@@ -88,7 +89,19 @@ const SingleRestaurant = (props) => {
                 className={classes.media}
                 image={yelp.rest.image_url}
               />
+              <br />
               {/* <img src={yelp.rest.image_url} /> */}
+              <CardActions>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  target="_blank"
+                  href={encodeURI(
+                    `https://www.yelp.com/biz/${yelp.rest.alias}`,
+                  )}>
+                  Check it out on Yelp
+                </Button>
+              </CardActions>
             </CardContent>
           ) : (
             // </div>

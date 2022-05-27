@@ -51,7 +51,7 @@ export const addEvent =
             },
           },
         );
-        console.log('data', data);
+        // console.log('data', data);
         dispatch(createEvent(data));
       }
     } catch (error) {
@@ -69,7 +69,7 @@ export const updateEventThunk =
     restaurantAlias,
   }) =>
   async (dispatch) => {
-    console.log('event', eventId);
+    // console.log('event', eventId);
     try {
       const { data } = await axios.put(`/api/events/${eventId}`, {
         restaurantAlias,
