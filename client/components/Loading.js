@@ -16,7 +16,6 @@ export default function Loading({ data }) {
     // console.log("inside loading", data);
   }, []);
 
-  console.log('hello from loading');
   return (
     <div>
       <Button
