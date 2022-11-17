@@ -2,7 +2,7 @@
 
 ![Logo](./public/images/logo72.png)
 
-Live Demo: https://capstone-delicio.herokuapp.com/
+Live Demo: https://delicio.fly.dev/
 
 ## Description
 
